@@ -1,0 +1,2306 @@
+{
+  "Prontuário": {
+    "rows": 263,
+    "cols": 72,
+    "columns": [
+      {
+        "name": "Carimbo de data/hora",
+        "dtype": "datetime64[us]",
+        "sample": "2025-10-30 12:08:38.091000",
+        "non_null_count": 263
+      },
+      {
+        "name": "Nome completo:",
+        "dtype": "str",
+        "sample": "Wilmar Helena de Alencar Cunha Monteiro ",
+        "non_null_count": 263
+      },
+      {
+        "name": "Número da carterinha:",
+        "dtype": "str",
+        "sample": "0903002101150097",
+        "non_null_count": 168
+      },
+      {
+        "name": "Qual o plano de saúde?",
+        "dtype": "str",
+        "sample": "Geap",
+        "non_null_count": 262
+      },
+      {
+        "name": "E-mail:",
+        "dtype": "str",
+        "sample": "claudiamonteiro2007@hotmail.com",
+        "non_null_count": 199
+      },
+      {
+        "name": "Telefone: ",
+        "dtype": "object",
+        "sample": "85 988095644",
+        "non_null_count": 263
+      },
+      {
+        "name": "Data de nascimento:",
+        "dtype": "datetime64[us]",
+        "sample": "1934-07-30 00:00:00",
+        "non_null_count": 263
+      },
+      {
+        "name": "Sexo:",
+        "dtype": "str",
+        "sample": "Feminino",
+        "non_null_count": 263
+      },
+      {
+        "name": "Rg. nº:",
+        "dtype": "object",
+        "sample": "96002189318",
+        "non_null_count": 192
+      },
+      {
+        "name": "CPF:",
+        "dtype": "object",
+        "sample": "06062695334",
+        "non_null_count": 260
+      },
+      {
+        "name": "Naturalidade:",
+        "dtype": "str",
+        "sample": "Fortaleza",
+        "non_null_count": 257
+      },
+      {
+        "name": "Endereço Atual:",
+        "dtype": "str",
+        "sample": "Rua Dom José Lourenço 426",
+        "non_null_count": 263
+      },
+      {
+        "name": "Complemento do endereço:",
+        "dtype": "object",
+        "sample": "426",
+        "non_null_count": 191
+      },
+      {
+        "name": "CEP:",
+        "dtype": "object",
+        "sample": "60450245",
+        "non_null_count": 261
+      },
+      {
+        "name": "Profissão:",
+        "dtype": "str",
+        "sample": "Aposentada ",
+        "non_null_count": 244
+      },
+      {
+        "name": "Contato de emergência:  ",
+        "dtype": "object",
+        "sample": "85 32238049",
+        "non_null_count": 263
+      },
+      {
+        "name": "Indicado por:",
+        "dtype": "str",
+        "sample": "Plano de saúde",
+        "non_null_count": 263
+      },
+      {
+        "name": "Caso seja outro Dentista ou profissional da saúde escreva abaixo:",
+        "dtype": "str",
+        "sample": "Dr. Fábio Herlen",
+        "non_null_count": 42
+      },
+      {
+        "name": "No momento presente, você se encontra gripado/resfriado/sinusite?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 120
+      },
+      {
+        "name": "Queixa principal:",
+        "dtype": "str",
+        "sample": "Canal",
+        "non_null_count": 261
+      },
+      {
+        "name": "Alguma alergia? Se sim, qual(is)?",
+        "dtype": "str",
+        "sample": "Iodo",
+        "non_null_count": 262
+      },
+      {
+        "name": "Sua pressão é:",
+        "dtype": "str",
+        "sample": "Alta",
+        "non_null_count": 263
+      },
+      {
+        "name": "Tem ou teve algum problema no coração?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Tem diabetes?",
+        "dtype": "str",
+        "sample": "Sim",
+        "non_null_count": 263
+      },
+      {
+        "name": "Quando se corta há um sangramento:",
+        "dtype": "str",
+        "sample": "Normal",
+        "non_null_count": 263
+      },
+      {
+        "name": "Sua cicatrização é:",
+        "dtype": "str",
+        "sample": "Rápida",
+        "non_null_count": 263
+      },
+      {
+        "name": "Já fez alguma cirurgia? Se sim, qual(is)?",
+        "dtype": "str",
+        "sample": "Sim, esterectomia",
+        "non_null_count": 262
+      },
+      {
+        "name": "Gestante?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Está ou esteve recentemente em tratamento médico? Se sim, qual(is)?",
+        "dtype": "str",
+        "sample": "Não ",
+        "non_null_count": 262
+      },
+      {
+        "name": "Está tomando alguma medicação. Se sim, qual(is)?",
+        "dtype": "str",
+        "sample": "Muitas (relaçao PDF)",
+        "non_null_count": 262
+      },
+      {
+        "name": "Febre reumática:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Hepatite:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Hipertensão Arterial:",
+        "dtype": "str",
+        "sample": "Sim",
+        "non_null_count": 263
+      },
+      {
+        "name": "Portador do vírus HIV:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Bebida alcoólica:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Problema renal:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Problema respiratório:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Problema gástrico:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Problema articular/reumático:",
+        "dtype": "str",
+        "sample": "Sim",
+        "non_null_count": 263
+      },
+      {
+        "name": "Anemia:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Internação recente:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Alteração na coagulação sanguínea:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Você tem medo de dentista?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 118
+      },
+      {
+        "name": "Já apresentou reação com anestesia bucal?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 258
+      },
+      {
+        "name": "Apresenta dor nos dentes ou na gengiva?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 258
+      },
+      {
+        "name": "Nota sangramento na gengiva?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 258
+      },
+      {
+        "name": "Escova os dentes quantas vezes por dia? ",
+        "dtype": "str",
+        "sample": "3 vezes ou mais",
+        "non_null_count": 258
+      },
+      {
+        "name": "Usa fio dental?",
+        "dtype": "str",
+        "sample": "Em todas as escovações",
+        "non_null_count": 258
+      },
+      {
+        "name": "Sente dores ou estalos no maxilar ou no ouvido?",
+        "dtype": "str",
+        "sample": "Sim",
+        "non_null_count": 258
+      },
+      {
+        "name": "Ranges os dentes de dia ou a noite?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 258
+      },
+      {
+        "name": "Já teve alguma ferida ou bolha nos lábios ou na gengiva?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 258
+      },
+      {
+        "name": "Consome alimentados pigmentados em alta frequência? ",
+        "dtype": "str",
+        "sample": "Nenhum, consumo esses alimentos moderamente",
+        "non_null_count": 258
+      },
+      {
+        "name": "Fumante:",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 263
+      },
+      {
+        "name": "Nacionalidade:",
+        "dtype": "str",
+        "sample": "Brasileiro(a)",
+        "non_null_count": 263
+      },
+      {
+        "name": "Visto permanente?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 2
+      },
+      {
+        "name": "Validade:",
+        "dtype": "datetime64[us]",
+        "sample": "2025-11-18 00:00:00",
+        "non_null_count": 2
+      },
+      {
+        "name": "Número do passaporte:",
+        "dtype": "object",
+        "sample": "Poi",
+        "non_null_count": 2
+      },
+      {
+        "name": "País do passaporte:",
+        "dtype": "object",
+        "sample": "2346",
+        "non_null_count": 3
+      },
+      {
+        "name": "Quando foi o seu último tratamento dentário?",
+        "dtype": "object",
+        "sample": "3 anos",
+        "non_null_count": 250
+      },
+      {
+        "name": "Qual foi o seu último tratamento dentário?",
+        "dtype": "object",
+        "sample": "Faz tempo ",
+        "non_null_count": 258
+      },
+      {
+        "name": "Qual será o tipo de Procedimento que você irá fazer?",
+        "dtype": "str",
+        "sample": "Odontológico",
+        "non_null_count": 263
+      },
+      {
+        "name": "O que te motivou a buscar tratamento estético com harmonização orofacial?",
+        "dtype": "str",
+        "sample": "Desejo de melhorar a autoestima ",
+        "non_null_count": 5
+      },
+      {
+        "name": "O que você gostaria de melhorar em sua face?",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Possui alguma referência estética específica ou algum resultado desejado?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Já teve alguma reação adversa a ANESTÉSICO LOCAL?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Tem histórico de herpes labial ou outras infecções virais?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Já realizou algum procedimento de harmonização orofacial antes?",
+        "dtype": "str",
+        "sample": "Não ",
+        "non_null_count": 5
+      },
+      {
+        "name": "Possui alguma restrição ou fobia relacionada a agulhas ou procedimento invasivos?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Já teve alguma reação adversa a TOXINA BOTULÍNICA?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Já teve alguma reação adversa a PREENCHEDOR FACIAL?",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 5
+      },
+      {
+        "name": "Coluna 69",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Atualizado? Favor Atualizar quando paciente retornar ",
+        "dtype": "str",
+        "sample": "Não",
+        "non_null_count": 55
+      }
+    ]
+  },
+  "Atendimentos Odonto": {
+    "rows": 1135,
+    "cols": 15,
+    "columns": [
+      {
+        "name": "Data",
+        "dtype": "datetime64[us]",
+        "sample": "2021-07-26 00:00:00",
+        "non_null_count": 454
+      },
+      {
+        "name": "Paciente",
+        "dtype": "str",
+        "sample": "Ana Beatriz Fernandes Ramos",
+        "non_null_count": 454
+      },
+      {
+        "name": "Plano de Saúde",
+        "dtype": "str",
+        "sample": "Particular",
+        "non_null_count": 454
+      },
+      {
+        "name": "Limpeza",
+        "dtype": "bool",
+        "sample": "False",
+        "non_null_count": 1135
+      },
+      {
+        "name": "Pediu Recibo",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1133
+      },
+      {
+        "name": "Modalidade de Pagamento",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 31
+      },
+      {
+        "name": "Parcelas",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 31
+      },
+      {
+        "name": "Procedimentos Particular",
+        "dtype": "str",
+        "sample": "Limpeza (Prof + Rasg), Clareamento Consultório",
+        "non_null_count": 109
+      },
+      {
+        "name": "Procedimentos Uniodonto",
+        "dtype": "str",
+        "sample": "Consulta odontológica *(correspondente/equivalente), Profila",
+        "non_null_count": 242
+      },
+      {
+        "name": "Procedimentos Camed",
+        "dtype": "str",
+        "sample": "Tratamento endodôntico birradicular",
+        "non_null_count": 34
+      },
+      {
+        "name": "Procedimentos Geap",
+        "dtype": "str",
+        "sample": "CONSULTA ODONTOLÓGICA INICIAL, PACOTE ODONTOLÓGICOPERIODONTA",
+        "non_null_count": 37
+      },
+      {
+        "name": "Detalhes da despesa do Procedimento",
+        "dtype": "str",
+        "sample": "Escova robinson, Pasta profilatica, Pedra Pomes, Luva, Opall",
+        "non_null_count": 235
+      },
+      {
+        "name": "Descrição da Queixa Principal:",
+        "dtype": "str",
+        "sample": "Encaminhado para finalizar tratamento endodontico dente 25",
+        "non_null_count": 5
+      },
+      {
+        "name": "Hístoria da Doença Atual",
+        "dtype": "str",
+        "sample": "Entreega do kit de clareamento caseiro",
+        "non_null_count": 7
+      },
+      {
+        "name": "Prescrição de medicamento",
+        "dtype": "object",
+        "sample": "17399.55",
+        "non_null_count": 6
+      }
+    ]
+  },
+  "Análise Financeira Odonto": {
+    "rows": 1278,
+    "cols": 16,
+    "columns": [
+      {
+        "name": "Horário do Procedimento",
+        "dtype": "datetime64[us]",
+        "sample": "2021-07-26 00:00:00",
+        "non_null_count": 454
+      },
+      {
+        "name": "Paciente",
+        "dtype": "str",
+        "sample": "Ana Beatriz Fernandes Ramos",
+        "non_null_count": 454
+      },
+      {
+        "name": "Plano ",
+        "dtype": "str",
+        "sample": "Particular",
+        "non_null_count": 454
+      },
+      {
+        "name": "Pediu Recibo?",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1059
+      },
+      {
+        "name": "Modalidade de Pagamento",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 31
+      },
+      {
+        "name": "Parcelas",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 31
+      },
+      {
+        "name": "Orçamento?",
+        "dtype": "float64",
+        "sample": "600.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Custo da Máquina de Crédito",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "INSS",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Imposto de Renda",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Custo do Procedimento",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Resultado Líquido",
+        "dtype": "float64",
+        "sample": "600.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Margem Operacional",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Margem Operacial com Máquina de Crédito",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Margem Operacional com Imposto",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 1278
+      },
+      {
+        "name": "Pago?",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      }
+    ]
+  },
+  "Atendimentos HOF": {
+    "rows": 115,
+    "cols": 17,
+    "columns": [
+      {
+        "name": "Data do Procedimento",
+        "dtype": "datetime64[us]",
+        "sample": "2025-04-30 00:00:00",
+        "non_null_count": 9
+      },
+      {
+        "name": "Paciente",
+        "dtype": "str",
+        "sample": "ana cristina",
+        "non_null_count": 9
+      },
+      {
+        "name": "Plano de Saúde",
+        "dtype": "str",
+        "sample": "Particular",
+        "non_null_count": 115
+      },
+      {
+        "name": "Pediu Recibo",
+        "dtype": "bool",
+        "sample": "False",
+        "non_null_count": 115
+      },
+      {
+        "name": "Modalidade de Pagamento",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 6
+      },
+      {
+        "name": "Parcelas",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimentos Particular",
+        "dtype": "str",
+        "sample": "Preenchimento Labial",
+        "non_null_count": 7
+      },
+      {
+        "name": "Detalhes da despesa do Procedimento",
+        "dtype": "str",
+        "sample": "Sculptra, Sculptra, Seringa 10ml Descartável, Deep Line Lido",
+        "non_null_count": 9
+      },
+      {
+        "name": "Quantidade de retornos feitos",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Quantidade de Meses do último Procedimento feito comigo?",
+        "dtype": "str",
+        "sample": "10 Meses",
+        "non_null_count": 115
+      },
+      {
+        "name": "Enviou?",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 113
+      },
+      {
+        "name": "Status do Paciente",
+        "dtype": "str",
+        "sample": "Não enviar ainda",
+        "non_null_count": 113
+      },
+      {
+        "name": "Idade",
+        "dtype": "object",
+        "sample": "Nome não encontrado",
+        "non_null_count": 115
+      },
+      {
+        "name": "Quantos semanas até aniversário?",
+        "dtype": "object",
+        "sample": "Nome não encontrado",
+        "non_null_count": 115
+      },
+      {
+        "name": "Telefone",
+        "dtype": "object",
+        "sample": "85 991657323",
+        "non_null_count": 4
+      },
+      {
+        "name": "Mensagem",
+        "dtype": "str",
+        "sample": "#VALUE!",
+        "non_null_count": 115
+      },
+      {
+        "name": "Whatsapp Direto",
+        "dtype": "str",
+        "sample": "wa.me/+5585991657323",
+        "non_null_count": 6
+      }
+    ]
+  },
+  "Retorno Odonto": {
+    "rows": 1161,
+    "cols": 11,
+    "columns": [
+      {
+        "name": "Pacientes",
+        "dtype": "str",
+        "sample": "Ana Paula Vaz da silva",
+        "non_null_count": 111
+      },
+      {
+        "name": "Plano de Sáude",
+        "dtype": "str",
+        "sample": "Uniodonto",
+        "non_null_count": 104
+      },
+      {
+        "name": "Limpeza",
+        "dtype": "float64",
+        "sample": "3.0",
+        "non_null_count": 717
+      },
+      {
+        "name": "Clareamento",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Tempo da Última Limpeza",
+        "dtype": "str",
+        "sample": "1 mês e 12 dias",
+        "non_null_count": 111
+      },
+      {
+        "name": "Inativo:",
+        "dtype": "bool",
+        "sample": "False",
+        "non_null_count": 1161
+      },
+      {
+        "name": "Telefone",
+        "dtype": "str",
+        "sample": "558588710287",
+        "non_null_count": 111
+      },
+      {
+        "name": "wa.me",
+        "dtype": "str",
+        "sample": "wa.me//558588710287",
+        "non_null_count": 107
+      },
+      {
+        "name": "Texto do Whatsapp",
+        "dtype": "str",
+        "sample": "Olá Ana Paula Vaz da silva, tudo bem? 😊\n\nNotamos que já se p",
+        "non_null_count": 714
+      },
+      {
+        "name": "Idade",
+        "dtype": "float64",
+        "sample": "33.0",
+        "non_null_count": 704
+      },
+      {
+        "name": "Semanas até aniversario",
+        "dtype": "object",
+        "sample": "25",
+        "non_null_count": 715
+      }
+    ]
+  },
+  "Análise Financeira HOF": {
+    "rows": 257,
+    "cols": 15,
+    "columns": [
+      {
+        "name": "Horário do Procedimento",
+        "dtype": "datetime64[us]",
+        "sample": "2025-04-30 00:00:00",
+        "non_null_count": 9
+      },
+      {
+        "name": "Paciente",
+        "dtype": "str",
+        "sample": "ana cristina",
+        "non_null_count": 169
+      },
+      {
+        "name": "Plano ",
+        "dtype": "str",
+        "sample": "Particular",
+        "non_null_count": 115
+      },
+      {
+        "name": "Pediu Recibo?",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 115
+      },
+      {
+        "name": "Modalidade de Pagamento",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 6
+      },
+      {
+        "name": "Parcelas",
+        "dtype": "float64",
+        "sample": "2.0",
+        "non_null_count": 4
+      },
+      {
+        "name": "Orçamento?",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Custo da Máquina de Crédito",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Imposto de Renda",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Custo do Procedimento",
+        "dtype": "float64",
+        "sample": "2406.3266",
+        "non_null_count": 257
+      },
+      {
+        "name": "Resultado Líquido",
+        "dtype": "float64",
+        "sample": "-2406.3266",
+        "non_null_count": 257
+      },
+      {
+        "name": "Margem Operacional",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Margem Operacial com Máquina de Crédito",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Margem Operacional com Imposto",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 257
+      },
+      {
+        "name": "Column 15",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      }
+    ]
+  },
+  "B. Estocagem": {
+    "rows": 73,
+    "cols": 16,
+    "columns": [
+      {
+        "name": "Insumo",
+        "dtype": "str",
+        "sample": "Mepvacaína",
+        "non_null_count": 73
+      },
+      {
+        "name": "Link",
+        "dtype": "str",
+        "sample": "Link",
+        "non_null_count": 69
+      },
+      {
+        "name": "Usos por Vez do Produto",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 69
+      },
+      {
+        "name": "Lote do Produto",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 69
+      },
+      {
+        "name": "Estoque Contado (Item - 30/01/2025",
+        "dtype": "float64",
+        "sample": "5.0",
+        "non_null_count": 72
+      },
+      {
+        "name": "Estoque Real - Usos",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 73
+      },
+      {
+        "name": "Validade",
+        "dtype": "object",
+        "sample": "2025-08-01 00:00:00",
+        "non_null_count": 68
+      },
+      {
+        "name": "Renovou?",
+        "dtype": "bool",
+        "sample": "False",
+        "non_null_count": 73
+      },
+      {
+        "name": "Meses até validade",
+        "dtype": "float64",
+        "sample": "8.0",
+        "non_null_count": 15
+      },
+      {
+        "name": "Quantidade Usadas na história!",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 73
+      },
+      {
+        "name": "Unnamed: 10",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 11",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 12",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 13",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 14",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "0",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 4
+      }
+    ]
+  },
+  "DRE 2025": {
+    "rows": 37,
+    "cols": 27,
+    "columns": [
+      {
+        "name": "Categoria",
+        "dtype": "str",
+        "sample": "Procedimento Particular Odonto",
+        "non_null_count": 35
+      },
+      {
+        "name": "Janeiro",
+        "dtype": "object",
+        "sample": "500",
+        "non_null_count": 32
+      },
+      {
+        "name": "Janeiro 2",
+        "dtype": "object",
+        "sample": "0.104558762",
+        "non_null_count": 22
+      },
+      {
+        "name": "Fevereiro",
+        "dtype": "object",
+        "sample": "900",
+        "non_null_count": 33
+      },
+      {
+        "name": "Fevereiro 2",
+        "dtype": "object",
+        "sample": "0.5256487382",
+        "non_null_count": 22
+      },
+      {
+        "name": "Março",
+        "dtype": "object",
+        "sample": "2250",
+        "non_null_count": 31
+      },
+      {
+        "name": "Março 2",
+        "dtype": "object",
+        "sample": "0.4705961093",
+        "non_null_count": 22
+      },
+      {
+        "name": "Abril",
+        "dtype": "object",
+        "sample": "1750",
+        "non_null_count": 30
+      },
+      {
+        "name": "Abril 2",
+        "dtype": "object",
+        "sample": "0.2955766532",
+        "non_null_count": 22
+      },
+      {
+        "name": "Maio",
+        "dtype": "object",
+        "sample": "650",
+        "non_null_count": 33
+      },
+      {
+        "name": "Maio 2",
+        "dtype": "object",
+        "sample": "0.06679093205",
+        "non_null_count": 22
+      },
+      {
+        "name": "Junho",
+        "dtype": "object",
+        "sample": "6800",
+        "non_null_count": 32
+      },
+      {
+        "name": "Junho 2",
+        "dtype": "object",
+        "sample": "0.5260466588",
+        "non_null_count": 22
+      },
+      {
+        "name": "Julho",
+        "dtype": "object",
+        "sample": "500",
+        "non_null_count": 32
+      },
+      {
+        "name": "Julho 2",
+        "dtype": "object",
+        "sample": "0.04680394576",
+        "non_null_count": 22
+      },
+      {
+        "name": "Agosto",
+        "dtype": "object",
+        "sample": "2200",
+        "non_null_count": 32
+      },
+      {
+        "name": "Agosto 2",
+        "dtype": "object",
+        "sample": "0.1874244977",
+        "non_null_count": 22
+      },
+      {
+        "name": "Setembro",
+        "dtype": "object",
+        "sample": "2500",
+        "non_null_count": 32
+      },
+      {
+        "name": "Setembro 2",
+        "dtype": "object",
+        "sample": "0.261959499",
+        "non_null_count": 22
+      },
+      {
+        "name": "Outubro",
+        "dtype": "object",
+        "sample": "800",
+        "non_null_count": 32
+      },
+      {
+        "name": "Outubro 2",
+        "dtype": "object",
+        "sample": "0.1195244719",
+        "non_null_count": 22
+      },
+      {
+        "name": "Novembro",
+        "dtype": "object",
+        "sample": "400",
+        "non_null_count": 28
+      },
+      {
+        "name": "Novembro 2",
+        "dtype": "object",
+        "sample": "0.06677116354",
+        "non_null_count": 22
+      },
+      {
+        "name": "Dezembro",
+        "dtype": "object",
+        "sample": "4000",
+        "non_null_count": 28
+      },
+      {
+        "name": "Dezembro 2",
+        "dtype": "object",
+        "sample": "0.4062679012",
+        "non_null_count": 22
+      },
+      {
+        "name": "Anual",
+        "dtype": "object",
+        "sample": "23250",
+        "non_null_count": 34
+      },
+      {
+        "name": "Anual 2",
+        "dtype": "float64",
+        "sample": "0.2464272291",
+        "non_null_count": 21
+      }
+    ]
+  },
+  "DRE 2026": {
+    "rows": 37,
+    "cols": 27,
+    "columns": [
+      {
+        "name": "Categoria",
+        "dtype": "str",
+        "sample": "Procedimento Particular Odonto",
+        "non_null_count": 35
+      },
+      {
+        "name": "Janeiro",
+        "dtype": "object",
+        "sample": "850",
+        "non_null_count": 32
+      },
+      {
+        "name": "Janeiro 2",
+        "dtype": "object",
+        "sample": "0.083535128",
+        "non_null_count": 22
+      },
+      {
+        "name": "Fevereiro",
+        "dtype": "object",
+        "sample": "900",
+        "non_null_count": 33
+      },
+      {
+        "name": "Fevereiro 2",
+        "dtype": "object",
+        "sample": "0.5256487382",
+        "non_null_count": 22
+      },
+      {
+        "name": "Março",
+        "dtype": "object",
+        "sample": "2250",
+        "non_null_count": 31
+      },
+      {
+        "name": "Março 2",
+        "dtype": "object",
+        "sample": "0.4705961093",
+        "non_null_count": 22
+      },
+      {
+        "name": "Abril",
+        "dtype": "object",
+        "sample": "1750",
+        "non_null_count": 30
+      },
+      {
+        "name": "Abril 2",
+        "dtype": "object",
+        "sample": "0.2955766532",
+        "non_null_count": 22
+      },
+      {
+        "name": "Maio",
+        "dtype": "object",
+        "sample": "650",
+        "non_null_count": 33
+      },
+      {
+        "name": "Maio 2",
+        "dtype": "object",
+        "sample": "0.06679093205",
+        "non_null_count": 22
+      },
+      {
+        "name": "Junho",
+        "dtype": "object",
+        "sample": "6800",
+        "non_null_count": 32
+      },
+      {
+        "name": "Junho 2",
+        "dtype": "object",
+        "sample": "0.5260466588",
+        "non_null_count": 22
+      },
+      {
+        "name": "Julho",
+        "dtype": "object",
+        "sample": "500",
+        "non_null_count": 32
+      },
+      {
+        "name": "Julho 2",
+        "dtype": "object",
+        "sample": "0.04680394576",
+        "non_null_count": 22
+      },
+      {
+        "name": "Agosto",
+        "dtype": "object",
+        "sample": "2200",
+        "non_null_count": 32
+      },
+      {
+        "name": "Agosto 2",
+        "dtype": "object",
+        "sample": "0.1874244977",
+        "non_null_count": 22
+      },
+      {
+        "name": "Setembro",
+        "dtype": "object",
+        "sample": "2500",
+        "non_null_count": 32
+      },
+      {
+        "name": "Setembro 2",
+        "dtype": "object",
+        "sample": "0.261959499",
+        "non_null_count": 22
+      },
+      {
+        "name": "Outubro",
+        "dtype": "object",
+        "sample": "800",
+        "non_null_count": 32
+      },
+      {
+        "name": "Outubro 2",
+        "dtype": "object",
+        "sample": "0.1195244719",
+        "non_null_count": 22
+      },
+      {
+        "name": "Novembro",
+        "dtype": "object",
+        "sample": "400",
+        "non_null_count": 28
+      },
+      {
+        "name": "Novembro 2",
+        "dtype": "object",
+        "sample": "0.06677116354",
+        "non_null_count": 22
+      },
+      {
+        "name": "Dezembro",
+        "dtype": "object",
+        "sample": "4000",
+        "non_null_count": 28
+      },
+      {
+        "name": "Dezembro 2",
+        "dtype": "object",
+        "sample": "0.4062679012",
+        "non_null_count": 22
+      },
+      {
+        "name": "Anual",
+        "dtype": "object",
+        "sample": "23600",
+        "non_null_count": 34
+      },
+      {
+        "name": "Anual 2",
+        "dtype": "float64",
+        "sample": "0.2366111666",
+        "non_null_count": 21
+      }
+    ]
+  },
+  "B. Receita": {
+    "rows": 119,
+    "cols": 46,
+    "columns": [
+      {
+        "name": "Procedimento Particular",
+        "dtype": "str",
+        "sample": "Urgência Endodontica",
+        "non_null_count": 53
+      },
+      {
+        "name": "Valor Cobrado 2025",
+        "dtype": "float64",
+        "sample": "450.0",
+        "non_null_count": 53
+      },
+      {
+        "name": "Valor Cobrado 2026",
+        "dtype": "float64",
+        "sample": "469.44",
+        "non_null_count": 63
+      },
+      {
+        "name": "Unnamed: 3",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Mês",
+        "dtype": "str",
+        "sample": "JANEIRO",
+        "non_null_count": 12
+      },
+      {
+        "name": "Início do Mês",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Fim do Mês",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-31 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Unnamed: 7",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimento Unidonto",
+        "dtype": "str",
+        "sample": "Consulta odontológica de urgência / justificativa obrigatóri",
+        "non_null_count": 62
+      },
+      {
+        "name": "US",
+        "dtype": "float64",
+        "sample": "110.0",
+        "non_null_count": 62
+      },
+      {
+        "name": "%US",
+        "dtype": "float64",
+        "sample": "0.47",
+        "non_null_count": 7
+      },
+      {
+        "name": "Unnamed: 11",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimento Unidonto Intercambio",
+        "dtype": "str",
+        "sample": "Curativo endodôntico em situação de urgência",
+        "non_null_count": 34
+      },
+      {
+        "name": "US.1",
+        "dtype": "float64",
+        "sample": "20.0",
+        "non_null_count": 34
+      },
+      {
+        "name": "Mês.1",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Porcentagem para Doutor",
+        "dtype": "float64",
+        "sample": "0.36",
+        "non_null_count": 12
+      },
+      {
+        "name": "Unnamed: 16",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Mês.2",
+        "dtype": "str",
+        "sample": "JANEIRO",
+        "non_null_count": 13
+      },
+      {
+        "name": "Início do Mês.1",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-04 00:00:00",
+        "non_null_count": 13
+      },
+      {
+        "name": "Fim do Mês.1",
+        "dtype": "datetime64[us]",
+        "sample": "2025-02-04 00:00:00",
+        "non_null_count": 13
+      },
+      {
+        "name": "%US.1",
+        "dtype": "float64",
+        "sample": "0.47",
+        "non_null_count": 13
+      },
+      {
+        "name": "Unnamed: 21",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimento",
+        "dtype": "str",
+        "sample": "Consulta odontológica inicial",
+        "non_null_count": 39
+      },
+      {
+        "name": "Valor",
+        "dtype": "float64",
+        "sample": "30.95",
+        "non_null_count": 39
+      },
+      {
+        "name": "Mês.3",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Porcentagem para Doutor.1",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 12
+      },
+      {
+        "name": "Unnamed: 26",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Mês.4",
+        "dtype": "str",
+        "sample": "JANEIRO",
+        "non_null_count": 12
+      },
+      {
+        "name": "Início do Mês.2",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-06 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Fim do Mês.2",
+        "dtype": "datetime64[us]",
+        "sample": "2025-02-05 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Unnamed: 30",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimento Geap",
+        "dtype": "str",
+        "sample": "CONSULTA ODONTOLÓGICA DE URGÊNCIA",
+        "non_null_count": 119
+      },
+      {
+        "name": "Valor (R$)",
+        "dtype": "float64",
+        "sample": "61.76",
+        "non_null_count": 119
+      },
+      {
+        "name": "Mês.5",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Porcentagem para Doutor.2",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 35",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Mês.6",
+        "dtype": "str",
+        "sample": "JANEIRO",
+        "non_null_count": 12
+      },
+      {
+        "name": "Início do Mês.3",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Fim do Mês.3",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-31 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Unnamed: 39",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Procedimento.1",
+        "dtype": "str",
+        "sample": "Preenchimento Labial",
+        "non_null_count": 4
+      },
+      {
+        "name": "Valor Cobrado",
+        "dtype": "float64",
+        "sample": "600.0",
+        "non_null_count": 3
+      },
+      {
+        "name": "Unnamed: 42",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Mês.7",
+        "dtype": "str",
+        "sample": "JANEIRO",
+        "non_null_count": 12
+      },
+      {
+        "name": "Início do Mês.4",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 12
+      },
+      {
+        "name": "Fim do Mês.4",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-31 00:00:00",
+        "non_null_count": 12
+      }
+    ]
+  },
+  "B. Custo": {
+    "rows": 74,
+    "cols": 28,
+    "columns": [
+      {
+        "name": "Insumo",
+        "dtype": "str",
+        "sample": "Lima #6",
+        "non_null_count": 74
+      },
+      {
+        "name": "Link de Venda",
+        "dtype": "str",
+        "sample": "Link",
+        "non_null_count": 74
+      },
+      {
+        "name": "Quantidade de itens na Caixa",
+        "dtype": "int64",
+        "sample": "6",
+        "non_null_count": 74
+      },
+      {
+        "name": "Número de Vezes de Uso",
+        "dtype": "int64",
+        "sample": "1",
+        "non_null_count": 74
+      },
+      {
+        "name": "Preço da Caixa",
+        "dtype": "float64",
+        "sample": "96.0",
+        "non_null_count": 74
+      },
+      {
+        "name": "Preço por Uso",
+        "dtype": "float64",
+        "sample": "16.0",
+        "non_null_count": 74
+      },
+      {
+        "name": "Unnamed: 6",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Insumo.1",
+        "dtype": "str",
+        "sample": "Xeomin 100U",
+        "non_null_count": 9
+      },
+      {
+        "name": "Link de Venda.1",
+        "dtype": "str",
+        "sample": "medinface@hotmai.com",
+        "non_null_count": 9
+      },
+      {
+        "name": "Quantidade de itens na Caixa.1",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 9
+      },
+      {
+        "name": "Número de Vezes de Uso.1",
+        "dtype": "object",
+        "sample": "100",
+        "non_null_count": 9
+      },
+      {
+        "name": "Preço da Caixa.1",
+        "dtype": "float64",
+        "sample": "523.99",
+        "non_null_count": 9
+      },
+      {
+        "name": "Preço por Uso.1",
+        "dtype": "object",
+        "sample": "5.2399",
+        "non_null_count": 72
+      },
+      {
+        "name": "Unnamed: 13",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 14",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Faixa Limite Inferior",
+        "dtype": "object",
+        "sample": "0",
+        "non_null_count": 11
+      },
+      {
+        "name": "Faixa Limite Superior",
+        "dtype": "object",
+        "sample": "2259.2",
+        "non_null_count": 11
+      },
+      {
+        "name": "Aliquota",
+        "dtype": "object",
+        "sample": "0",
+        "non_null_count": 11
+      },
+      {
+        "name": "Valor a Deduzir",
+        "dtype": "object",
+        "sample": "0",
+        "non_null_count": 11
+      },
+      {
+        "name": "Unnamed: 19",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "aixa Salarial (R$) Inferior",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 4
+      },
+      {
+        "name": "aixa Salarial (R$) Superior",
+        "dtype": "object",
+        "sample": "1518.01",
+        "non_null_count": 4
+      },
+      {
+        "name": "Alíquota (%)",
+        "dtype": "float64",
+        "sample": "0.075",
+        "non_null_count": 4
+      },
+      {
+        "name": "Parcela a Deduzir (R$)",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 4
+      },
+      {
+        "name": "Unnamed: 24",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Taxa",
+        "dtype": "float64",
+        "sample": "0.0074",
+        "non_null_count": 19
+      },
+      {
+        "name": "Modalidade",
+        "dtype": "str",
+        "sample": "Débito",
+        "non_null_count": 19
+      },
+      {
+        "name": "Quantidade de Parcelas",
+        "dtype": "float64",
+        "sample": "1.0",
+        "non_null_count": 19
+      }
+    ]
+  },
+  "DFC": {
+    "rows": 1085,
+    "cols": 36,
+    "columns": [
+      {
+        "name": "Janeiro",
+        "dtype": "datetime64[us]",
+        "sample": "2025-03-08 00:00:00",
+        "non_null_count": 31
+      },
+      {
+        "name": "Custos",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Clusterização",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Modalidade",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Valor",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Custos (%)",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 1085
+      },
+      {
+        "name": "Janeiro 2",
+        "dtype": "datetime64[us]",
+        "sample": "2025-01-01 00:00:00",
+        "non_null_count": 31
+      },
+      {
+        "name": "Receita",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Clusterização",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Modalidade",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Valor",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Receita (%)",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 1085
+      },
+      {
+        "name": "Unnamed: 12",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Fevereiro",
+        "dtype": "datetime64[us]",
+        "sample": "2025-02-01 00:00:00",
+        "non_null_count": 28
+      },
+      {
+        "name": "Custos.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Clusterização.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Modalidade.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "C. Valor.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Custos (%).1",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 1085
+      },
+      {
+        "name": "Fevereiro 2",
+        "dtype": "datetime64[us]",
+        "sample": "2025-02-01 00:00:00",
+        "non_null_count": 31
+      },
+      {
+        "name": "Receita.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Clusterização.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Modalidade.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "R. Valor.1",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Receita (%).1",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 1085
+      },
+      {
+        "name": "Unnamed: 25",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Data",
+        "dtype": "datetime64[us]",
+        "sample": "2025-11-15 00:00:00",
+        "non_null_count": 282
+      },
+      {
+        "name": "Custos.2",
+        "dtype": "str",
+        "sample": "inss nov",
+        "non_null_count": 283
+      },
+      {
+        "name": "C. Clusterização.2",
+        "dtype": "str",
+        "sample": "INSS",
+        "non_null_count": 282
+      },
+      {
+        "name": "C. Modalidade.2",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 282
+      },
+      {
+        "name": "C. Valor.2",
+        "dtype": "object",
+        "sample": "1631.48",
+        "non_null_count": 282
+      },
+      {
+        "name": "Data 2",
+        "dtype": "datetime64[us]",
+        "sample": "2025-03-14 00:00:00",
+        "non_null_count": 77
+      },
+      {
+        "name": "Receita.2",
+        "dtype": "object",
+        "sample": "Camed",
+        "non_null_count": 80
+      },
+      {
+        "name": "R. Clusterização.2",
+        "dtype": "str",
+        "sample": "Camed",
+        "non_null_count": 75
+      },
+      {
+        "name": "R. Modalidade.2",
+        "dtype": "str",
+        "sample": "Ted",
+        "non_null_count": 79
+      },
+      {
+        "name": "R. Valor.2",
+        "dtype": "object",
+        "sample": "1135.73",
+        "non_null_count": 79
+      }
+    ]
+  },
+  "Analytics DFC": {
+    "rows": 20,
+    "cols": 45,
+    "columns": [
+      {
+        "name": "Métricas",
+        "dtype": "str",
+        "sample": "Receita",
+        "non_null_count": 11
+      },
+      {
+        "name": "Jan",
+        "dtype": "object",
+        "sample": "0",
+        "non_null_count": 8
+      },
+      {
+        "name": "Fev",
+        "dtype": "object",
+        "sample": "0",
+        "non_null_count": 7
+      },
+      {
+        "name": "Mar",
+        "dtype": "object",
+        "sample": "3823.48",
+        "non_null_count": 10
+      },
+      {
+        "name": "Abril",
+        "dtype": "object",
+        "sample": "5183.5",
+        "non_null_count": 10
+      },
+      {
+        "name": "May",
+        "dtype": "object",
+        "sample": "1738.94",
+        "non_null_count": 9
+      },
+      {
+        "name": "Jun",
+        "dtype": "object",
+        "sample": "11910.19",
+        "non_null_count": 9
+      },
+      {
+        "name": " Jul",
+        "dtype": "object",
+        "sample": "8337.42",
+        "non_null_count": 10
+      },
+      {
+        "name": "Agosto",
+        "dtype": "object",
+        "sample": "6254.57",
+        "non_null_count": 9
+      },
+      {
+        "name": "Setember",
+        "dtype": "object",
+        "sample": "9887.88",
+        "non_null_count": 7
+      },
+      {
+        "name": "Outubro",
+        "dtype": "object",
+        "sample": "5748.7",
+        "non_null_count": 7
+      },
+      {
+        "name": "Novembro",
+        "dtype": "object",
+        "sample": "8572.86",
+        "non_null_count": 8
+      },
+      {
+        "name": "Dezembro",
+        "dtype": "object",
+        "sample": "11419.69",
+        "non_null_count": 7
+      },
+      {
+        "name": "Unnamed: 13",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 14",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Estrutura",
+        "dtype": "str",
+        "sample": "Alimentação",
+        "non_null_count": 20
+      },
+      {
+        "name": "Jan.1",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 20
+      },
+      {
+        "name": "Fev.1",
+        "dtype": "int64",
+        "sample": "0",
+        "non_null_count": 20
+      },
+      {
+        "name": "Mar.1",
+        "dtype": "float64",
+        "sample": "58.0",
+        "non_null_count": 20
+      },
+      {
+        "name": "Abril.1",
+        "dtype": "float64",
+        "sample": "95.3",
+        "non_null_count": 20
+      },
+      {
+        "name": "May.1",
+        "dtype": "float64",
+        "sample": "37.9",
+        "non_null_count": 20
+      },
+      {
+        "name": "Jun.1",
+        "dtype": "float64",
+        "sample": "96.49",
+        "non_null_count": 20
+      },
+      {
+        "name": " Jul.1",
+        "dtype": "float64",
+        "sample": "591.67",
+        "non_null_count": 20
+      },
+      {
+        "name": "Agosto.1",
+        "dtype": "float64",
+        "sample": "231.63",
+        "non_null_count": 20
+      },
+      {
+        "name": "Setember.1",
+        "dtype": "float64",
+        "sample": "343.66",
+        "non_null_count": 20
+      },
+      {
+        "name": "Outubro.1",
+        "dtype": "float64",
+        "sample": "414.78",
+        "non_null_count": 20
+      },
+      {
+        "name": "Novembro.1",
+        "dtype": "float64",
+        "sample": "275.24",
+        "non_null_count": 20
+      },
+      {
+        "name": "Dezembro.1",
+        "dtype": "float64",
+        "sample": "46.7",
+        "non_null_count": 20
+      },
+      {
+        "name": "Total",
+        "dtype": "float64",
+        "sample": "2191.37",
+        "non_null_count": 20
+      },
+      {
+        "name": "Unnamed: 29",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Unnamed: 30",
+        "dtype": "float64",
+        "sample": "EMPTY",
+        "non_null_count": 0
+      },
+      {
+        "name": "Estrutura.1",
+        "dtype": "str",
+        "sample": "Pix",
+        "non_null_count": 6
+      },
+      {
+        "name": "Jan.2",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Fev.2",
+        "dtype": "float64",
+        "sample": "0.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Mar.2",
+        "dtype": "float64",
+        "sample": "750.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Abril.2",
+        "dtype": "float64",
+        "sample": "1386.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "May.2",
+        "dtype": "float64",
+        "sample": "838.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Jun.2",
+        "dtype": "float64",
+        "sample": "6650.0",
+        "non_null_count": 6
+      },
+      {
+        "name": " Jul.2",
+        "dtype": "float64",
+        "sample": "1090.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Agosto.2",
+        "dtype": "float64",
+        "sample": "752.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Setember.2",
+        "dtype": "float64",
+        "sample": "2158.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Outubro.2",
+        "dtype": "float64",
+        "sample": "675.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Novembro.2",
+        "dtype": "float64",
+        "sample": "1259.9",
+        "non_null_count": 6
+      },
+      {
+        "name": "Dezembro.2",
+        "dtype": "float64",
+        "sample": "3645.0",
+        "non_null_count": 6
+      },
+      {
+        "name": "Total.1",
+        "dtype": "float64",
+        "sample": "19203.9",
+        "non_null_count": 6
+      }
+    ]
+  }
+}

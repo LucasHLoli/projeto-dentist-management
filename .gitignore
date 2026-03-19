@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment and secrets
+.env
+.env.*
+google-token.json
+
+# Local backups and generated artifacts
+backups/
+*.log
+*.tmp
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+
+# Sensitive data files (avoid uploading patient data)
+*.xlsx
+*.xls
