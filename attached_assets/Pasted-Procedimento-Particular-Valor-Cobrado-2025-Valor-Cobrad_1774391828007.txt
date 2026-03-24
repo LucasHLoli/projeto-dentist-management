@@ -1,0 +1,64 @@
+Procedimento Particular	Valor Cobrado 2025	Valor Cobrado 2026
+Urgência Endodontica	R$ 450,00	R$ 469,44
+Ulotomia/Ulectomia	R$ 500,00	R$ 521,60
+Retratamento Uni	R$ 600,00	R$ 625,92
+Retratamento Multi	R$ 1.050,00	R$ 1.095,36
+Retratamento Bi	R$ 700,00	R$ 730,24
+Restauração Pino	R$ 80,00	R$ 83,46
+Restauração 4F Qte 3	R$ 800,00	R$ 834,56
+Restauração 4F Qte 2	R$ 600,00	R$ 625,92
+Restauração 4F Qte 1	R$ 400,00	R$ 417,28
+Restauração 3F Qte 4	R$ 850,00	R$ 886,72
+Restauração 3F Qte 3	R$ 650,00	R$ 678,08
+Restauração 3F Qte 2	R$ 450,00	R$ 469,44
+Restauração 3F Qte 1	R$ 300,00	R$ 312,96
+Restauração 2F Qte 4	R$ 800,00	R$ 834,56
+Restauração 2F Qte 3	R$ 600,00	R$ 625,92
+Restauração 2F Qte 2	R$ 450,00	R$ 469,44
+Restauração 2F Qte 1	R$ 250,00	R$ 260,80
+Restauração 1F Qte 5	R$ 850,00	R$ 886,72
+Restauração 1F Qte 4	R$ 600,00	R$ 625,92
+Restauração 1F Qte 3	R$ 500,00	R$ 521,60
+Restauração 1F Qte 2	R$ 400,00	R$ 417,28
+Restauração 1F Qte 1	R$ 200,00	R$ 208,64
+Recimentação de Coroa	R$ 200,00	R$ 208,64
+Limpeza (Prof + Rasg)	R$ 300,00	R$ 312,96
+Frenectomia Lingual	R$ 400,00	R$ 417,28
+Frenectomia Labial	R$ 350,00	R$ 365,12
+Faceta 8	R$ 1.600,00	R$ 1.669,12
+Faceta 6	R$ 1.200,00	R$ 1.251,84
+Faceta 4	R$ 850,00	R$ 886,72
+Faceta 2	R$ 650,00	R$ 678,08
+Faceta 10	R$ 1.500,00	R$ 1.564,80
+Faceta 1	R$ 400,00	R$ 417,28
+Extração Simples	R$ 250,00	R$ 260,80
+Extração Incluso	R$ 350,00	R$ 365,12
+Endo Uni	R$ 500,00	R$ 521,60
+Endo Multi	R$ 800,00	R$ 834,56
+Endo Bi	R$ 650,00	R$ 678,08
+Curativo Provisório	R$ 150,00	R$ 156,48
+Consulta	R$ 250,00	R$ 260,80
+Clareamento Consultório	R$ 300,00	R$ 312,96
+Clareamento Caseiro	R$ 650,00	R$ 678,08
+Biopsia Incisional	R$ 200,00	R$ 208,64
+Biopsia Excisional	R$ 300,00	R$ 312,96
+Alveolite	R$ 150,00	R$ 156,48
+ACC	R$ 250,00	R$ 260,80
+Gengivoplastia 1	R$ 200,00	R$ 208,64
+Gengivoplastia 2	R$ 400,00	R$ 417,28
+Gengivoplastia 4	R$ 600,00	R$ 625,92
+Gengivoplastia 6	R$ 700,00	R$ 730,24
+Gengivoplastia 8	R$ 800,00	R$ 834,56
+Gengivoplastia 10	R$ 1.000,00	R$ 1.043,20
+Acabamento e Polimento de Facete de Resina	R$ 300,00	R$ 312,96
+Aumento de Coroa	R$ 350,00	R$ 365,12
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
+		R$ 0,00
