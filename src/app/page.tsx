@@ -1,7 +1,6 @@
 'use client';
 
-import { samplePatients, sampleAppointments, sampleFinancials, analyticsDFC, sampleStock } from '@/lib/data';
-import { useState, useEffect } from 'react';
+import { samplePatients, sampleAppointments, analyticsDFC, sampleStock } from '@/lib/data';
 
 function StatCard({ icon, label, value, change, changeType, color }: {
   icon: string; label: string; value: string; change: string; changeType: 'positive' | 'negative'; color: string;
@@ -55,9 +54,6 @@ function MiniChart({ data, color }: { data: number[]; color: string }) {
 }
 
 export default function Dashboard() {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => setLoaded(true), []);
-
   const totalPatients = 263;
   const totalAppointments = 1135;
   const totalRevenue = analyticsDFC.receita.reduce((a, b) => a + b, 0);
@@ -65,7 +61,7 @@ export default function Dashboard() {
   const lowStock = sampleStock.filter(s => s.estoqueReal <= 3).length;
 
   return (
-    <div style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+    <div className="animate-in">
       <div className="page-header">
         <h1>Dashboard</h1>
         <p>Bem-vindo ao DentFlow — Visão geral da clínica</p>
