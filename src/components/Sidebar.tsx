@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 const navSections = [
   {
@@ -38,6 +39,28 @@ const navSections = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [allConnected, setAllConnected] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch('/api/status')
+      .then(r => r.json())
+      .then(data => {
+        setAllConnected(data.googleSheets?.connected && data.groqAI?.connected);
+      })
+      .catch(() => setAllConnected(false));
+  }, []);
+
+  const dotColor = allConnected === null
+    ? 'var(--text-muted)'
+    : allConnected
+      ? 'var(--accent-teal)'
+      : '#f59e0b';
+
+  const dotGlow = allConnected === null
+    ? 'none'
+    : allConnected
+      ? '0 0 6px var(--accent-teal)'
+      : '0 0 6px #f59e0b';
 
   return (
     <aside className="sidebar">
@@ -68,19 +91,22 @@ export function Sidebar() {
 
       <div style={{ marginTop: 'auto', paddingTop: 'var(--space-lg)' }}>
         <div className="sidebar-section-title">Sistema</div>
-        <div style={{ 
-          padding: 'var(--space-md)', 
-          background: 'var(--bg-glass)', 
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--border-glass)',
-          fontSize: '0.75rem',
-          color: 'var(--text-muted)'
-        }}>
-          <div style={{ color: 'var(--accent-teal)', fontWeight: 600, marginBottom: '4px' }}>
-            ● Online
-          </div>
-          Servidor Local Ativo
-        </div>
+        <Link
+          href="/sistema"
+          className={`sidebar-link ${pathname === '/sistema' ? 'active' : ''}`}
+        >
+          <span className="sidebar-link-icon">
+            <span style={{
+              display: 'inline-block',
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              background: dotColor,
+              boxShadow: dotGlow,
+            }} />
+          </span>
+          <span>Status do Sistema</span>
+        </Link>
       </div>
     </aside>
   );

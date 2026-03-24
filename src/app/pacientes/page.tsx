@@ -128,7 +128,7 @@ export default function PacientesPage() {
   const [filterPlano, setFilterPlano] = useState('');
   const [patients, setPatients] = useState<PatientRecord[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [notAuthenticated, setNotAuthenticated] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState<PatientRecord | null>(null);
 
   useEffect(() => {
@@ -137,17 +137,22 @@ export default function PacientesPage() {
 
   const fetchData = async () => {
     setLoading(true);
+    setNotAuthenticated(false);
     try {
       const res = await fetch('/api/sheets?sheet=Prontuário');
       const json = await res.json();
       
+      if (res.status === 401) {
+        setNotAuthenticated(true);
+        return;
+      }
       if (!res.ok) throw new Error(json.error || 'Failed to fetch');
       
       // Sort by newest first (descending row index)
       const sorted = json.data.sort((a: any, b: any) => Number(b._rowIndex) - Number(a._rowIndex));
       setPatients(sorted);
     } catch (err: any) {
-      setError(err.message);
+      // Silent fail — connection issues handled via /sistema page
     } finally {
       setLoading(false);
     }
@@ -198,10 +203,16 @@ export default function PacientesPage() {
         </button>
       </div>
 
-      {error && (
-        <div style={{ background: 'var(--accent-rose-glow)', color: 'var(--accent-rose)', padding: 'var(--space-md)', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-lg)', border: '1px solid rgba(244,63,94,0.3)' }}>
-          ⚠️ Conexão Falhou: {error}
-          <br /><span style={{ fontSize: '0.8rem', opacity: 0.8 }}>Certifique-se que o usuário autorizou o aplicativo no fluxo OAuth2.</span>
+      {notAuthenticated && (
+        <div style={{ background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-md)', padding: 'var(--space-xl)', textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
+          <div style={{ fontSize: '2rem', marginBottom: 'var(--space-sm)' }}>🔗</div>
+          <div style={{ fontWeight: 600, marginBottom: '4px' }}>Planilha não conectada</div>
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 'var(--space-md)' }}>
+            Para carregar os prontuários, conecte a planilha Google na página de Sistema.
+          </div>
+          <a href="/sistema" style={{ display: 'inline-block', padding: '8px 20px', background: 'var(--accent-purple)', color: '#fff', borderRadius: 'var(--radius-sm)', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 500 }}>
+            Ir para Sistema →
+          </a>
         </div>
       )}
 
