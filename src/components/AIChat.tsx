@@ -9,12 +9,14 @@ interface Message {
   timestamp: Date;
 }
 
+const INITIAL_TIMESTAMP = new Date(0);
+
 const initialMessages: Message[] = [
   {
     id: 1,
     role: 'assistant',
     content: '👋 Olá Dra.! Estou aqui para ajudar.\n\nPosso consultar dados, gerar relatórios e executar ações quando você pedir.\n\n💡 Exemplos:\n• "Busque o paciente Ana Beatriz"\n• "Qual o lucro de junho?"\n• "Estoque baixo"\n• "Retornos pendentes"',
-    timestamp: new Date(),
+    timestamp: INITIAL_TIMESTAMP,
   },
 ];
 

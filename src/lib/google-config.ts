@@ -1,11 +1,11 @@
 // Google OAuth2 Configuration
-// These are used for authenticating with Google Sheets API
+// Credentials are loaded from environment variables for security
 
 export const GOOGLE_CONFIG = {
-  clientId: '672509318519-bqrme1gp9ao027euhl54bfdmpcggfm3n.apps.googleusercontent.com',
-  clientSecret: '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',
-  spreadsheetId: '1ehnfCtFCTyBSnrW72uuIPMW0z2hA7Q_ag0anFEiGASQ',
-  redirectUri: 'http://localhost:3000/api/auth/callback',
+  clientId: process.env.GOOGLE_CLIENT_ID || '',
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+  spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID || '',
+  redirectUri: process.env.GOOGLE_REDIRECT_URI || `https://${process.env.REPLIT_DEV_DOMAIN}/api/auth/callback`,
   scopes: [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive.readonly',
