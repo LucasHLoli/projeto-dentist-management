@@ -45,7 +45,7 @@ export default function AtendimentosPage() {
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
           <span className="search-bar-icon">🔍</span>
-          <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
         <select className="form-input" style={{ width: '180px' }} value={filterPlano} onChange={e => setFilterPlano(e.target.value)}>
           <option value="">Todos os planos</option>

@@ -87,6 +87,7 @@ function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; 
                             value={editValue} 
                             onChange={e => setEditValue(e.target.value)}
                             onKeyDown={e => e.key === 'Enter' && handleSave(colName)}
+                            suppressHydrationWarning
                           />
                           <button 
                             className="btn btn-sm btn-primary" 
@@ -211,6 +212,7 @@ export default function PacientesPage() {
             placeholder="Buscar por nome ou CPF..."
             value={search}
             onChange={e => setSearch(e.target.value)}
+            suppressHydrationWarning
           />
         </div>
         <select className="form-input" style={{ width: '180px' }} value={filterPlano} onChange={e => setFilterPlano(e.target.value)}>

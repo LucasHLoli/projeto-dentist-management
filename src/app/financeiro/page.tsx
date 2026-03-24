@@ -46,7 +46,7 @@ export default function FinanceiroPage() {
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
           <span className="search-bar-icon">🔍</span>
-          <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
       </div>
 

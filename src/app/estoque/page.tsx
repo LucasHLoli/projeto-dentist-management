@@ -37,7 +37,7 @@ export default function EstoquePage() {
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
           <span className="search-bar-icon">🔍</span>
-          <input placeholder="Buscar insumo..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input placeholder="Buscar insumo..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
         <button className="btn btn-primary">+ Novo Item</button>
       </div>
