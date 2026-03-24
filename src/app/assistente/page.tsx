@@ -9,12 +9,14 @@ interface Message {
   timestamp: Date;
 }
 
+const INITIAL_TIMESTAMP = new Date(0);
+
 const initialMessages: Message[] = [
   {
     id: 1,
     role: 'assistant',
     content: '👋 Olá! Sou o assistente de gestão da DentFlow.\n\nPosso te ajudar com:\n\n• 📊 **Relatórios financeiros** — "Qual foi o lucro de junho?"\n• 👥 **Busca de pacientes** — "Encontre pacientes do plano Uniodonto"\n• 📦 **Estoque** — "Quais insumos estão com estoque baixo?"\n• 🔄 **Retornos** — "Quais pacientes precisam de retorno?"\n• 📈 **Análises** — "Compare receita 2025 vs 2026"\n\nComo posso ajudar?',
-    timestamp: new Date(),
+    timestamp: INITIAL_TIMESTAMP,
   },
 ];
 
@@ -29,7 +31,12 @@ export default function AssistentePage() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -86,7 +93,7 @@ export default function AssistentePage() {
             <div key={msg.id} className={`chat-message ${msg.role}`}>
               <div style={{ whiteSpace: 'pre-line' }}>{msg.content}</div>
               <div style={{ fontSize: '0.65rem', color: msg.role === 'user' ? 'rgba(255,255,255,0.6)' : 'var(--text-muted)', marginTop: '6px' }}>
-                {msg.timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                {isMounted ? msg.timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '--:--'}
               </div>
             </div>
           ))}

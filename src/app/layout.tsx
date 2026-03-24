@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Sidebar } from '@/components/Sidebar';
-import { AIChat } from '@/components/AIChat';
+import { AIChatWrapper } from '@/components/AIChatWrapper';
 
 export const metadata: Metadata = {
   title: 'DentFlow — Gestão Odontológica',
@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
-      <body>
+    <html lang="pt-BR" data-scroll-behavior="smooth">
+      <body suppressHydrationWarning>
         <div className="app-layout">
           <Sidebar />
           <main className="main-content">
             {children}
           </main>
-          <AIChat />
+          <AIChatWrapper />
         </div>
       </body>
     </html>
