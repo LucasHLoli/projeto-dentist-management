@@ -1,0 +1,27 @@
+Data	Paciente	Plano de Saúde	Limpeza	Pediu Recibo	Modalidade de Pagamento	Parcelas	Procedimentos Particular	Procedimentos Uniodonto	Procedimentos Camed	Procedimentos Geap	Detalhes da despesa do Procedimento	Descrição da Queixa Principal:	Hístoria da Doença Atual	Prescrição de medicamento
+26/07/2021 00:00:00	Ana Beatriz Fernandes Ramos	Particular	FALSE	FALSE			Limpeza (Prof + Rasg), Clareamento Consultório							17399,55
+02/08/2021 00:00:00	Ana Beatriz Fernandes Ramos	Particular	FALSE	FALSE			Clareamento Consultório							6270,39
+04/10/2021 00:00:00	Rafael Alves da Silva	Particular	FALSE	FALSE			Clareamento Consultório							11129,16
+07/12/2021 00:00:00	Cássio Heitor Fernandes Pinheiro	Particular	FALSE	FALSE			Limpeza (Prof + Rasg), Restauração 1F Qte 5							11613,22
+07/11/2022 00:00:00	Ana Paula Vaz da silva	Uniodonto	TRUE	FALSE			Limpeza (Prof + Rasg), Restauração 1F Qte 3, ACC							
+24/02/2023 00:00:00	Ana Augusta Pontes Martins Magalhães	Camed	FALSE	FALSE					Tratamento endodôntico birradicular					
+06/10/2023 00:00:00	José Freires Rocha	Uniodonto	FALSE	FALSE			Retratamento Multi, Restauração 3F Qte 1							
+09/11/2023 00:00:00	Luverson Cristian Santana de Sousa	Uniodonto	FALSE	FALSE			Restauração 1F Qte 5, Extração Simples							
+20/11/2023 00:00:00	Luverson Cristian Santana de Sousa	Uniodonto	FALSE	FALSE			Restauração 1F Qte 5, Limpeza (Prof + Rasg), Extração Simples							
+22/11/2023 00:00:00	Pedro Emmanuel Braga Evangelista	Uniodonto	FALSE	FALSE			Extração Simples							
+27/11/2023 00:00:00	Pedro Emmanuel Braga Evangelista	Uniodonto	FALSE	FALSE										
+13/01/2024 00:00:00	Kellyane Vale de Farias	Uniodonto	TRUE	FALSE			Limpeza (Prof + Rasg)							
+31/01/2024 00:00:00	Adriana Cruz	Uniodonto	FALSE	FALSE			Curativo Provisório							
+03/02/2024 00:00:00	Pedro Henrique Boa Sorte	Particular	FALSE	FALSE			Limpeza (Prof + Rasg)							
+05/02/2024 00:00:00	Pedro Henrique Boa Sorte	Particular	FALSE	FALSE			Clareamento Caseiro						Entreega do kit de clareamento caseiro	
+20/02/2024 00:00:00	Paulo Roberto Salomão	Uniodonto	FALSE	FALSE			Extração Simples							
+20/02/2024 00:00:00	Talita Magalhães Rocha	Uniodonto	TRUE	FALSE			Limpeza (Prof + Rasg)							
+24/02/2024 00:00:00	Ana Vitória Sousa de Oliveira 	Uniodonto	FALSE	FALSE			Endo Multi							
+29/02/2024 00:00:00	Talita Magalhães Rocha	Uniodonto	FALSE	FALSE			Restauração 2F Qte 2							
+04/03/2024 00:00:00	Adail Passos Filhos	Particular	FALSE	FALSE			Extração Simples							
+11/03/2024 00:00:00	Maria Diva Santos Salomão	Uniodonto	FALSE	FALSE			Limpeza (Prof + Rasg), Restauração 1F Qte 1, Alveolite							
+11/03/2024 00:00:00	Paulo Roberto Salomão	Uniodonto	FALSE	FALSE			Limpeza (Prof + Rasg), Restauração 1F Qte 2, Restauração 3F Qte 1							
+11/03/2024 00:00:00	Thiago Santos Salomão	Uniodonto	FALSE	FALSE			Limpeza (Prof + Rasg)							
+12/03/2024 00:00:00	Fabiene Viana de Paula	Uniodonto	TRUE	FALSE			Limpeza (Prof + Rasg)							
+21/03/2024 00:00:00	Mavignier Sampaio Vale	Uniodonto	FALSE	FALSE										
+09/04/2024 00:00:00	Maria Diva Santos Salomão	Uniodonto	FALSE	FALSE			Endo Uni, Restauração 2F Qte 1							

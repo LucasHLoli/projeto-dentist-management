@@ -1,0 +1,1013 @@
+Procedimento Particular	Valor Cobrado 2025	Valor Cobrado 2026		Mês	Início do Mês	Fim do Mês		Procedimento Unidonto	US	%US		Procedimento Unidonto Intercambio	US	Mês	Porcentagem para Doutor		Mês	Início do Mês	Fim do Mês	%US		Procedimento	Valor	Mês	Porcentagem para Doutor		Mês	Início do Mês	Fim do Mês		Procedimento Geap	Valor (R$)	Mês	Porcentagem para Doutor		Mês	Início do Mês	Fim do Mês		Procedimento	Valor Cobrado		Mês	Início do Mês	Fim do Mês
+Urgência Endodontica	R$ 450,00	R$ 469,44		JANEIRO	01/01/2025	31/01/2025		Consulta odontológica de urgência / justificativa obrigatória	110	47%		Curativo endodôntico em situação de urgência	R$ 20,00	01/01/2025	36%		JANEIRO	04/01/2025	04/02/2025	47%		Consulta odontológica inicial	R$ 30,95	01/01/2025	100%		JANEIRO	06/01/2025	05/02/2025		CONSULTA ODONTOLÓGICA DE URGÊNCIA	R$ 61,76				JANEIRO	01/01/2025	31/01/2025		Preenchimento Labial	R$ 600,00		JANEIRO	01/01/2025	31/01/2025
+Ulotomia/Ulectomia	R$ 500,00	R$ 521,60		FEVEREIRO	01/02/2025	28/02/2025		Incisão e drenagem de abscesso intraoral / rx incluso envio obrigatório	232	47%		Recimentação de trabalhos protéticos	R$ 20,00	01/02/2025	50%		FEVEREIRO	05/02/2025	06/03/2025	45%		Coleta de raspado em lesões ou sítios específicos da região buco-maxilo-facial	R$ 84,48	01/02/2025	100%		FEVEREIRO	06/02/2025	05/03/2025		RADIOGRAFIA INTERPROXIMAL - BITE-WING	R$ 8,92				FEVEREIRO	01/02/2025	28/02/2025		Botox	R$ 750,00		FEVEREIRO	01/02/2025	28/02/2025
+Retratamento Uni	R$ 600,00	R$ 625,92		MARÇO	01/03/2025	31/03/2025		Recimentação de trabalho protético	110	46%		Restauração temporária / tratamento expectante	R$ 20,00	01/03/2025	50%		MARÇO	07/03/2025	02/04/2025	46%		Controle de hemorragia com aplicação de agente hemostático em região buco-maxilo-facial	R$ 45,73	01/03/2025	100%		MARÇO	06/03/2025	05/04/2025		RADIOGRAFIA PERIAPICAL	R$ 8,92				MARÇO	01/03/2025	31/03/2025		Colágeno	R$ 1.500,00		MARÇO	01/03/2025	31/03/2025
+Retratamento Multi	R$ 1.050,00	R$ 1.095,36		ABRIL	01/04/2025	30/04/2025		Tratamento de alveolite / rx incluso envio obrigatório	232	50%		Tratamento de Alveolite	R$ 20,00	01/04/2025	50%		ABRIL	03/04/2025	05/05/2025	45%		Controle de hemorragia sem aplicação de agente hemostático em região buco-maxilo-facial	R$ 45,73	01/04/2025	100%		ABRIL	06/04/2025	05/05/2025		CONTROLE DE HEMORRAGIA COM APLICAÇÃO DE AGENTE HEMOSTÁTICO EM REGIÃO BUCO-MAXILO-FACIAL	R$ 79,22				ABRIL	01/04/2025	30/04/2025		Bigode Chines			ABRIL	01/04/2025	30/04/2025
+Retratamento Bi	R$ 700,00	R$ 730,24		MAIO	01/05/2025	31/05/2025		Tratamento de pericoronarite	110	45%		Consulta odontológica	R$ 57,00	01/05/2025	50%		MAIO	06/05/2025	03/06/2025	45%		Cunha proximal	R$ 44,80	01/05/2025	100%		MAIO	06/05/2025	05/06/2025		CONTROLE DE HEMORRAGIA SEM APLICAÇÃO DE AGENTE HEMOSTÁTICO EM REGIÃO BUCO-MAXILO-FACIAL	R$ 52,55				MAIO	01/05/2025	31/05/2025					MAIO	01/05/2025	31/05/2025
+Restauração Pino	R$ 80,00	R$ 83,46		JUNHO	01/06/2025	30/06/2025		Consulta odontológica *(correspondente/equivalente)	85	45%		Consulta odontológica de Urgência	R$ 110,00	01/06/2025	50%		JUNHO	04/06/2025	02/07/2025	46%		Exodontia a retalho	R$ 62,60	01/06/2025	100%		JUNHO	06/06/2025	05/07/2025		EXODONTIA A RETALHO	R$ 86,70				JUNHO	01/06/2025	30/06/2025					JUNHO	01/06/2025	30/06/2025
+Restauração 4F Qte 3	R$ 800,00	R$ 834,56		JULHO	01/07/2025	31/07/2025		Consulta odontológica inicial *(correspondente/equivalente)	85	45%		Consulta odontológica inicial	R$ 57,00	01/07/2025	50%		JULHO	03/07/2025	04/08/2025	46%		Exodontia de permanente por indicação ortodôntica/protética	R$ 59,31	01/07/2025	100%		JULHO	06/07/2025	05/08/2025		EXODONTIA DE RAIZ RESIDUAL	R$ 79,48				JULHO	01/07/2025	31/07/2025					JULHO	01/07/2025	31/07/2025
+Restauração 4F Qte 2	R$ 600,00	R$ 625,92		AGOSTO	01/08/2025	31/08/2025		Condicionamento em odontologia (até 03 sessões/ano)	20			Aplicação tópica de flúor	R$ 100,00	01/08/2025	50%		AGOSTO	05/08/2025	02/09/2025	46%		Exodontia simples de permanente	R$ 59,31	01/08/2025	100%		AGOSTO	06/08/2025	05/09/2025		EXODONTIA SIMPLES DE PERMANENTE	R$ 79,48				AGOSTO	01/08/2025	31/08/2025					AGOSTO	01/08/2025	31/08/2025
+Restauração 4F Qte 1	R$ 400,00	R$ 417,28		SETEMBRO	01/09/2025	30/09/2025		Aplicação tópica de flúor	40			Controle de biofilme (placa bacteriana)	R$ 40,00	01/09/2025	50%		SETEMBRO	03/09/2025	02/10/2025	47%		Exodontia de raiz residual	R$ 62,60	01/09/2025	100%		SETEMBRO	06/09/2025	05/10/2025		INCISÃO E DRENAGEM EXTRA-ORAL DE ABSCESSO, HEMATOMA E/OU FLEGMÃO DA REGIÃO BUCO-MAXILO-FACIAL	R$ 69,35				SETEMBRO	01/09/2025	30/09/2025					SETEMBRO	01/09/2025	30/09/2025
+Restauração 3F Qte 4	R$ 850,00	R$ 886,72		OUTUBRO	01/10/2025	31/10/2025		Atividade educativa em saúde bucal	5			Profilaxia: polimento coronário	R$ 80,00	01/10/2025	36%		OUTUBRO	03/10/2025	04/11/2025	49%		Frenulectomia labial	R$ 91,12	01/10/2025	100%		OUTUBRO	06/10/2025	05/11/2025		INCISÃO E DRENAGEM INTRA-ORAL DE ABSCESSO, HEMATOMA E/OU FLEGMÃO DA REGIÃO BUCO-MAXILO-FACIAL	R$ 73,35				OUTUBRO	01/10/2025	31/10/2025					OUTUBRO	01/10/2025	31/10/2025
+Restauração 3F Qte 3	R$ 650,00	R$ 678,08		NOVEMBRO	01/11/2025	30/11/2025		Controle de biofilme dental	36			Curativo de demora em endodontia	R$ 0,00	01/11/2025	36%		NOVEMBRO	05/11/2025	02/12/2025	48%		Frenulectomia lingual	R$ 97,52	01/11/2025	100%		NOVEMBRO	06/11/2025	05/12/2025		REDUÇÃO CRUENTA DE FRATURA ALVÉOLO-DENTÁRIA	R$ 135,00				NOVEMBRO	01/11/2025	30/11/2025					NOVEMBRO	01/11/2025	30/11/2025
+Restauração 3F Qte 2	R$ 450,00	R$ 469,44		DEZEMBRO	01/12/2025	31/12/2025		Profilaxia e polimento coronário	37			Remoção de Material Obturador Intracanal para Retratamento Endodôntico	R$ 0,00	01/12/2025	50%		DEZEMBRO	03/12/2025	02/01/2026	52%		Incisão e Drenagem extra-oral de abscesso, hematoma e/ou flegmão da região buco-maxilo-facial	R$ 80,40	01/12/2025	100%		DEZEMBRO	06/12/2025	05/01/2026		REDUÇÃO INCRUENTA DE FRATURA ALVÉOLO-DENTÁRIA	R$ 81,88				DEZEMBRO	01/12/2025	31/12/2025					DEZEMBRO	01/12/2025	31/12/2025
+Restauração 3F Qte 1	R$ 300,00	R$ 312,96						Exodontia simples de dente decíduo	110			Remoção de núcleo intrarradicular	R$ 163,00				JANEIRO	04/01/2026	04/02/2026	48%		Incisão e Drenagem intra-oral de abscesso, hematoma e/ou flegmão da região buco-maxilo-facial	R$ 42,33								REDUÇÃO SIMPLES DE LUXAÇÃO DE ARTICULAÇÃO TÊMPORO-MANDIBULAR (ATM)	R$ 74,12													
+Restauração 2F Qte 4	R$ 800,00	R$ 834,56						Rest. temporária/tratamento expectante/adequação do meio bucal c/ ionômero ou irm (sem face)	30			Retratamento endodôntico birradicular	R$ 878,00									Punção aspirativa na região buco-maxilo-facial	R$ 90,41								REIMPLANTE DENTÁRIO COM CONTENÇÃO	R$ 101,92													
+Restauração 2F Qte 3	R$ 600,00	R$ 625,92						Restauração de ionômero de vidro 1 face (em dente decíduo)	100			Retratamento endodôntico multirradicular	R$ 1.383,00									Redução cruenta de fratura alvéolo dentária	R$ 45,73								SUTURA DE FERIDA EM REGIÃO BUCO-MAXILO-FACIAL	R$ 95,99													
+Restauração 2F Qte 2	R$ 450,00	R$ 469,44						Restauração. de ionômero de vidro 2 faces (em dente decíduo) / enviar rx inicial (envolvendo as faces mo e od)	140			Retratamento endodôntico unirradicular	R$ 632,00									Reimplante dentário com contenção	R$ 120,53								TRATAMENTO DE ALVEOLITE	R$ 80,24													
+Restauração 2F Qte 1	R$ 250,00	R$ 260,80						Restauração de resina fotopolimerizável- 1 face	121			Tratamento endodôntico birradicular	R$ 616,00									Remoção de dentes inclusos / impactados	R$ 195,60								EXODONTIA SIMPLES DE DECÍDUO	R$ 42,16													
+Restauração 1F Qte 5	R$ 850,00	R$ 886,72						Restauração de resina fotopolimerizável- 2 faces / enviar rx inicial (mi e di)	136			Tratamento endodôntico multirradicular	R$ 1.056,00									Sutura de ferida em região buco-maxilo-facial	R$ 45,73								PULPOTOMIA EM DENTE DECÍDUO	R$ 61,89													
+Restauração 1F Qte 4	R$ 600,00	R$ 625,92						Restauração de resina fotopolimerizável- 3 faces / enviar rx inicial (envolvendo as faces mi e di)	150			Tratamento endodôntico unirradicular	R$ 484,00									Tratamento de alveolite	R$ 45,73								IMOBILIZAÇÃO DENTÁRIA EM DENTES DECÍDUOS	R$ 76,22													
+Restauração 1F Qte 3	R$ 500,00	R$ 521,60						Restauração de resina fotopolimerizável- 4 faces / enviar rx inicial (envolvendo as faces mi e di)	200			Adequação do meio bucal	R$ 10,00									Aplicação de selante de fóssulas e fissuras	R$ 20,13								CAPEAMENTO PULPAR DIRETO	R$ 46,16													
+Restauração 1F Qte 2	R$ 400,00	R$ 417,28						Faceta direta em resina fotopolimerizável (em face v)	200			Aplicação de selante de fóssulas e fissuras	R$ 50,00									Remineralização	R$ 37,40								COLAGEM DE FRAGMENTOS DENTÁRIOS	R$ 64,40													
+Restauração 1F Qte 1	R$ 200,00	R$ 208,64						Restauração de resina fotopolimerizável- 1 face	121			Exodontia simples de decíduo	R$ 165,00									Colagem de fragmentos dentários	R$ 45,73								RESTAURAÇÃO EM RESINA FOTOPOLIMERIZÁVEL 3 FACES	R$ 85,16													
+Recimentação de Coroa	R$ 200,00	R$ 208,64						Restauração de resina fotopolimerizável- 2 faces / enviar rx inicial (mo e od)	176			Restauração em ionômero de vidro - 1 face	R$ 101,00									Restauração em ionômero de vidro - 1 face	R$ 37,81								PULPECTOMIA	R$ 55,55													
+Limpeza (Prof + Rasg)	R$ 300,00	R$ 312,96						Restauração de resina fotopolimerizável- 3 faces / enviar rx inicial (envolvendo as faces mo e od)	231			Restauração em ionômero de vidro - 2 faces	R$ 101,00									Restauração em ionômero de vidro - 2 faces	R$ 37,81								PULPOTOMIA	R$ 64,75													
+Frenectomia Lingual	R$ 400,00	R$ 417,28						Restauração de resina fotopolimerizável- 4 faces / enviar rx inicial (envolvendo as faces mo e od)	231			Restauração em ionômero de vidro - 3 faces	R$ 101,00									Restauração em ionômero de vidro - 3 faces	R$ 37,81								REMOÇÃO DE MATERIAL OBTURADOR INTRACANAL PARA RETRATAMENTO ENDODÔNTICO	R$ 85,47													
+Frenectomia Labial	R$ 350,00	R$ 365,12						Aumento de coroa clínica / imagem clínica + rx inicial	450			Restauração em ionômero de vidro - 4 faces	R$ 101,00									Restauração em ionômero de vidro - 4 faces	R$ 37,81								RESTAURAÇÃO TEMPORÁRIA / TRATAMENTO EXPECTANTE	R$ 41,17													
+Faceta 8	R$ 1.600,00	R$ 1.669,12						Gengivoplastia / imagem clínica	220			Restauração em resina fotopolimerizável  1 face	R$ 96,00									Restauração em resina fotopolimerizável 1 face	R$ 48,36								CURATIVO ENDODÔNTICO EM SITUAÇÃO DE URGÊNCIA	R$ 76,24													
+Faceta 6	R$ 1.200,00	R$ 1.251,84						Raspagem supra gengival e polim coronário e radicular	50			Restauração em resina fotopolimerizável  2 faces	R$ 142,00									Restauração em resina fotopolimerizável 2 faces	R$ 75,06								IMOBILIZAÇÃO DENTÁRIA EM DENTES PERMANENTES	R$ 76,67													
+Faceta 4	R$ 850,00	R$ 886,72						Remoção de fatores de retenção do biofilme dental (placa bacteriana)	50			Restauração em resina fotopolimerizável  3 faces	R$ 194,00									Restauração em resina fotopolimerizável 3 faces	R$ 89,98								TRATAMENTO DE ABSCESSO PERIODONTAL AGUDO	R$ 56,71													
+Faceta 2	R$ 650,00	R$ 678,08						Biópsia de glândula salivar	243			Restauração em resina fotopolimerizável  4 faces	R$ 284,00									Restauração em resina fotopolimerizável 4 faces	R$ 102,19								TRATAMENTO DE PERICORONARITE	R$ 64,92													
+Faceta 10	R$ 1.500,00	R$ 1.564,80						Biópsia de lábio	243			Aumento de coroa clínica	R$ 400,00									Pulpectomia	R$ 45,73								CONSERTO EM PRÓTESE PARCIAL REMOVÍVEL	R$ 90,31													
+Faceta 1	R$ 400,00	R$ 417,28						Biópsia de língua	243			Manutenção Periodontal	R$ 0,00									Remoção de núcleo intrarradicular	R$ 59,17								CONSERTO EM PRÓTESE TOTAL	R$ 90,31													
+Extração Simples	R$ 250,00	R$ 260,80						Tratamento endodôntico unirradicular / enviar rx inicial e final (paga 01 rx)	453			Raspagem sub-gengival/alisamento radicular	R$ 120,00									Retratamento endodôntico birradicular	R$ 259,84								COROA PROVISÓRIA COM PINO	R$ 105,88													
+Extração Incluso	R$ 350,00	R$ 365,12						Tratamento endodôntico birradicular / enviar rx inicial e final (paga 01 rx)	628			Raspagem supra-gengival	R$ 32,00									Retratamento endodôntico multirradicular	R$ 398,73								COROA PROVISÓRIA SEM PINO	R$ 95,99													
+Endo Uni	R$ 500,00	R$ 521,60						Tratamento endodôntico multirradicular / enviar rx inicial e final (paga 01 rx)	1000													Retratamento endodôntico unirradicular	R$ 191,35								RECIMENTAÇÃO DE TRABALHOS PROTÉTICOS	R$ 35,14													
+Endo Multi	R$ 800,00	R$ 834,56						Retratamento endodôntico unirradicular / enviar rx inicial e final (paga 01 rx)	554													Tratamento de perfuração endodôntica	R$ 69,86								REMOÇÃO DE TRABALHO PROTÉTICO	R$ 35,14													
+Endo Bi	R$ 650,00	R$ 678,08						Retratamento endodôntico birradicular / enviar rx inicial e final (paga 01 rx)	765													Tratamento endodôntico birradicular	R$ 207,38								BIÓPSIA DE BOCA	R$ 85,00													
+Curativo Provisório	R$ 150,00	R$ 156,48						Retratamento endodôntico multirradicular / enviar rx inicial e final (paga 01 rx)	1212													Tratamento endodôntico multirradicular	R$ 312,17								TESTE DE FLUXO SALIVAR	R$ 9,21													
+Consulta	R$ 250,00	R$ 260,80						Remoção de trabalho protético (pode cobrar os 02 rx) / enviar rx inicial e final	86													Tratamento endodôntico unirradicular	R$ 155,19								CONSULTA ODONTOLÓGICA INICIAL	R$ 38,60													
+Clareamento Consultório	R$ 300,00	R$ 312,96						Remoção de núcleo intrarradicular (pode cobrar os 02 rx) / enviar rx inicial e final	257																						ALVEOLOPLASTIA	R$ 29,29													
+Clareamento Caseiro	R$ 650,00	R$ 678,08						Remoção de corpo estranho intracanal (pode cobrar os 02 rx) / enviar rx inicial e final	257																						CUNHA PROXIMAL	R$ 88,44													
+Biopsia Incisional	R$ 200,00	R$ 208,64						Tratamento de perfuração endodôntica (pode cobrar os 02 rx) / enviar rx inicial e final	521																						EXODONTIA DE PERMANENTE POR INDICAÇÃO ORTODÔNTICA/PROTÉTICA	R$ 79,48													
+Biopsia Excisional	R$ 300,00	R$ 312,96						Excisão de mucocele / imagem clínica	243																						FRENULECTOMIA LABIAL	R$ 131,61													
+Alveolite	R$ 150,00	R$ 156,48						Exodontia simples de permanente / enviar rx inicial (fortaleza)/rx inicial e final (interior)	187																						FRENULECTOMIA LINGUAL	R$ 254,39													
+ACC	R$ 250,00	R$ 260,80						Exodontia de raiz residual enviar rx inicial (fortaleza)/rx inicial e final (interior)	187																						FRENULOTOMIA LABIAL	R$ 131,61													
+Gengivoplastia 1	R$ 200,00	R$ 208,64						Exodontia de permanente - indicação ortodôntica/protética/ enviar rx inicial (fortaleza)/rx inicial e final (interior)	187																						FRENULOTOMIA LINGUAL	R$ 154,39													
+Gengivoplastia 2	R$ 400,00	R$ 417,28						Exodontia a retalho / enviar rx inicial (fortaleza)/rx inicial e final (interior)	200																						GENGIVECTOMIA	R$ 28,90													
+Gengivoplastia 4	R$ 600,00	R$ 625,92						Exodontia de elemento semi incluso / enviar rx inicial (fortaleza)/rx inicial e final (interior)	600																						REMOÇÃO DE DENTES INCLUSOS/IMPACTADOS	R$ 180,63													
+Gengivoplastia 6	R$ 700,00	R$ 730,24						Exodontia de elemento incluso ou impactado / enviar rx inicial (fortaleza)/rx inicial e final (interior)	600																						REMOÇÃO DE DENTES SEMI-INCLUSOS/IMPACTADOS	R$ 144,50													
+Gengivoplastia 8	R$ 800,00	R$ 834,56						Frenotomia/frenulotomia labial / imagem clínica	325																						ULECTOMIA	R$ 74,65													
+Gengivoplastia 10	R$ 1.000,00	R$ 1.043,20						Frenotomia/frenulotomia lingual / imagem clínica	325																						ULOTOMIA	R$ 65,08													
+Acabamento e Polimento de Facete de Resina	R$ 300,00	R$ 312,96						Frenulectomia (frenectomia) labial / imagem clínica	325																						COROA DE ACETATO EM DENTE DECÍDUO	R$ 229,08													
+Aumento de Coroa	R$ 350,00	R$ 365,12						Frenulectomia (frenectomia) lingual / imagem clínica	325																						COROA DE AÇO EM DENTE DECÍDUO	R$ 85,10													
+		R$ 0,00						Ulectomia / imagem clínica	170																						COROA DE POLICARBONATO EM DENTE DECÍDUO	R$ 85,10													
+		R$ 0,00						Ulotomia / imagem clínica	170																						MANTENEDOR DE ESPAÇO REMOVÍVEL	R$ 74,97													
+		R$ 0,00						Pino pré – fabricado (em dentes tratados endodonticamente) # / imagem clínica + rx inicial e final	330																						RESTAURAÇÃO ATRAUMÁTICA EM DENTE DECÍDUO	R$ 45,83													
+		R$ 0,00						Panorâmica com finalidade cirúrgica (convencional)	140																						TRATAMENTO ENDODÔNTICO EM DENTE DECÍDUO	R$ 148,92													
+		R$ 0,00						Radiografia interproximal / bite wing	32																						APLICAÇÃO DE CARIOSTÁTICO	R$ 46,85													
+		R$ 0,00						Radiografia intraoral/periapical	32																						APLICAÇÃO DE SELANTE - TÉCNICA INVASIVA	R$ 41,71													
+		R$ 0,00						Seriografia (levantamento radiográfico) – 11, 13, 14, 16, 23, 24, 26, 31, 33, 34, 36, 43, 44 e 46	448																						APLICAÇÃO DE SELANTE DE FÓSSULAS E FISSURAS	R$ 23,67													
+		R$ 0,00						Curativo de demora em endodontia	232																						APLICAÇÃO TÓPICA DE VERNIZ FLUORETADO	R$ 24,27													
+		R$ 0,00						Remoção de dentes semi-inclusos / impactados	600																						REMINERALIZAÇÃO	R$ 39,47													
+		R$ 0,00																													TESTE DE PH SALIVAR	R$ 49,12													
+																															FACETA DIRETA EM RESINA FOTOPOLIMERIZÁVEL	R$ 117,27													
+																															RESTAURAÇÃO ATRAUMÁTICA EM DENTE PERMANENTE	R$ 22,27													
+Procedimento	Qtd	Valor	Testes	Preço Final	Desconto 5%	Desconto 10%																									RESTAURAÇÃO DE AMÁLGAMA - 1 FACE	R$ 40,57													
+Canal de Molar	1	R$ 850,00	2F 4Q + 3F 2Q + Multi	R$ 2.200,00	R$ 2.090,00	R$ 1.980,00																									RESTAURAÇÃO DE AMÁLGAMA - 2 FACES	R$ 50,77													
+Restauração 4F Qte 4	1	R$ 1.000,00	2F 3Q + 3F 3Q + Multi	R$ 2.200,00	R$ 2.090,00	R$ 1.980,00																									RESTAURAÇÃO DE AMÁLGAMA - 3 FACES	R$ 60,97													
+Restauração 4F Qte 3	1	R$ 850,00	2F 4Q + 3F 1Q + Multi	R$ 2.050,00	R$ 1.947,50	R$ 1.845,00																									RESTAURAÇÃO DE AMÁLGAMA - 4 FACES	R$ 71,17													
+Restauração 4F Qte 2	1	R$ 650,00	1F 3Q + 2F 3Q + Multi	R$ 2.100,00	R$ 1.995,00	R$ 1.890,00																									RESTAURAÇÃO EM IONÔMERO DE VIDRO - 1 FACE	R$ 48,03													
+Restauração 4F Qte 1	1	R$ 450,00	2F 4Q + 1F 3Q + Multi	R$ 2.250,00	R$ 2.137,50	R$ 2.025,00																									RESTAURAÇÃO EM IONÔMERO DE VIDRO - 2 FACES	R$ 54,83													
+Restauração 3F Qte 4	1	R$ 900,00	2F 4Q + 1F 2Q + Multi	R$ 2.150,00	R$ 2.042,50	R$ 1.935,00																									RESTAURAÇÃO EM IONÔMERO DE VIDRO - 3 FACES	R$ 61,63													
+Restauração 3F Qte 3	1	R$ 700,00																													RESTAURAÇÃO EM IONÔMERO DE VIDRO - 4 FACES	R$ 68,43													
+Restauração 3F Qte 2	1	R$ 500,00																													RESTAURAÇÃO EM RESINA FOTOPOLIMERIZÁVEL - 1 FACE	R$ 55,41													
+Restauração 3F Qte 1	1	R$ 350,00																													RESTAURAÇÃO EM RESINA FOTOPOLIMERIZÁVEL - 2 FACES	R$ 70,71													
+Restauração 2F Qte 4	1	R$ 850,00																													RESTAURAÇÃO EM RESINA FOTOPOLIMERIZÁVEL - 4 FACES	R$ 95,36													
+Restauração 2F Qte 3	1	R$ 650,00																													ADEQUAÇÃO DO MEIO BUCAL	R$ 77,64													
+Restauração 2F Qte 2	1	R$ 500,00																													PREPARO PARA NÚCLEO INTRARRADICULAR	R$ 48,82													
+Restauração 2F Qte 1	1	R$ 300,00																													REMOÇÃO DE NÚCLEO INTRARRADICULAR	R$ 115,60													
+Restauração 1F Qte 5	1	R$ 900,00																													TRATAMENTO ENDODÔNTICO BIRRADICULAR	R$ 195,08													
+Restauração 1F Qte 4	1	R$ 650,00																													TRATAMENTO ENDODÔNTICO UNIRRADICULAR	R$ 158,95													
+Restauração 1F Qte 3	1	R$ 550,00																													DESSENSIBILIZAÇÃO DENTÁRIA	R$ 18,53													
+Restauração 1F Qte 2	1	R$ 450,00																													AJUSTE OCLUSAL POR ACRESCIMO	R$ 53,11													
+Restauração 1F Qte 1	1	R$ 250,00																													AJUSTE OCLUSAL POR DESGASTE SELETIVO	R$ 43,82													
+Limpeza	1	R$ 350,00																													CONSERTO EM PRÓTESE TOTAL (EM CONSULTÓRIO E EM LABORATÓRIO)	R$ 90,31													
+Clareamento Consultorio	1	R$ 350,00																													COROA TOTAL ACRÍLICA PRENSADA	R$ 197,24													
+																															COROA TOTAL EM CERÔMERO	R$ 374,98													
+																															COROA TOTAL METÁLICA	R$ 269,71													
+																															NÚCLEO DE PREENCHIMENTO	R$ 61,41													
+																															NÚCLEO METÁLICO FUNDIDO	R$ 130,34													
+																															ÓRTESE MORRELAZANTE (PLACA OCLUSAL ESTABILIZADORA)	R$ 210,46													
+																															PINO PRÉ-FABRICADO	R$ 99,62													
+																															PROVISÓRIO PARA INLAY/ONLAY	R$ 89,59													
+																															PROVISÓRIO PARA RESTAURAÇÃO METÁLICA FUNDIDA	R$ 89,59													
+																															REEMBASAMENTO DE COROA PROVISÓRIA	R$ 27,31													
+																															RESTAURAÇÃO METÁLICA FUNDIDA	R$ 209,78													
+																															ATIVIDADE EDUCATIVA EM ODONTOLOGIA PARA PAIS E/OU CUIDADORES DE PACIENTES COM NECESSIDADES ESPECIAIS	R$ 23,88													
+																															ATIVIDADE EDUCATIVA PARA PAIS E/OU CUIDADORES	R$ 23,88													
+																															COROA DE ACETATO EM DENTE PERMANENTE	R$ 150,66													
+																															COROA DE AÇO EM DENTE PERMANENTE	R$ 99,01													
+																															COROA DE POLICARBONATO EM DENTE PERMANENTE	R$ 107,29													
+																															APICETOMIA BIRRADICULARES COM OBTURAÇÃO RETRÓGRADA	R$ 158,95													
+																															APICETOMIA BIRRADICULARES SEM OBTURAÇÃO RETRÓGRADA	R$ 144,50													
+																															APICETOMIA MULTIRRADICULARES COM OBTURAÇÃO RETRÓGRADA	R$ 187,85													
+																															APICETOMIA MULTIRRADICULARES SEM OBTURAÇÃO RETRÓGRADA	R$ 173,40													
+																															APICETOMIA UNIRRADICULARES COM OBTURAÇÃO RETRÓGRADA	R$ 137,28													
+																															APICETOMIA UNIRRADICULARES SEM OBTURAÇÃO RETRÓGRADA	R$ 126,44													
+																															CURATIVO DE DEMORA EM ENDODONTIA	R$ 65,66													
+																															REMOÇÃO DE CORPO ESTRANHO INTRACANAL	R$ 86,09													
+																															RETRATAMENTO ENDODÔNTICO BIRRADICULAR	R$ 231,20													
+																															RETRATAMENTO ENDODÔNTICO MULTIRRADICULAR	R$ 433,50													
+																															RETRATAMENTO ENDODÔNTICO UNIRRADICULAR	R$ 195,08													
+																															TRATAMENTO DE PERFURAÇÃO ENDODÔNTICA	R$ 120,00													
+																															TRATAMENTO ENDODÔNDICO DE DENTE COM RIZOGÊNESE INCOMPLETA	R$ 100,00													
+																															TRATAMENTO ENDODÔNTICO MULTIRRADICULAR	R$ 300,00													
+																															TRATAMENTO ENDODÔNTICO BIRRADICULAR	R$ 195,08													
+																															TRATAMENTO ENDODÔNTICO UNIRRADICULAR	R$ 158,95													
+																															PACOTE ODONTOLÓGICO PREVENTIVO	R$ 121,47													
+																															PACOTE ODONTOLÓGICOPERIODONTAL BÁSICO	R$ 167,88													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
+																																													
