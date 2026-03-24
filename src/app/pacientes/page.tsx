@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { PRONTUARIO_COLUMNS, COLUMN_LABELS, COLUMN_GROUPS } from '@/lib/google-config';
+import { Search, RefreshCw, Link as LinkIcon, Pencil, Check, X } from 'lucide-react';
 
-// Interface for Google Sheets rows
 type PatientRecord = Record<string, string>;
 
 function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; onClose: () => void; onUpdate: (rowIndex: string, colIndex: number, value: string) => Promise<void> }) {
@@ -47,7 +47,7 @@ function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; 
               Linha: {localPatient._rowIndex} • Cadastrado em: {localPatient['Carimbo de data/hora']}
             </div>
           </div>
-          <button className="modal-close" onClick={onClose}>✕</button>
+          <button className="modal-close" onClick={onClose}><X size={18} /></button>
         </div>
 
         <div style={{ marginTop: 'var(--space-md)' }}>
@@ -71,9 +71,9 @@ function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; 
                         {!isEditing && (
                           <button 
                             onClick={() => handleEditClick(colName, value)}
-                            style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', fontSize: '0.7rem', cursor: 'pointer' }}
+                            style={{ background: 'none', border: 'none', color: 'var(--accent-primary)', fontSize: '0.7rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}
                           >
-                            ✎ Editar
+                            <Pencil size={10} /> Editar
                           </button>
                         )}
                       </div>
@@ -95,7 +95,7 @@ function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; 
                             disabled={isSaving}
                             style={{ padding: '0 8px' }}
                           >
-                            {isSaving ? '...' : '✓'}
+                            {isSaving ? '...' : <Check size={12} />}
                           </button>
                           <button 
                             className="btn btn-sm btn-secondary" 
@@ -103,7 +103,7 @@ function PatientModal({ patient, onClose, onUpdate }: { patient: PatientRecord; 
                             disabled={isSaving}
                             style={{ padding: '0 8px' }}
                           >
-                            ✕
+                            <X size={12} />
                           </button>
                         </div>
                       ) : (
@@ -148,11 +148,9 @@ export default function PacientesPage() {
       }
       if (!res.ok) throw new Error(json.error || 'Failed to fetch');
       
-      // Sort by newest first (descending row index)
       const sorted = json.data.sort((a: any, b: any) => Number(b._rowIndex) - Number(a._rowIndex));
       setPatients(sorted);
     } catch (err: any) {
-      // Silent fail — connection issues handled via /sistema page
     } finally {
       setLoading(false);
     }
@@ -170,7 +168,6 @@ export default function PacientesPage() {
       throw new Error(text);
     }
 
-    // Update local state without refetching
     setPatients(prev => prev.map(p => {
       if (p._rowIndex === rowIndex) {
         return { ...p, [PRONTUARIO_COLUMNS[colIndex]]: value };
@@ -198,14 +195,17 @@ export default function PacientesPage() {
           <h1>Pacientes</h1>
           <p>Gestão de prontuários com sincronização Google Sheets — {patients.length} registros conectados</p>
         </div>
-        <button className="btn btn-secondary" onClick={fetchData} disabled={loading}>
-          {loading ? 'Sincronizando...' : '🔄 Sincronizar'}
+        <button className="btn btn-secondary" onClick={fetchData} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+          {loading ? 'Sincronizando...' : 'Sincronizar'}
         </button>
       </div>
 
       {notAuthenticated && (
         <div style={{ background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-md)', padding: 'var(--space-xl)', textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
-          <div style={{ fontSize: '2rem', marginBottom: 'var(--space-sm)' }}>🔗</div>
+          <div style={{ marginBottom: 'var(--space-sm)', display: 'flex', justifyContent: 'center' }}>
+            <LinkIcon size={32} color="var(--text-muted)" />
+          </div>
           <div style={{ fontWeight: 600, marginBottom: '4px' }}>Planilha não conectada</div>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 'var(--space-md)' }}>
             Para carregar os prontuários, conecte a planilha Google na página de Sistema.
@@ -219,7 +219,7 @@ export default function PacientesPage() {
       {!notAuthenticated && (<>
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
-          <span className="search-bar-icon">🔍</span>
+          <span className="search-bar-icon"><Search size={14} /></span>
           <input
             placeholder="Buscar por nome ou CPF..."
             value={search}
@@ -264,7 +264,6 @@ export default function PacientesPage() {
               <tbody>
                 {filtered.map(p => {
                   const nome = p['Nome completo:'] || 'Registro Sem Nome';
-                  const atualizado = p['Atualizado? Favor Atualizar quando paciente retornar '];
                   
                   return (
                     <tr key={p._rowIndex} style={{ cursor: 'pointer' }} onClick={() => setSelectedPatient(p)}>
@@ -322,7 +321,7 @@ export default function PacientesPage() {
                       </td>
                       <td>
                         <button className="btn btn-sm btn-secondary" onClick={e => { e.stopPropagation(); setSelectedPatient(p); }}>
-                          Completar
+                          Ver mais
                         </button>
                       </td>
                     </tr>

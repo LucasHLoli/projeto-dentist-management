@@ -1,6 +1,7 @@
 'use client';
 
 import { analyticsDFC } from '@/lib/data';
+import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react';
 
 export default function DFCPage() {
   const totalReceita = analyticsDFC.receita.reduce((a, b) => a + b, 0);
@@ -17,23 +18,22 @@ export default function DFCPage() {
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="stat-card teal">
-          <div className="stat-card-icon">💰</div>
+          <div className="stat-card-icon"><DollarSign size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Receita Total</div>
           <div className="stat-card-value">R$ {totalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
         <div className="stat-card rose">
-          <div className="stat-card-icon">📉</div>
+          <div className="stat-card-icon"><TrendingDown size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Custo Total</div>
           <div className="stat-card-value">R$ {totalCusto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
         <div className="stat-card purple">
-          <div className="stat-card-icon">📈</div>
+          <div className="stat-card-icon"><TrendingUp size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Lucro Líquido</div>
           <div className="stat-card-value">R$ {totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
       </div>
 
-      {/* Bar Chart: Receita vs Custo */}
       <div className="glass-card" style={{ marginBottom: 'var(--space-xl)' }}>
         <div className="glass-card-header">
           <div className="glass-card-title">Receita vs Custo Mensal</div>
@@ -71,7 +71,6 @@ export default function DFCPage() {
       </div>
 
       <div className="grid-2">
-        {/* Monthly Breakdown Table */}
         <div className="glass-card" style={{ padding: 0 }}>
           <div style={{ padding: 'var(--space-lg)' }}>
             <div className="glass-card-title">Breakdown Mensal</div>
@@ -102,7 +101,6 @@ export default function DFCPage() {
           </div>
         </div>
 
-        {/* Cost Structure */}
         <div className="glass-card">
           <div className="glass-card-title" style={{ marginBottom: 'var(--space-lg)' }}>Estrutura de Custos</div>
           {analyticsDFC.estruturaCustos.map((item, i) => {

@@ -2,6 +2,7 @@
 
 import { sampleReturns } from '@/lib/data';
 import { useState } from 'react';
+import { RefreshCw, Calendar, MessageSquare, Search, Scissors, Clock, Cake, CalendarDays, MessageCircle, Copy } from 'lucide-react';
 
 export default function RetornosPage() {
   const [search, setSearch] = useState('');
@@ -16,17 +17,17 @@ export default function RetornosPage() {
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="stat-card teal">
-          <div className="stat-card-icon">🔄</div>
+          <div className="stat-card-icon"><RefreshCw size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Total na Lista</div>
           <div className="stat-card-value">111</div>
         </div>
         <div className="stat-card purple">
-          <div className="stat-card-icon">📅</div>
+          <div className="stat-card-icon"><Calendar size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Aniversários Próximos</div>
           <div className="stat-card-value">{sampleReturns.filter(r => r.semanasAteAniversario <= 4).length}</div>
         </div>
         <div className="stat-card amber">
-          <div className="stat-card-icon">💬</div>
+          <div className="stat-card-icon"><MessageSquare size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Mensagens Pendentes</div>
           <div className="stat-card-value">{sampleReturns.length}</div>
         </div>
@@ -34,7 +35,7 @@ export default function RetornosPage() {
 
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
-          <span className="search-bar-icon">🔍</span>
+          <span className="search-bar-icon"><Search size={14} /></span>
           <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
       </div>
@@ -54,22 +55,25 @@ export default function RetornosPage() {
               </div>
 
               <div style={{ display: 'flex', gap: 'var(--space-xl)', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
-                <span>🧹 {r.limpeza} limpezas</span>
-                <span>⏱️ Última: {r.tempoUltimaLimpeza}</span>
-                <span>🎂 {r.idade} anos</span>
-                <span>📅 Aniversário em {r.semanasAteAniversario} semanas</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Scissors size={12} /> {r.limpeza} limpezas</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Clock size={12} /> Última: {r.tempoUltimaLimpeza}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Cake size={12} /> {r.idade} anos</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><CalendarDays size={12} /> Aniversário em {r.semanasAteAniversario} semanas</span>
               </div>
 
-              <div style={{ background: 'var(--bg-glass)', padding: 'var(--space-md)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-glass)', fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.6, whiteSpace: 'pre-line', maxHeight: '80px', overflow: 'hidden' }}>
-                💬 {r.textoWhatsapp}
+              <div style={{ background: 'var(--bg-glass)', padding: 'var(--space-md)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-glass)', fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.6, whiteSpace: 'pre-line', maxHeight: '80px', overflow: 'hidden', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                <MessageCircle size={14} style={{ flexShrink: 0, marginTop: 2, color: 'var(--accent-teal)' }} />
+                {r.textoWhatsapp}
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', flexShrink: 0 }}>
-              <a href={`https://${r.whatsappLink}`} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-primary" style={{ background: 'linear-gradient(135deg, #25d366, #128c7e)' }}>
-                📱 WhatsApp
+              <a href={`https://${r.whatsappLink}`} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-primary" style={{ background: 'linear-gradient(135deg, #25d366, #128c7e)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <MessageSquare size={12} /> WhatsApp
               </a>
-              <button className="btn btn-sm btn-secondary">📋 Copiar Texto</button>
+              <button className="btn btn-sm btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Copy size={12} /> Copiar Texto
+              </button>
             </div>
           </div>
         ))}

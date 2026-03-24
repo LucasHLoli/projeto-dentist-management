@@ -2,6 +2,7 @@
 
 import { sampleStock } from '@/lib/data';
 import { useState } from 'react';
+import { Package, AlertTriangle, Clock, Search, Plus, Check, X } from 'lucide-react';
 
 export default function EstoquePage() {
   const [search, setSearch] = useState('');
@@ -18,17 +19,17 @@ export default function EstoquePage() {
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="stat-card teal">
-          <div className="stat-card-icon">📦</div>
+          <div className="stat-card-icon"><Package size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Total de Itens</div>
           <div className="stat-card-value">{sampleStock.length}</div>
         </div>
         <div className="stat-card rose">
-          <div className="stat-card-icon">⚠️</div>
+          <div className="stat-card-icon"><AlertTriangle size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Estoque Baixo (≤3)</div>
           <div className="stat-card-value">{lowStock.length}</div>
         </div>
         <div className="stat-card amber">
-          <div className="stat-card-icon">⏰</div>
+          <div className="stat-card-icon"><Clock size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Vencendo em 6 meses</div>
           <div className="stat-card-value">{expiringSoon.length}</div>
         </div>
@@ -36,10 +37,12 @@ export default function EstoquePage() {
 
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
-          <span className="search-bar-icon">🔍</span>
+          <span className="search-bar-icon"><Search size={14} /></span>
           <input placeholder="Buscar insumo..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
-        <button className="btn btn-primary">+ Novo Item</button>
+        <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Plus size={14} /> Novo Item
+        </button>
       </div>
 
       <div className="glass-card" style={{ padding: 0 }}>
@@ -81,7 +84,7 @@ export default function EstoquePage() {
                       </span>
                     </td>
                     <td style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>{s.quantidadeUsadasHistoria}</td>
-                    <td>{s.renovou ? <span className="badge badge-emerald">✓ Sim</span> : <span className="badge badge-rose">✕ Não</span>}</td>
+                    <td>{s.renovou ? <span className="badge badge-emerald"><Check size={10} /> Sim</span> : <span className="badge badge-rose"><X size={10} /> Não</span>}</td>
                   </tr>
                 );
               })}

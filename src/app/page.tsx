@@ -1,17 +1,23 @@
 'use client';
 
 import { samplePatients, sampleAppointments, analyticsDFC, sampleStock } from '@/lib/data';
+import { Users, Stethoscope, DollarSign, TrendingUp, ArrowUpRight, ArrowDownRight, AlertTriangle, ClipboardList, RefreshCw, type LucideIcon } from 'lucide-react';
 
-function StatCard({ icon, label, value, change, changeType, color }: {
-  icon: string; label: string; value: string; change: string; changeType: 'positive' | 'negative'; color: string;
+function StatCard({ icon: Icon, label, value, change, changeType, color }: {
+  icon: LucideIcon; label: string; value: string; change: string; changeType: 'positive' | 'negative'; color: string;
 }) {
   return (
     <div className={`stat-card ${color} animate-in`}>
-      <div className="stat-card-icon">{icon}</div>
+      <div className="stat-card-icon">
+        <Icon size={18} strokeWidth={2} />
+      </div>
       <div className="stat-card-label">{label}</div>
       <div className="stat-card-value">{value}</div>
       <span className={`stat-card-change ${changeType}`}>
-        {changeType === 'positive' ? '↑' : '↓'} {change}
+        {changeType === 'positive'
+          ? <ArrowUpRight size={12} />
+          : <ArrowDownRight size={12} />}
+        {change}
       </span>
     </div>
   );
@@ -68,14 +74,13 @@ export default function Dashboard() {
       </div>
 
       <div className="stats-grid">
-        <StatCard icon="👥" label="Total de Pacientes" value={totalPatients.toString()} change="+12 este mês" changeType="positive" color="purple" />
-        <StatCard icon="🦷" label="Atendimentos" value={totalAppointments.toLocaleString('pt-BR')} change="454 com dados" changeType="positive" color="teal" />
-        <StatCard icon="💰" label="Receita Total" value={`R$ ${totalRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} change="+18.5%" changeType="positive" color="amber" />
-        <StatCard icon="📈" label="Lucro Líquido" value={`R$ ${totalProfit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} change="+22.3%" changeType="positive" color="rose" />
+        <StatCard icon={Users} label="Total de Pacientes" value={totalPatients.toString()} change="+12 este mês" changeType="positive" color="purple" />
+        <StatCard icon={Stethoscope} label="Atendimentos" value={totalAppointments.toLocaleString('pt-BR')} change="454 com dados" changeType="positive" color="teal" />
+        <StatCard icon={DollarSign} label="Receita Total" value={`R$ ${totalRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} change="+18.5%" changeType="positive" color="amber" />
+        <StatCard icon={TrendingUp} label="Lucro Líquido" value={`R$ ${totalProfit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`} change="+22.3%" changeType="positive" color="rose" />
       </div>
 
       <div className="grid-2" style={{ marginBottom: 'var(--space-xl)' }}>
-        {/* Revenue Chart */}
         <div className="glass-card">
           <div className="glass-card-header">
             <div>
@@ -92,7 +97,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Profit Chart */}
         <div className="glass-card">
           <div className="glass-card-header">
             <div>
@@ -111,7 +115,6 @@ export default function Dashboard() {
       </div>
 
       <div className="grid-2">
-        {/* Recent Appointments */}
         <div className="glass-card">
           <div className="glass-card-header">
             <div className="glass-card-title">Últimos Atendimentos</div>
@@ -147,7 +150,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Alerts */}
         <div className="glass-card">
           <div className="glass-card-header">
             <div className="glass-card-title">Alertas</div>
@@ -156,31 +158,34 @@ export default function Dashboard() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
             {lowStock > 0 && (
-              <div style={{ padding: 'var(--space-md)', background: 'var(--accent-rose-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(244,63,94,0.2)' }}>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fda4af', marginBottom: '4px' }}>
-                  ⚠️ Estoque Baixo
-                </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                  {lowStock} item(s) com estoque ≤ 3 unidades
+              <div style={{ padding: 'var(--space-md)', background: 'var(--accent-rose-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(244,63,94,0.2)', display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
+                <AlertTriangle size={16} color="#fda4af" style={{ flexShrink: 0, marginTop: 2 }} />
+                <div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fda4af', marginBottom: '4px' }}>Estoque Baixo</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                    {lowStock} item(s) com estoque ≤ 3 unidades
+                  </div>
                 </div>
               </div>
             )}
 
-            <div style={{ padding: 'var(--space-md)', background: 'var(--accent-amber-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(245,158,11,0.2)' }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fcd34d', marginBottom: '4px' }}>
-                📋 Prontuários Desatualizados
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                {samplePatients.filter(p => !p.atualizado).length} pacientes precisam de atualização
+            <div style={{ padding: 'var(--space-md)', background: 'var(--accent-amber-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(245,158,11,0.2)', display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
+              <ClipboardList size={16} color="#fcd34d" style={{ flexShrink: 0, marginTop: 2 }} />
+              <div>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fcd34d', marginBottom: '4px' }}>Prontuários Desatualizados</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                  {samplePatients.filter(p => !p.atualizado).length} pacientes precisam de atualização
+                </div>
               </div>
             </div>
 
-            <div style={{ padding: 'var(--space-md)', background: 'var(--accent-emerald-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(16,185,129,0.2)' }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#6ee7b7', marginBottom: '4px' }}>
-                🔄 Retornos Pendentes
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                3 pacientes com retorno pendente nesta semana
+            <div style={{ padding: 'var(--space-md)', background: 'var(--accent-emerald-glow)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(16,185,129,0.2)', display: 'flex', gap: 'var(--space-md)', alignItems: 'flex-start' }}>
+              <RefreshCw size={16} color="#6ee7b7" style={{ flexShrink: 0, marginTop: 2 }} />
+              <div>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#6ee7b7', marginBottom: '4px' }}>Retornos Pendentes</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                  3 pacientes com retorno pendente nesta semana
+                </div>
               </div>
             </div>
           </div>

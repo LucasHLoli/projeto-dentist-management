@@ -3,36 +3,62 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import {
+  LayoutDashboard,
+  Users,
+  Stethoscope,
+  TrendingUp,
+  BarChart3,
+  CreditCard,
+  Package,
+  RefreshCw,
+  Receipt,
+  Bot,
+  Activity,
+  type LucideIcon,
+} from 'lucide-react';
 
-const navSections = [
+interface NavLink {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  badge?: string;
+}
+
+interface NavSection {
+  title: string;
+  links: NavLink[];
+}
+
+const navSections: NavSection[] = [
   {
     title: 'Principal',
     links: [
-      { href: '/', icon: '📊', label: 'Dashboard' },
-      { href: '/pacientes', icon: '👥', label: 'Pacientes', badge: '263' },
-      { href: '/atendimentos', icon: '🦷', label: 'Atendimentos' },
+      { href: '/', icon: LayoutDashboard, label: 'Dashboard' },
+      { href: '/pacientes', icon: Users, label: 'Pacientes', badge: '263' },
+      { href: '/atendimentos', icon: Stethoscope, label: 'Atendimentos' },
     ],
   },
   {
     title: 'Financeiro',
     links: [
-      { href: '/financeiro', icon: '💰', label: 'Análise Financeira' },
-      { href: '/dre', icon: '📈', label: 'DRE' },
-      { href: '/dfc', icon: '💳', label: 'Fluxo de Caixa' },
+      { href: '/financeiro', icon: TrendingUp, label: 'Análise Financeira' },
+      { href: '/dre', icon: BarChart3, label: 'DRE' },
+      { href: '/dfc', icon: CreditCard, label: 'Fluxo de Caixa' },
     ],
   },
   {
     title: 'Operacional',
     links: [
-      { href: '/estoque', icon: '📦', label: 'Estoque' },
-      { href: '/retornos', icon: '🔄', label: 'Retornos' },
-      { href: '/receita', icon: '🧾', label: 'Tabela de Preços' },
+      { href: '/estoque', icon: Package, label: 'Estoque' },
+      { href: '/retornos', icon: RefreshCw, label: 'Retornos' },
+      { href: '/receita', icon: Receipt, label: 'Tabela de Preços' },
     ],
   },
   {
     title: 'Inteligência',
     links: [
-      { href: '/assistente', icon: '🤖', label: 'Assistente AI' },
+      { href: '/assistente', icon: Bot, label: 'Assistente AI' },
     ],
   },
 ];
@@ -65,7 +91,9 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="sidebar-logo-icon">🦷</div>
+        <div className="sidebar-logo-icon">
+          <Activity size={22} color="white" strokeWidth={2} />
+        </div>
         <div>
           <div className="sidebar-logo-text">DentFlow</div>
           <div className="sidebar-logo-sub">Management System</div>
@@ -75,17 +103,23 @@ export function Sidebar() {
       {navSections.map((section) => (
         <div className="sidebar-section" key={section.title}>
           <div className="sidebar-section-title">{section.title}</div>
-          {section.links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`sidebar-link ${pathname === link.href ? 'active' : ''}`}
-            >
-              <span className="sidebar-link-icon">{link.icon}</span>
-              <span>{link.label}</span>
-              {link.badge && <span className="sidebar-link-badge">{link.badge}</span>}
-            </Link>
-          ))}
+          {section.links.map((link) => {
+            const Icon = link.icon;
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`sidebar-link ${isActive ? 'active' : ''}`}
+              >
+                <span className="sidebar-link-icon">
+                  <Icon size={16} strokeWidth={isActive ? 2.5 : 2} />
+                </span>
+                <span>{link.label}</span>
+                {link.badge && <span className="sidebar-link-badge">{link.badge}</span>}
+              </Link>
+            );
+          })}
         </div>
       ))}
 

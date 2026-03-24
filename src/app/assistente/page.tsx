@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { Bot, Send } from 'lucide-react';
 
 interface Message {
   id: number;
@@ -15,7 +16,7 @@ const initialMessages: Message[] = [
   {
     id: 1,
     role: 'assistant',
-    content: '👋 Olá! Sou o assistente de gestão da DentFlow.\n\nPosso te ajudar com:\n\n• 📊 **Relatórios financeiros** — "Qual foi o lucro de junho?"\n• 👥 **Busca de pacientes** — "Encontre pacientes do plano Uniodonto"\n• 📦 **Estoque** — "Quais insumos estão com estoque baixo?"\n• 🔄 **Retornos** — "Quais pacientes precisam de retorno?"\n• 📈 **Análises** — "Compare receita 2025 vs 2026"\n\nComo posso ajudar?',
+    content: 'Olá! Sou o assistente de gestão da DentFlow.\n\nPosso te ajudar com:\n\n• **Relatórios financeiros** — "Qual foi o lucro de junho?"\n• **Busca de pacientes** — "Encontre pacientes do plano Uniodonto"\n• **Estoque** — "Quais insumos estão com estoque baixo?"\n• **Retornos** — "Quais pacientes precisam de retorno?"\n• **Análises** — "Compare receita 2025 vs 2026"\n\nComo posso ajudar?',
     timestamp: INITIAL_TIMESTAMP,
   },
 ];
@@ -74,7 +75,7 @@ export default function AssistentePage() {
       setMessages(prev => [...prev, {
         id: Date.now(),
         role: 'assistant',
-        content: '⚠️ Erro de conexão. Tente novamente.',
+        content: 'Erro de conexão. Tente novamente.',
         timestamp: new Date(),
       }]);
     } finally {
@@ -84,9 +85,12 @@ export default function AssistentePage() {
 
   return (
     <div>
-      <div className="page-header">
-        <h1>🤖 Assistente AI</h1>
-        <p>Converse com a inteligência artificial para gerenciar sua clínica</p>
+      <div className="page-header" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-md)' }}>
+        <div>
+          <h1>Assistente AI</h1>
+          <p>Converse com a inteligência artificial para gerenciar sua clínica</p>
+        </div>
+        <Bot size={28} style={{ marginLeft: 'auto', color: 'var(--accent-primary)', opacity: 0.7 }} />
       </div>
 
       <div className="chat-container">
@@ -99,15 +103,15 @@ export default function AssistentePage() {
               </div>
             </div>
           ))}
-
           {isTyping && (
-            <div className="chat-message assistant" style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-              <span style={{ animation: 'pulse 1s infinite' }}>●</span>
-              <span style={{ animation: 'pulse 1s infinite 0.2s' }}>●</span>
-              <span style={{ animation: 'pulse 1s infinite 0.4s' }}>●</span>
+            <div className="chat-message assistant">
+              <div style={{ display: 'flex', gap: '4px', padding: '4px 0' }}>
+                <span style={{ animation: 'pulse 1s infinite 0s', color: 'var(--accent-primary)' }}>●</span>
+                <span style={{ animation: 'pulse 1s infinite 0.2s', color: 'var(--accent-primary)' }}>●</span>
+                <span style={{ animation: 'pulse 1s infinite 0.4s', color: 'var(--accent-primary)' }}>●</span>
+              </div>
             </div>
           )}
-
           <div ref={messagesEndRef} />
         </div>
 
@@ -120,8 +124,8 @@ export default function AssistentePage() {
             disabled={isTyping}
             suppressHydrationWarning
           />
-          <button onClick={handleSend} disabled={isTyping || !input.trim()}>
-            Enviar
+          <button onClick={handleSend} disabled={isTyping || !input.trim()} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Send size={14} /> Enviar
           </button>
         </div>
       </div>

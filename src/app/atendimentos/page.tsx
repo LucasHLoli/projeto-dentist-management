@@ -3,6 +3,7 @@
 import { sampleAppointments, Appointment } from '@/lib/data';
 import { useState } from 'react';
 import NovoAtendimentoModal from '@/components/NovoAtendimentoModal';
+import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X } from 'lucide-react';
 
 export default function AtendimentosPage() {
   const [search, setSearch] = useState('');
@@ -35,17 +36,17 @@ export default function AtendimentosPage() {
 
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="stat-card teal">
-          <div className="stat-card-icon">🦷</div>
+          <div className="stat-card-icon"><Stethoscope size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Total Atendimentos</div>
           <div className="stat-card-value">1.135</div>
         </div>
         <div className="stat-card purple">
-          <div className="stat-card-icon">📋</div>
+          <div className="stat-card-icon"><ClipboardList size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Com dados completos</div>
           <div className="stat-card-value">454</div>
         </div>
         <div className="stat-card amber">
-          <div className="stat-card-icon">🧹</div>
+          <div className="stat-card-icon"><Sparkles size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Com Limpeza</div>
           <div className="stat-card-value">{appointments.filter(a => a.limpeza).length}</div>
         </div>
@@ -53,7 +54,7 @@ export default function AtendimentosPage() {
 
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
-          <span className="search-bar-icon">🔍</span>
+          <span className="search-bar-icon"><Search size={14} /></span>
           <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
         <select className="form-input" style={{ width: '180px' }} value={filterPlano} onChange={e => setFilterPlano(e.target.value)}>
@@ -63,7 +64,9 @@ export default function AtendimentosPage() {
           <option value="Camed">Camed</option>
           <option value="Geap">Geap</option>
         </select>
-        <button className="btn btn-primary" onClick={() => setShowModal(true)}>+ Novo Atendimento</button>
+        <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }} onClick={() => setShowModal(true)}>
+          <Plus size={14} /> Novo Atendimento
+        </button>
       </div>
 
       <div className="glass-card" style={{ padding: 0 }}>
@@ -96,8 +99,8 @@ export default function AtendimentosPage() {
                   <td style={{ maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {getProcedimento(a)}
                   </td>
-                  <td>{a.limpeza ? <span className="badge badge-emerald">Sim</span> : <span className="badge badge-rose">Não</span>}</td>
-                  <td>{a.pediuRecibo ? <span className="badge badge-amber">Sim</span> : '—'}</td>
+                  <td>{a.limpeza ? <span className="badge badge-emerald"><Check size={10} /> Sim</span> : <span className="badge badge-rose"><X size={10} /> Não</span>}</td>
+                  <td>{a.pediuRecibo ? <span className="badge badge-amber"><Check size={10} /> Sim</span> : '—'}</td>
                 </tr>
               ))}
             </tbody>

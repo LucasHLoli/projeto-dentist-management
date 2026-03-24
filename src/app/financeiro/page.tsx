@@ -2,6 +2,7 @@
 
 import { sampleFinancials } from '@/lib/data';
 import { useState } from 'react';
+import { DollarSign, TrendingDown, TrendingUp, BarChart2, Search } from 'lucide-react';
 
 export default function FinanceiroPage() {
   const [search, setSearch] = useState('');
@@ -22,22 +23,22 @@ export default function FinanceiroPage() {
 
       <div className="stats-grid">
         <div className="stat-card amber">
-          <div className="stat-card-icon">💰</div>
+          <div className="stat-card-icon"><DollarSign size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Orçamento Total</div>
           <div className="stat-card-value">R$ {totalOrcamento.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
         <div className="stat-card rose">
-          <div className="stat-card-icon">📉</div>
+          <div className="stat-card-icon"><TrendingDown size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Custo Total</div>
           <div className="stat-card-value">R$ {totalCusto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
         <div className="stat-card teal">
-          <div className="stat-card-icon">📈</div>
+          <div className="stat-card-icon"><TrendingUp size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Resultado Líquido</div>
           <div className="stat-card-value">R$ {totalLiquido.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
         </div>
         <div className="stat-card purple">
-          <div className="stat-card-icon">📊</div>
+          <div className="stat-card-icon"><BarChart2 size={18} strokeWidth={2} /></div>
           <div className="stat-card-label">Margem Média</div>
           <div className="stat-card-value">{(margemMedia * 100).toFixed(1)}%</div>
         </div>
@@ -45,7 +46,7 @@ export default function FinanceiroPage() {
 
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
-          <span className="search-bar-icon">🔍</span>
+          <span className="search-bar-icon"><Search size={14} /></span>
           <input placeholder="Buscar paciente..." value={search} onChange={e => setSearch(e.target.value)} suppressHydrationWarning />
         </div>
       </div>

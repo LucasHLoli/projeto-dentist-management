@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { Bot, Send, Minus } from 'lucide-react';
 
 interface Message {
   id: number;
@@ -15,7 +16,7 @@ const initialMessages: Message[] = [
   {
     id: 1,
     role: 'assistant',
-    content: '👋 Olá Dra.! Estou aqui para ajudar.\n\nPosso consultar dados, gerar relatórios e executar ações quando você pedir.\n\n💡 Exemplos:\n• "Busque o paciente Ana Beatriz"\n• "Qual o lucro de junho?"\n• "Estoque baixo"\n• "Retornos pendentes"',
+    content: 'Olá Dra.! Estou aqui para ajudar.\n\nPosso consultar dados, gerar relatórios e executar ações quando você pedir.\n\nExemplos:\n• "Busque o paciente Ana Beatriz"\n• "Qual o lucro de junho?"\n• "Estoque baixo"\n• "Retornos pendentes"',
     timestamp: INITIAL_TIMESTAMP,
   },
 ];
@@ -86,7 +87,7 @@ export function AIChat() {
       setMessages(prev => [...prev, {
         id: Date.now(),
         role: 'assistant',
-        content: '⚠️ Erro de conexão. Tente novamente.',
+        content: 'Erro de conexão. Tente novamente.',
         timestamp: new Date(),
       }]);
     } finally {
@@ -97,7 +98,7 @@ export function AIChat() {
   if (isMinimized) {
     return (
       <div className="ai-chat-minimized" onClick={() => setIsMinimized(false)}>
-        <span>🤖</span>
+        <Bot size={24} color="white" />
         <span className="ai-chat-minimized-dot" />
       </div>
     );
@@ -111,7 +112,7 @@ export function AIChat() {
           <span className="ai-chat-header-title">Assistente AI</span>
         </div>
         <button className="ai-chat-minimize" onClick={() => setIsMinimized(true)} title="Minimizar">
-          ─
+          <Minus size={14} />
         </button>
       </div>
 
@@ -145,7 +146,7 @@ export function AIChat() {
           suppressHydrationWarning
         />
         <button onClick={handleSend} disabled={isTyping || !input.trim()}>
-          ➤
+          <Send size={14} />
         </button>
       </div>
     </aside>

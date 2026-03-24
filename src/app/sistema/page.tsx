@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LayoutGrid, Bot, Monitor, RefreshCw, type LucideIcon } from 'lucide-react';
 
 type Status = {
   googleSheets: { connected: boolean; authUrl: string | null };
@@ -9,14 +10,14 @@ type Status = {
 } | null;
 
 function StatusCard({
-  icon,
+  icon: Icon,
   title,
   description,
   connected,
   actionLabel,
   onAction,
 }: {
-  icon: string;
+  icon: LucideIcon;
   title: string;
   description: string;
   connected: boolean;
@@ -25,18 +26,23 @@ function StatusCard({
 }) {
   return (
     <div className="glass-card" style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-lg)' }}>
-      <div style={{ fontSize: '2rem', lineHeight: 1 }}>{icon}</div>
+      <div style={{
+        width: 40,
+        height: 40,
+        borderRadius: 'var(--radius-md)',
+        background: connected ? 'rgba(20, 184, 166, 0.12)' : 'rgba(100, 116, 139, 0.12)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        color: connected ? 'var(--accent-teal)' : 'var(--text-muted)',
+      }}>
+        <Icon size={18} strokeWidth={2} />
+      </div>
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
           <span style={{ fontWeight: 600, fontSize: '1rem' }}>{title}</span>
-          <span style={{
-            padding: '2px 10px',
-            borderRadius: '99px',
-            fontSize: '0.72rem',
-            fontWeight: 600,
-            background: connected ? 'rgba(16,185,129,0.15)' : 'rgba(148,163,184,0.12)',
-            color: connected ? 'var(--accent-teal)' : 'var(--text-muted)',
-          }}>
+          <span className={`badge ${connected ? 'badge-teal' : 'badge-slate'}`}>
             {connected ? '● Conectado' : '○ Não conectado'}
           </span>
         </div>
@@ -72,7 +78,6 @@ export default function SistemaPage() {
       const data = await res.json();
       setStatus(data);
     } catch {
-      // ignore
     } finally {
       setLoading(false);
     }
@@ -88,13 +93,14 @@ export default function SistemaPage() {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
           <h1>Sistema</h1>
           <p>Status das integrações e conexões da clínica</p>
         </div>
-        <button className="btn btn-secondary" onClick={fetchStatus} disabled={loading}>
-          {loading ? 'Verificando...' : '🔄 Atualizar'}
+        <button className="btn btn-secondary" onClick={fetchStatus} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <RefreshCw size={14} />
+          {loading ? 'Verificando...' : 'Atualizar'}
         </button>
       </div>
 
@@ -116,7 +122,7 @@ export default function SistemaPage() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
           <StatusCard
-            icon="📊"
+            icon={LayoutGrid}
             title="Google Sheets"
             description={
               status?.googleSheets.connected
@@ -129,7 +135,7 @@ export default function SistemaPage() {
           />
 
           <StatusCard
-            icon="🤖"
+            icon={Bot}
             title="Groq AI"
             description={
               status?.groqAI.connected
@@ -140,7 +146,7 @@ export default function SistemaPage() {
           />
 
           <StatusCard
-            icon="🖥️"
+            icon={Monitor}
             title="Servidor"
             description={
               status
