@@ -3,12 +3,13 @@
 import { sampleAppointments, Appointment } from '@/lib/data';
 import { useState } from 'react';
 import NovoAtendimentoModal from '@/components/NovoAtendimentoModal';
-import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X, Trash2 } from 'lucide-react';
+import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X, Trash2, Pencil } from 'lucide-react';
 
 export default function AtendimentosPage() {
   const [search, setSearch] = useState('');
   const [filterPlano, setFilterPlano] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
   const [appointments, setAppointments] = useState<Appointment[]>(sampleAppointments);
 
   const filtered = appointments.filter(a => {
@@ -22,7 +23,21 @@ export default function AtendimentosPage() {
   };
 
   const handleSave = (appointment: Appointment) => {
-    setAppointments(prev => [appointment, ...prev]);
+    setAppointments(prev => {
+      const exists = prev.find(a => a.id === appointment.id);
+      if (exists) return prev.map(a => a.id === appointment.id ? appointment : a);
+      return [appointment, ...prev];
+    });
+  };
+
+  const handleEdit = (appointment: Appointment) => {
+    setEditingAppointment(appointment);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setEditingAppointment(null);
   };
 
   const handleDelete = (id: number) => {
@@ -70,7 +85,7 @@ export default function AtendimentosPage() {
           <option value="Camed">Camed</option>
           <option value="Geap">Geap</option>
         </select>
-        <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }} onClick={() => setShowModal(true)}>
+        <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px' }} onClick={() => { setEditingAppointment(null); setShowModal(true); }}>
           <Plus size={14} /> Novo Atendimento
         </button>
       </div>
@@ -109,23 +124,26 @@ export default function AtendimentosPage() {
                   <td>{a.limpeza ? <span className="badge badge-emerald"><Check size={10} /> Sim</span> : <span className="badge badge-rose"><X size={10} /> Não</span>}</td>
                   <td>{a.pediuRecibo ? <span className="badge badge-amber"><Check size={10} /> Sim</span> : '—'}</td>
                   <td>
-                    <button
-                      onClick={() => handleDelete(a.id)}
-                      title="Excluir atendimento"
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: 'var(--text-muted)',
-                        padding: '4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.color = '#f87171')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
-                    >
-                      <Trash2 size={15} />
-                    </button>
+                    <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                      <button
+                        onClick={() => handleEdit(a)}
+                        title="Editar atendimento"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '4px', display: 'flex', alignItems: 'center' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-primary)')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                      >
+                        <Pencil size={14} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(a.id)}
+                        title="Excluir atendimento"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '4px', display: 'flex', alignItems: 'center' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = '#f87171')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -136,9 +154,10 @@ export default function AtendimentosPage() {
 
       {showModal && (
         <NovoAtendimentoModal
-          onClose={() => setShowModal(false)}
+          onClose={handleCloseModal}
           onSave={handleSave}
           nextId={nextId}
+          initialData={editingAppointment ?? undefined}
         />
       )}
     </div>
