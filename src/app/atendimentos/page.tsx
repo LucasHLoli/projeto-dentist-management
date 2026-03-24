@@ -1,9 +1,20 @@
 'use client';
 
 import { sampleAppointments, Appointment } from '@/lib/data';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NovoAtendimentoModal from '@/components/NovoAtendimentoModal';
 import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X, Trash2, Pencil } from 'lucide-react';
+
+const LS_KEY = 'dentflow_appointments';
+
+function loadAppointments(): Appointment[] {
+  if (typeof window === 'undefined') return sampleAppointments;
+  try {
+    const saved = localStorage.getItem(LS_KEY);
+    if (saved) return JSON.parse(saved) as Appointment[];
+  } catch {}
+  return sampleAppointments;
+}
 
 export default function AtendimentosPage() {
   const [search, setSearch] = useState('');
@@ -11,6 +22,16 @@ export default function AtendimentosPage() {
   const [showModal, setShowModal] = useState(false);
   const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
   const [appointments, setAppointments] = useState<Appointment[]>(sampleAppointments);
+
+  useEffect(() => {
+    setAppointments(loadAppointments());
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(LS_KEY, JSON.stringify(appointments));
+    }
+  }, [appointments]);
 
   const filtered = appointments.filter(a => {
     const matchSearch = a.paciente.toLowerCase().includes(search.toLowerCase());

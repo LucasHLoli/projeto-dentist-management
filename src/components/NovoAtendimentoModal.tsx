@@ -565,10 +565,10 @@ const labelStyle: React.CSSProperties = {
 };
 
 const dropdownStyle: React.CSSProperties = {
-  background: 'var(--bg-card)',
-  border: '1px solid var(--border-glass)',
+  background: '#111827',
+  border: '1px solid rgba(99,102,241,0.3)',
   borderRadius: '8px',
-  boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+  boxShadow: '0 12px 40px rgba(0,0,0,0.8)',
   zIndex: 99999,
   maxHeight: '240px',
   overflowY: 'auto',
