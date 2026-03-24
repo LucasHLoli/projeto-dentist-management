@@ -31,9 +31,14 @@ const emptyForm = {
   detalhesDespesa: '',
 };
 
+const getInitialForm = () => ({
+  ...emptyForm,
+  data: new Date().toLocaleDateString('en-CA'),
+});
+
 export default function NovoAtendimentoModal({ onClose, onSave, nextId }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('Identificação');
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState(getInitialForm);
 
   const set = (field: keyof typeof emptyForm, value: string | boolean | number) =>
     setForm(prev => ({ ...prev, [field]: value }));

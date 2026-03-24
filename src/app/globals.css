@@ -655,6 +655,17 @@ textarea.form-input {
   min-height: 80px;
 }
 
+input[type="date"].form-input {
+  color-scheme: light;
+  appearance: none;
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+  filter: invert(1) brightness(0.7);
+  cursor: pointer;
+}
+
 /* ========== SEARCH BAR ========== */
 .search-bar {
   position: relative;
