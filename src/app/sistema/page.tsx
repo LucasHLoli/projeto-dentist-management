@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 type Status = {
   googleSheets: { connected: boolean; authUrl: string | null };
   groqAI: { connected: boolean };
+  server: { port: number | string; env: string; uptime: string };
 } | null;
 
 function StatusCard({
@@ -141,7 +142,11 @@ export default function SistemaPage() {
           <StatusCard
             icon="🖥️"
             title="Servidor"
-            description="Servidor Next.js rodando localmente na porta 5000. Todas as rotas de API estão ativas."
+            description={
+              status
+                ? `Servidor Next.js na porta ${status.server.port} (${status.server.env}). Ativo há ${status.server.uptime}. Todas as rotas de API estão respondendo.`
+                : 'Servidor Next.js ativo. Todas as rotas de API estão respondendo.'
+            }
             connected={true}
           />
         </div>

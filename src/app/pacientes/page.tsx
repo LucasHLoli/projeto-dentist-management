@@ -216,6 +216,7 @@ export default function PacientesPage() {
         </div>
       )}
 
+      {!notAuthenticated && (<>
       <div className="filter-row">
         <div className="search-bar" style={{ flex: 1 }}>
           <span className="search-bar-icon">🔍</span>
@@ -338,6 +339,7 @@ export default function PacientesPage() {
           </div>
         )}
       </div>
+      </>)}
 
       {selectedPatient && (
         <PatientModal 
