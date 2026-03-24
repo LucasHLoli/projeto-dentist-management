@@ -118,6 +118,7 @@ export default function AssistentePage() {
             onKeyDown={e => e.key === 'Enter' && handleSend()}
             placeholder="Pergunte sobre pacientes, financeiro, estoque..."
             disabled={isTyping}
+            suppressHydrationWarning
           />
           <button onClick={handleSend} disabled={isTyping || !input.trim()}>
             Enviar

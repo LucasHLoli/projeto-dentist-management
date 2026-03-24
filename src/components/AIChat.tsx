@@ -142,6 +142,7 @@ export function AIChat() {
           onKeyDown={e => e.key === 'Enter' && handleSend()}
           placeholder="Pergunte à AI..."
           disabled={isTyping}
+          suppressHydrationWarning
         />
         <button onClick={handleSend} disabled={isTyping || !input.trim()}>
           ➤
