@@ -3,7 +3,7 @@
 import { sampleAppointments, Appointment } from '@/lib/data';
 import { useState } from 'react';
 import NovoAtendimentoModal from '@/components/NovoAtendimentoModal';
-import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X } from 'lucide-react';
+import { Stethoscope, ClipboardList, Sparkles, Search, Plus, Check, X, Trash2 } from 'lucide-react';
 
 export default function AtendimentosPage() {
   const [search, setSearch] = useState('');
@@ -23,6 +23,12 @@ export default function AtendimentosPage() {
 
   const handleSave = (appointment: Appointment) => {
     setAppointments(prev => [appointment, ...prev]);
+  };
+
+  const handleDelete = (id: number) => {
+    if (window.confirm('Tem certeza que deseja excluir este atendimento?')) {
+      setAppointments(prev => prev.filter(a => a.id !== id));
+    }
   };
 
   const nextId = appointments.length > 0 ? Math.max(...appointments.map(a => a.id)) + 1 : 1;
@@ -80,6 +86,7 @@ export default function AtendimentosPage() {
                 <th>Procedimento</th>
                 <th>Limpeza</th>
                 <th>Recibo</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -101,6 +108,25 @@ export default function AtendimentosPage() {
                   </td>
                   <td>{a.limpeza ? <span className="badge badge-emerald"><Check size={10} /> Sim</span> : <span className="badge badge-rose"><X size={10} /> Não</span>}</td>
                   <td>{a.pediuRecibo ? <span className="badge badge-amber"><Check size={10} /> Sim</span> : '—'}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(a.id)}
+                      title="Excluir atendimento"
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: 'var(--text-muted)',
+                        padding: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#f87171')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

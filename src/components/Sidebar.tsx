@@ -15,6 +15,7 @@ import {
   Receipt,
   Bot,
   Activity,
+  DollarSign,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -53,6 +54,7 @@ const navSections: NavSection[] = [
       { href: '/estoque', icon: Package, label: 'Estoque' },
       { href: '/retornos', icon: RefreshCw, label: 'Retornos' },
       { href: '/receita', icon: Receipt, label: 'Tabela de Preços' },
+      { href: '/valores', icon: DollarSign, label: 'Valores' },
     ],
   },
   {
