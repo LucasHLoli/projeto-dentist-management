@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "googleapis": "^171.4.0",
+    "groq-sdk": "^1.1.1",
     "lucide-react": "^0.344.0",
     "next": "^15.5.14",
     "react": "^18.2.0",

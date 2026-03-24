@@ -20,13 +20,6 @@ const initialMessages: Message[] = [
   },
 ];
 
-const mockResponses: Record<string, string> = {
-  'lucro': '📊 **Análise de Lucro**\n\nBaseado nos dados do DFC:\n\n| Mês | Lucro |\n|-----|-------|\n| Jun | R$ 7.410,19 |\n| Set | R$ 5.687,88 |\n| Dez | R$ 6.419,69 |\n\n**Total Anual:** R$ 40.485,86\n\nO mês de **junho** foi o mais lucrativo, com margem de 62.2%. Quer que eu gere um relatório detalhado?',
-  'estoque': '📦 **Alerta de Estoque**\n\nItens com estoque crítico (≤ 3 unidades):\n\n• ⚠️ **Mepvacaína** — 3 unidades (validade: Ago/2025)\n• ⚠️ **Hipoclorito de Sódio** — 2 unidades (OK até Jan/2026)\n• ⚠️ **Pasta Profilática** — 1 unidade (validade: Dez/2025)\n\nRecomendo reabastecer esses itens o mais rápido possível. Deseja que eu gere um pedido de compra?',
-  'retorno': '🔄 **Pacientes com Retorno Pendente**\n\nEncontrei 3 pacientes que precisam agendar retorno:\n\n1. **Ana Paula Vaz da Silva** — Última limpeza há 1 mês e 12 dias (Uniodonto)\n2. **Carlos Eduardo Silva Mendes** — Última limpeza há 3 meses e 5 dias (Uniodonto)\n3. **Maria José Santos** — Última limpeza há 6 meses (Particular)\n\nDeseja que eu prepare as mensagens de WhatsApp para envio?',
-  'paciente': '👥 **Busca de Pacientes**\n\nAtualmente temos **263 pacientes** cadastrados.\n\nDistribuição por plano:\n• Particular: 109 pacientes\n• Uniodonto: 98 pacientes\n• Camed: 34 pacientes\n• Geap: 22 pacientes\n\n**55 prontuários** precisam ser atualizados. Quer que eu liste os desatualizados?',
-};
-
 export default function AssistentePage() {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
@@ -42,42 +35,51 @@ export default function AssistentePage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = async () => {
+    if (!input.trim() || isTyping) return;
 
     const userMessage: Message = {
-      id: messages.length + 1,
+      id: Date.now(),
       role: 'user',
       content: input,
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput('');
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const lower = input.toLowerCase();
-      let response = '🤔 Entendi sua pergunta! Em um sistema completo, eu consultaria o banco de dados para trazer a resposta exata.\n\nPor enquanto, experimente perguntar sobre:\n• Lucro/financeiro\n• Estoque\n• Retornos de pacientes\n• Dados de pacientes';
+    try {
+      const history = newMessages
+        .filter(m => m.id !== 1)
+        .map(m => ({ role: m.role, content: m.content }));
 
-      for (const [key, value] of Object.entries(mockResponses)) {
-        if (lower.includes(key)) {
-          response = value;
-          break;
-        }
-      }
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
 
-      const assistantMessage: Message = {
-        id: messages.length + 2,
+      const data = await res.json();
+      const reply = data.reply || data.error || 'Erro ao obter resposta.';
+
+      setMessages(prev => [...prev, {
+        id: Date.now(),
         role: 'assistant',
-        content: response,
+        content: reply,
         timestamp: new Date(),
-      };
-
+      }]);
+    } catch {
+      setMessages(prev => [...prev, {
+        id: Date.now(),
+        role: 'assistant',
+        content: '⚠️ Erro de conexão. Tente novamente.',
+        timestamp: new Date(),
+      }]);
+    } finally {
       setIsTyping(false);
-      setMessages(prev => [...prev, assistantMessage]);
-    }, 1500);
+    }
   };
 
   return (
