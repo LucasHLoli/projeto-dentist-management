@@ -68,7 +68,7 @@ export default function FinanceiroPage() {
             <tbody>
               {filtered.map(f => (
                 <tr key={f.id}>
-                  <td>{new Date(f.data).toLocaleDateString('pt-BR')}</td>
+                  <td>{f.data.split('-').reverse().join('/')}</td>
                   <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{f.paciente}</td>
                   <td><span className={`badge ${f.plano === 'Particular' ? 'badge-amber' : f.plano === 'Uniodonto' ? 'badge-teal' : f.plano === 'Camed' ? 'badge-purple' : 'badge-rose'}`}>{f.plano}</span></td>
                   <td>{f.modalidadePagamento || '—'}</td>

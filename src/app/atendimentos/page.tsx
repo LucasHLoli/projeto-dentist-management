@@ -73,7 +73,7 @@ export default function AtendimentosPage() {
             <tbody>
               {filtered.map(a => (
                 <tr key={a.id}>
-                  <td>{new Date(a.data).toLocaleDateString('pt-BR')}</td>
+                  <td>{a.data.split('-').reverse().join('/')}</td>
                   <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{a.paciente}</td>
                   <td>
                     <span className={`badge ${

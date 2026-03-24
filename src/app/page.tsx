@@ -22,11 +22,12 @@ function MiniChart({ data, color }: { data: number[]; color: string }) {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min || 1;
+  const gradId = `grad-${color.replace('#', '')}`;
 
   return (
     <svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none" style={{ display: 'block' }}>
       <defs>
-        <linearGradient id={`grad-${color}`} x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.3"/>
           <stop offset="100%" stopColor={color} stopOpacity="0"/>
         </linearGradient>
@@ -37,7 +38,7 @@ function MiniChart({ data, color }: { data: number[]; color: string }) {
           const y = 55 - ((d - min) / range) * 50;
           return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
         }).join(' ') + ` L 200 60 L 0 60 Z`}
-        fill={`url(#grad-${color})`}
+        fill={`url(#${gradId})`}
       />
       <path
         d={data.map((d, i) => {
@@ -132,7 +133,7 @@ export default function Dashboard() {
               <tbody>
                 {sampleAppointments.slice(0, 5).map(a => (
                   <tr key={a.id}>
-                    <td>{new Date(a.data).toLocaleDateString('pt-BR')}</td>
+                    <td>{a.data.split('-').reverse().join('/')}</td>
                     <td style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{a.paciente}</td>
                     <td>
                       <span className={`badge ${
