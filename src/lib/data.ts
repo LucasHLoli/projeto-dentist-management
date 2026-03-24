@@ -264,7 +264,7 @@ export const dreData = {
   revenue2026: [850, 900, 2250, 1750, 650, 6800, 500, 2200, 2500, 800, 400, 4000],
 };
 
-// Analytics DFC
+// Analytics DFC (legacy — kept for backward compat)
 export const analyticsDFC = {
   months: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
   receita: [0, 0, 3823.48, 5183.5, 1738.94, 11910.19, 8337.42, 6254.57, 9887.88, 5748.7, 8572.86, 11419.69],
@@ -279,3 +279,103 @@ export const analyticsDFC = {
     { nome: 'Manutenção', total: 3500 },
   ],
 };
+
+export interface MonthlyData {
+  receita: number;
+  custo: number;
+  lucro: number;
+  atendimentos: number;
+}
+
+export interface YearData {
+  year: number;
+  months: MonthlyData[];
+}
+
+export const analyticsByYear: YearData[] = [
+  {
+    year: 2023,
+    months: [
+      { receita: 2100, custo: 1400, lucro: 700, atendimentos: 18 },
+      { receita: 2450, custo: 1550, lucro: 900, atendimentos: 20 },
+      { receita: 3100, custo: 1800, lucro: 1300, atendimentos: 24 },
+      { receita: 2800, custo: 1650, lucro: 1150, atendimentos: 22 },
+      { receita: 1900, custo: 1300, lucro: 600, atendimentos: 16 },
+      { receita: 5200, custo: 2400, lucro: 2800, atendimentos: 38 },
+      { receita: 4800, custo: 2200, lucro: 2600, atendimentos: 35 },
+      { receita: 3600, custo: 1900, lucro: 1700, atendimentos: 28 },
+      { receita: 6100, custo: 2800, lucro: 3300, atendimentos: 42 },
+      { receita: 4200, custo: 2000, lucro: 2200, atendimentos: 32 },
+      { receita: 5800, custo: 2600, lucro: 3200, atendimentos: 40 },
+      { receita: 7200, custo: 3100, lucro: 4100, atendimentos: 50 },
+    ],
+  },
+  {
+    year: 2024,
+    months: [
+      { receita: 2800, custo: 1600, lucro: 1200, atendimentos: 22 },
+      { receita: 3200, custo: 1800, lucro: 1400, atendimentos: 26 },
+      { receita: 4100, custo: 2100, lucro: 2000, atendimentos: 30 },
+      { receita: 3700, custo: 1950, lucro: 1750, atendimentos: 28 },
+      { receita: 2400, custo: 1450, lucro: 950, atendimentos: 19 },
+      { receita: 7800, custo: 3200, lucro: 4600, atendimentos: 52 },
+      { receita: 6500, custo: 2900, lucro: 3600, atendimentos: 46 },
+      { receita: 5100, custo: 2400, lucro: 2700, atendimentos: 38 },
+      { receita: 8200, custo: 3500, lucro: 4700, atendimentos: 56 },
+      { receita: 5600, custo: 2600, lucro: 3000, atendimentos: 40 },
+      { receita: 7100, custo: 3000, lucro: 4100, atendimentos: 50 },
+      { receita: 9800, custo: 4000, lucro: 5800, atendimentos: 66 },
+    ],
+  },
+  {
+    year: 2025,
+    months: [
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 3823.48, custo: 2191.37, lucro: 1632.11, atendimentos: 29 },
+      { receita: 5183.5, custo: 3000, lucro: 2183.5, atendimentos: 37 },
+      { receita: 1738.94, custo: 1200, lucro: 538.94, atendimentos: 14 },
+      { receita: 11910.19, custo: 4500, lucro: 7410.19, atendimentos: 72 },
+      { receita: 8337.42, custo: 3800, lucro: 4537.42, atendimentos: 58 },
+      { receita: 6254.57, custo: 2800, lucro: 3454.57, atendimentos: 46 },
+      { receita: 9887.88, custo: 4200, lucro: 5687.88, atendimentos: 64 },
+      { receita: 5748.7, custo: 2500, lucro: 3248.7, atendimentos: 41 },
+      { receita: 8572.86, custo: 3200, lucro: 5372.86, atendimentos: 58 },
+      { receita: 11419.69, custo: 5000, lucro: 6419.69, atendimentos: 74 },
+    ],
+  },
+  {
+    year: 2026,
+    months: [
+      { receita: 4200, custo: 1800, lucro: 2400, atendimentos: 32 },
+      { receita: 5600, custo: 2300, lucro: 3300, atendimentos: 42 },
+      { receita: 7100, custo: 2900, lucro: 4200, atendimentos: 52 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+      { receita: 0, custo: 0, lucro: 0, atendimentos: 0 },
+    ],
+  },
+];
+
+export const MONTHS_SHORT = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+// Business KPIs per year
+export interface BusinessKPIs {
+  year: number;
+  ticketMedioAnual: number;
+  totalAtendimentos: number;
+  margemMediaAnual: number;
+}
+
+export const businessKPIs: BusinessKPIs[] = [
+  { year: 2023, ticketMedioAnual: 182.5, totalAtendimentos: 365, margemMediaAnual: 54.8 },
+  { year: 2024, ticketMedioAnual: 218.3, totalAtendimentos: 473, margemMediaAnual: 58.2 },
+  { year: 2025, ticketMedioAnual: 241.7, totalAtendimentos: 493, margemMediaAnual: 55.6 },
+  { year: 2026, ticketMedioAnual: 265.4, totalAtendimentos: 126, margemMediaAnual: 61.3 },
+];
