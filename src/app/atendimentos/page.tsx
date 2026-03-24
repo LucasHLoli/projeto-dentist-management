@@ -1,21 +1,30 @@
 'use client';
 
-import { sampleAppointments } from '@/lib/data';
+import { sampleAppointments, Appointment } from '@/lib/data';
 import { useState } from 'react';
+import NovoAtendimentoModal from '@/components/NovoAtendimentoModal';
 
 export default function AtendimentosPage() {
   const [search, setSearch] = useState('');
   const [filterPlano, setFilterPlano] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [appointments, setAppointments] = useState<Appointment[]>(sampleAppointments);
 
-  const filtered = sampleAppointments.filter(a => {
+  const filtered = appointments.filter(a => {
     const matchSearch = a.paciente.toLowerCase().includes(search.toLowerCase());
     const matchPlano = !filterPlano || a.planoSaude === filterPlano;
     return matchSearch && matchPlano;
   });
 
-  const getProcedimento = (a: typeof sampleAppointments[0]) => {
+  const getProcedimento = (a: Appointment) => {
     return a.procedimentosParticular || a.procedimentosUniodonto || a.procedimentosCamed || a.procedimentosGeap || '—';
   };
+
+  const handleSave = (appointment: Appointment) => {
+    setAppointments(prev => [appointment, ...prev]);
+  };
+
+  const nextId = appointments.length > 0 ? Math.max(...appointments.map(a => a.id)) + 1 : 1;
 
   return (
     <div>
@@ -38,7 +47,7 @@ export default function AtendimentosPage() {
         <div className="stat-card amber">
           <div className="stat-card-icon">🧹</div>
           <div className="stat-card-label">Com Limpeza</div>
-          <div className="stat-card-value">{sampleAppointments.filter(a => a.limpeza).length}</div>
+          <div className="stat-card-value">{appointments.filter(a => a.limpeza).length}</div>
         </div>
       </div>
 
@@ -54,7 +63,7 @@ export default function AtendimentosPage() {
           <option value="Camed">Camed</option>
           <option value="Geap">Geap</option>
         </select>
-        <button className="btn btn-primary">+ Novo Atendimento</button>
+        <button className="btn btn-primary" onClick={() => setShowModal(true)}>+ Novo Atendimento</button>
       </div>
 
       <div className="glass-card" style={{ padding: 0 }}>
@@ -95,6 +104,14 @@ export default function AtendimentosPage() {
           </table>
         </div>
       </div>
+
+      {showModal && (
+        <NovoAtendimentoModal
+          onClose={() => setShowModal(false)}
+          onSave={handleSave}
+          nextId={nextId}
+        />
+      )}
     </div>
   );
 }
