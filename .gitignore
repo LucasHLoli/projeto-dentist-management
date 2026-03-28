@@ -24,6 +24,9 @@ backups/
 .DS_Store
 Thumbs.db
 
+# Claude Code
+CLAUDE.md
+
 # Sensitive data files (avoid uploading patient data)
 *.xlsx
 *.xls
