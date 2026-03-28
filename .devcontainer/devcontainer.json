@@ -1,0 +1,33 @@
+{
+  "name": "DentFlow Claude Container",
+  "dockerFile": "../Dockerfile",
+  "remoteUser": "dentflow",
+
+  "forwardPorts": [5000],
+  "portsAttributes": {
+    "5000": {
+      "label": "DentFlow Next.js",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "runArgs": [
+    "--env-file", "${localWorkspaceFolder}/.env.local"
+  ],
+
+  "mounts": [
+    "source=C:/Users/lolil/.claude/.credentials.json,target=/home/dentflow/.claude/.credentials.json,type=bind,readonly=true",
+    "source=${localWorkspaceFolder}/google-token.json,target=/app/google-token.json,type=bind"
+  ],
+
+  "postStartCommand": "cd /app && npm run dev &",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
