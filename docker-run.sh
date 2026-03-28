@@ -27,7 +27,7 @@ echo ""
 WINPATH=$(pwd -W 2>/dev/null || pwd)
 
 docker run -it \
-  -v "/c/Users/lolil/.claude/.credentials.json:/root/.claude/.credentials.json:ro" \
+  -v "/c/Users/lolil/.claude/.credentials.json:/home/dentflow/.claude/.credentials.json:ro" \
   -v "${WINPATH}/google-token.json:/app/google-token.json" \
   --env-file .env.local \
   -p 5000:5000 \

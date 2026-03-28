@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+# Restaura .claude.json do backup se não existir
+if [ ! -f "$HOME/.claude.json" ]; then
+  BACKUP=$(ls "$HOME/.claude/backups/.claude.json.backup."* 2>/dev/null | sort | tail -1)
+  if [ -n "$BACKUP" ]; then
+    echo "==> Restaurando configuração Claude do backup..."
+    cp "$BACKUP" "$HOME/.claude.json"
+  fi
+fi
+
 # package.json já tem "dev": "next dev -p 5000 -H 0.0.0.0" — porta garantida
 echo "==> Iniciando Next.js em background..."
 cd /app
