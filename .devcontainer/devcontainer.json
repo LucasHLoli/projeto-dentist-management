@@ -16,7 +16,7 @@
   ],
 
   "mounts": [
-    "source=C:/Users/lolil/.claude/.credentials.json,target=/home/dentflow/.claude/.credentials.json,type=bind,readonly=true",
+    "source=C:/Users/lolil/.claude/.credentials.json,target=/home/dentflow/.claude/.credentials.json,type=bind",
     "source=${localWorkspaceFolder}/google-token.json,target=/app/google-token.json,type=bind"
   ],
 

@@ -30,14 +30,15 @@ RUN npx playwright install --with-deps chromium
 # Cria usuário não-root (--dangerously-skip-permissions não funciona como root)
 RUN useradd -m -s /bin/bash -u 1001 dentflow
 
-# Config do Claude Code (.claude-build copiado pelo docker-build.sh)
-COPY .claude-build/ /home/dentflow/.claude/
-RUN chown -R dentflow:dentflow /home/dentflow/.claude
-
 # Projeto
 WORKDIR /app
 COPY . .
-RUN npm install && chown -R dentflow:dentflow /app
+
+# Copia configuração versionada do projeto, se existir
+RUN mkdir -p /home/dentflow/.claude \
+    && if [ -d "/app/.claude" ]; then cp -r /app/.claude/. /home/dentflow/.claude/; fi \
+    && npm install \
+    && chown -R dentflow:dentflow /app /home/dentflow/.claude
 
 # Entrypoint
 COPY docker-entrypoint.sh /entrypoint.sh

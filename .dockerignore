@@ -2,7 +2,6 @@ node_modules/
 .next/
 .env.local
 google-token.json
-.claude-build/
 backups/
 *.xlsx
 .git/
