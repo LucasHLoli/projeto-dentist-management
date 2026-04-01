@@ -1,12 +1,47 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   Package, AlertTriangle, Clock, Search, Plus, Upload,
-  ClipboardList, Truck, RefreshCw, ChevronRight, Zap, X,
-  BarChart2, Star, TrendingUp, TrendingDown, Minus
+  ClipboardList, Truck, RefreshCw, ChevronRight, ChevronDown, Zap, X,
+  BarChart2, Star, TrendingUp, TrendingDown, Minus,
+  FileText, Download, Table,
 } from 'lucide-react'
 import NFeUploadModal from '@/components/NFeUploadModal'
+import { useToast } from '@/components/Toast'
+
+// ─── Hooks utilitários ──────────────────────────────────────────────────────
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay)
+    return () => clearTimeout(timer)
+  }, [value, delay])
+  return debounced
+}
+
+function SkeletonTable({ rows = 6, cols = 8 }: { rows?: number; cols?: number }) {
+  const widths = ['120px', '80px', '70px', '90px', '60px', '80px', '80px', '70px']
+  return (
+    <div className="glass-card" style={{ padding: 0 }}>
+      <div className="table-container">
+        <div style={{ padding: '12px 16px', display: 'flex', gap: '16px', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+          {Array.from({ length: cols }).map((_, i) => (
+            <div key={i} className="skeleton" style={{ width: widths[i % widths.length], height: '10px' }} />
+          ))}
+        </div>
+        {Array.from({ length: rows }).map((_, r) => (
+          <div key={r} className="skeleton-row">
+            {Array.from({ length: cols }).map((_, c) => (
+              <div key={c} className="skeleton-cell" style={{ width: widths[c % widths.length], animationDelay: `${r * 0.05}s` }} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
@@ -115,7 +150,7 @@ interface LoteCompleto {
   taxaUsoMensal: number
 }
 
-type Tab = 'estoque' | 'lotes' | 'alertas' | 'fornecedores'
+type Tab = 'estoque' | 'lotes' | 'alertas' | 'fornecedores' | 'notas'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -380,6 +415,7 @@ function EntradaLoteModal({
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export default function EstoquePage() {
+  const { toast } = useToast()
   const [tab, setTab] = useState<Tab>('estoque')
   const [insumos, setInsumos] = useState<InsumoResumo[]>([])
   const [alertas, setAlertas] = useState<Alerta[]>([])
@@ -398,6 +434,7 @@ export default function EstoquePage() {
   const [lotes, setLotes] = useState<LoteCompleto[]>([])
   const [loadingLotes, setLoadingLotes] = useState(true)
   const [searchLotes, setSearchLotes] = useState('')
+  const debouncedSearch = useDebounce(searchLotes, 200)
   const [filtroCategoria, setFiltroCategoria] = useState('')
   const [editandoCategoria, setEditandoCategoria] = useState<number | null>(null)
   const [baixaLoteId, setBaixaLoteId] = useState<number | null>(null)
@@ -509,6 +546,7 @@ export default function EstoquePage() {
       setShowNovoInsumoModal(false)
       setNovoInsumo({ nome: '', unidadeMedida: 'UN', unidadeUso: '', grupoCategoria: '', estoqueMinimo: 5 })
       fetchInsumos()
+      toast('Insumo cadastrado', 'success')
     } finally {
       setSalvandoInsumo(false)
     }
@@ -574,7 +612,7 @@ export default function EstoquePage() {
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid var(--border)' }}>
-        {(['estoque', 'lotes', 'alertas', 'fornecedores'] as Tab[]).map((t) => (
+        {(['estoque', 'lotes', 'alertas', 'fornecedores', 'notas'] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -586,23 +624,32 @@ export default function EstoquePage() {
               color: tab === t ? 'var(--accent-teal)' : 'var(--text-secondary)',
               cursor: 'pointer',
               fontWeight: tab === t ? 600 : 400,
-              textTransform: 'capitalize',
+              fontSize: '0.875rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              whiteSpace: 'nowrap',
             }}
           >
-            {t === 'estoque' && <Package size={13} style={{ marginRight: 4, verticalAlign: 'middle' }} />}
-            {t === 'lotes' && <Truck size={13} style={{ marginRight: 4, verticalAlign: 'middle' }} />}
-            {t === 'alertas' && <Zap size={13} style={{ marginRight: 4, verticalAlign: 'middle' }} />}
-            {t === 'fornecedores' && <RefreshCw size={13} style={{ marginRight: 4, verticalAlign: 'middle' }} />}
+            {t === 'estoque' && <Package size={13} />}
+            {t === 'lotes' && <Truck size={13} />}
+            {t === 'alertas' && <Zap size={13} />}
+            {t === 'fornecedores' && <RefreshCw size={13} />}
+            {t === 'notas' && <FileText size={13} />}
             {t === 'alertas' && alertas.length > 0
               ? `Alertas (${alertas.length})`
-              : t.charAt(0).toUpperCase() + t.slice(1)}
+              : t === 'notas'
+                ? 'Notas Fiscais'
+                : t === 'fornecedores'
+                  ? 'Fornecedores'
+                  : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
       </div>
 
       {/* Tab: Estoque */}
       {tab === 'estoque' && (
-        <>
+        <div className="tab-content-enter" key="tab-estoque">
           <div className="filter-row" style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
             <div className="search-bar" style={{ flex: 1 }}>
               <span className="search-bar-icon"><Search size={14} /></span>
@@ -625,23 +672,21 @@ export default function EstoquePage() {
           </div>
 
           {loadingLotes ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
-              Carregando estoque...
-            </div>
+            <SkeletonTable rows={6} cols={8} />
           ) : (
             <div className="glass-card" style={{ padding: 0 }}>
               <div className="table-container">
                 <table>
                   <thead>
-                    <tr>
-                      <th>Produto</th>
-                      <th>Categoria</th>
-                      <th>NF-e</th>
-                      <th style={{ textAlign: 'right' }}>Vlr. Nota</th>
+                    <tr style={{ userSelect: 'none', fontSize: '0.7rem' }}>
+                      <th style={{ textAlign: 'center' }}>Produto</th>
+                      <th style={{ textAlign: 'center' }}>Categoria</th>
+                      <th style={{ textAlign: 'center' }}>NF-e</th>
+                      <th style={{ textAlign: 'center' }}>Vlr. Nota</th>
                       <th style={{ textAlign: 'center' }}>Qtd</th>
-                      <th style={{ textAlign: 'right' }}>Vlr/item</th>
-                      <th>Lote</th>
-                      <th>Validade</th>
+                      <th style={{ textAlign: 'center' }}>Vlr/item</th>
+                      <th style={{ textAlign: 'center' }}>Lote</th>
+                      <th style={{ textAlign: 'center' }}>Validade</th>
                       <th style={{ textAlign: 'center' }}>Taxa/mês</th>
                       <th style={{ textAlign: 'center' }}>Ações</th>
                     </tr>
@@ -650,7 +695,7 @@ export default function EstoquePage() {
                     {lotes
                       .filter((l) => {
                         if (l.status === 'DESCARTADO') return false
-                        const q = searchLotes.toLowerCase()
+                        const q = debouncedSearch.toLowerCase()
                         if (q && !l.insumo.nome.toLowerCase().includes(q) &&
                             !l.nfeImport?.numero.includes(q) &&
                             !(l.fornecedor?.nome ?? '').toLowerCase().includes(q)) return false
@@ -658,20 +703,20 @@ export default function EstoquePage() {
                         return true
                       })
                       .map((lote) => (
-                        <tr key={lote.id} style={{ opacity: lote.status === 'ESGOTADO' ? 0.5 : 1 }}>
-                          <td style={{ fontWeight: 500, color: 'var(--text-primary)', maxWidth: '200px' }}>
+                        <tr key={lote.id} style={{ opacity: lote.status === 'ESGOTADO' ? 0.5 : 1, userSelect: 'none', fontSize: '0.7rem' }}>
+                          <td style={{ fontWeight: 500, color: 'var(--text-primary)', maxWidth: '150px', textAlign: 'center' }}>
                             <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                               {lote.insumo.nome}
                             </div>
                             {lote.insumo.grupoCategoria === null && (
-                              <div style={{ fontSize: '0.7rem', color: 'var(--accent-amber)' }}>⚠ sem categoria</div>
+                              <div style={{ fontSize: '0.68rem', color: 'var(--accent-amber)' }}>⚠ sem categoria</div>
                             )}
                           </td>
-                          <td>
+                          <td style={{ textAlign: 'center' }}>
                             {editandoCategoria === lote.id ? (
                               <select
                                 className="input"
-                                style={{ padding: '2px 4px', fontSize: '0.75rem' }}
+                                style={{ padding: '2px 4px', fontSize: '0.73rem' }}
                                 defaultValue={lote.insumo.grupoCategoria ?? ''}
                                 autoFocus
                                 onBlur={async (e) => {
@@ -695,7 +740,7 @@ export default function EstoquePage() {
                             ) : (
                               <span
                                 className={`badge ${lote.insumo.grupoCategoria ? 'badge-teal' : 'badge-amber'}`}
-                                style={{ cursor: 'pointer', fontSize: '0.7rem' }}
+                                style={{ cursor: 'pointer', fontSize: '0.68rem' }}
                                 onClick={() => setEditandoCategoria(lote.id)}
                                 title="Clique para editar"
                               >
@@ -703,37 +748,37 @@ export default function EstoquePage() {
                               </span>
                             )}
                           </td>
-                          <td style={{ fontSize: '0.78rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                          <td style={{ textAlign: 'center', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
                             {lote.nfeImport ? `NF ${lote.nfeImport.numero}/${lote.nfeImport.serie}` : '—'}
                           </td>
-                          <td style={{ textAlign: 'right', fontSize: '0.82rem', whiteSpace: 'nowrap' }}>
+                          <td style={{ textAlign: 'center', whiteSpace: 'nowrap', maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {lote.nfeImport
                               ? `R$ ${lote.nfeImport.valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
                               : '—'}
                           </td>
                           <td style={{ textAlign: 'center', fontWeight: 600 }}>
                             {lote.quantidadeAtual}
-                            <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginLeft: 2 }}>
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.68rem', marginLeft: 2 }}>
                               {lote.insumo.unidadeUso ?? lote.insumo.unidadeMedida}
                             </span>
                           </td>
-                          <td style={{ textAlign: 'right', fontSize: '0.82rem' }}>
+                          <td style={{ textAlign: 'center' }}>
                             {lote.custoUnitario != null ? `R$ ${lote.custoUnitario.toFixed(2)}` : '—'}
                           </td>
-                          <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                          <td style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                             {lote.codigoLote ?? '—'}
                           </td>
-                          <td>
+                          <td style={{ textAlign: 'center' }}>
                             {badgeValidade(lote.validade, lote.validadeConfirmada)}
                           </td>
-                          <td style={{ textAlign: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                          <td style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
                             {lote.taxaUsoMensal > 0
                               ? <span style={{ color: 'var(--accent-teal)' }}>{lote.taxaUsoMensal.toFixed(1)}/mês</span>
                               : <span>—</span>
                             }
                           </td>
-                          <td>
-                            <div style={{ display: 'flex', gap: '4px' }}>
+                          <td style={{ textAlign: 'center' }}>
+                            <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
                               <button
                                 className="btn btn-secondary"
                                 style={{ padding: '3px 7px', fontSize: '0.72rem' }}
@@ -756,7 +801,9 @@ export default function EstoquePage() {
                                 style={{ padding: '3px 7px', fontSize: '0.72rem', color: 'var(--accent-rose)' }}
                                 onClick={async () => {
                                   if (!confirm(`Remover lote de "${lote.insumo.nome}"?`)) return
-                                  await fetch(`/api/estoque/lotes/${lote.id}`, { method: 'DELETE' })
+                                  const res = await fetch(`/api/estoque/lotes/${lote.id}`, { method: 'DELETE' })
+                                  if (res.ok) toast('Lote removido', 'success')
+                                  else toast('Erro ao remover lote', 'error')
                                   fetchLotes()
                                 }}
                                 title="Remover lote"
@@ -785,7 +832,7 @@ export default function EstoquePage() {
               loteId={baixaLoteId}
               lote={lotes.find((l) => l.id === baixaLoteId)!}
               onClose={() => setBaixaLoteId(null)}
-              onSaved={() => { setBaixaLoteId(null); fetchLotes() }}
+              onSaved={() => { setBaixaLoteId(null); fetchLotes(); toast('Baixa registrada', 'success') }}
             />
           )}
           {entradaInsumoId !== null && (
@@ -796,15 +843,15 @@ export default function EstoquePage() {
               onSaved={() => { setEntradaInsumoId(null); fetchLotes() }}
             />
           )}
-        </>
+        </div>
       )}
 
       {/* Tab: Lotes (FEFO) */}
-      {tab === 'lotes' && <LotesTab />}
+      {tab === 'lotes' && <div className="tab-content-enter" key="tab-lotes"><LotesTab /></div>}
 
       {/* Tab: Alertas IA */}
       {tab === 'alertas' && (
-        <div>
+        <div className="tab-content-enter" key="tab-alertas">
           {loadingAlertas ? (
             <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
               Gerando alertas com IA...
@@ -887,7 +934,10 @@ export default function EstoquePage() {
       )}
 
       {/* Tab: Fornecedores */}
-      {tab === 'fornecedores' && <FornecedoresTab />}
+      {tab === 'fornecedores' && <div className="tab-content-enter" key="tab-fornecedores"><FornecedoresTab /></div>}
+
+      {/* Tab: Notas Fiscais */}
+      {tab === 'notas' && <div className="tab-content-enter" key="tab-notas"><NotasTab /></div>}
 
       {/* Modal Resumo IA */}
       {showResumoModal && (
@@ -993,7 +1043,7 @@ export default function EstoquePage() {
       {showNFeModal && (
         <NFeUploadModal
           onClose={() => setShowNFeModal(false)}
-          onImported={() => { setShowNFeModal(false); fetchInsumos() }}
+          onImported={() => { setShowNFeModal(false); fetchInsumos(); fetchLotes(); toast('NF-e importada com sucesso!', 'success') }}
         />
       )}
 
@@ -1084,6 +1134,300 @@ export default function EstoquePage() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Sub-componente: Notas Fiscais ───────────────────────────────────────────
+
+interface LoteNota {
+  id: number
+  nomeProduto: string
+  categoria: string | null
+  quantidade: number
+  custoUnitario: number | null
+  validade: string | null
+  codigoLote: string | null
+  status: string
+  unidadeMedida: string
+}
+
+interface NotaFiscal {
+  id: number
+  numero: string
+  serie: string
+  chaveAcesso: string
+  dataEmissao: string
+  valorTotal: number
+  xmlPath: string | null
+  fornecedor: { cnpj: string; nome: string }
+  totalProdutos: number
+  lotes: LoteNota[]
+}
+
+function NotasTab() {
+  const { toast } = useToast()
+  const [notas, setNotas] = useState<NotaFiscal[]>([])
+  const [loading, setLoading] = useState(true)
+  const [erro, setErro] = useState<string | null>(null)
+  const [expandidas, setExpandidas] = useState<Set<number>>(new Set())
+  const [exportando, setExportando] = useState(false)
+
+  function carregarNotas() {
+    setLoading(true)
+    setErro(null)
+    fetch('/api/estoque/nfe')
+      .then((r) => {
+        if (!r.ok) throw new Error('Erro')
+        return r.json()
+      })
+      .then(setNotas)
+      .catch(() => setErro('Erro ao carregar notas fiscais. Tente novamente.'))
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => { carregarNotas() }, [])
+
+  function toggleExpand(id: number) {
+    setExpandidas((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
+  }
+
+  async function exportarExcel() {
+    setExportando(true)
+    try {
+      const res = await fetch('/api/estoque/nfe/export')
+      if (!res.ok) throw new Error('Erro')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `estoque_notas_${new Date().toISOString().slice(0, 10)}.xlsx`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      toast('Erro ao exportar Excel', 'error')
+    } finally {
+      setExportando(false)
+    }
+  }
+
+  async function downloadNota(notaId: number) {
+    const res = await fetch(`/api/estoque/nfe/${notaId}/download`)
+    if (!res.ok) { toast('Arquivo não disponível', 'warning'); return }
+    const blob = await res.blob()
+    const cd = res.headers.get('Content-Disposition') ?? ''
+    const match = cd.match(/filename="([^"]+)"/)
+    const filename = match?.[1] ?? `nota_${notaId}`
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  async function deletarNota(notaId: number, numero: string) {
+    if (!confirm(`Remover NF ${numero} e todos os seus lotes?`)) return
+    const res = await fetch(`/api/estoque/nfe/${notaId}`, { method: 'DELETE' })
+    if (!res.ok) { toast('Erro ao remover nota', 'error'); return }
+    toast(`NF ${numero} removida`, 'success')
+    carregarNotas()
+  }
+
+  const totalProdutos = notas.reduce((s, n) => s + n.totalProdutos, 0)
+  const valorTotal = notas.reduce((s, n) => s + n.valorTotal, 0)
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', gap: '16px' }}>
+          <div style={{ padding: '8px 14px', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.8rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Notas: </span>
+            <strong>{notas.length}</strong>
+          </div>
+          <div style={{ padding: '8px 14px', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.8rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Produtos: </span>
+            <strong>{totalProdutos}</strong>
+          </div>
+          <div style={{ padding: '8px 14px', background: 'var(--bg-secondary)', borderRadius: '8px', fontSize: '0.8rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Total: </span>
+            <strong>{valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            className="btn btn-secondary"
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+            onClick={carregarNotas}
+          >
+            <RefreshCw size={13} /> Atualizar
+          </button>
+          <button
+            className="btn btn-primary"
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+            onClick={exportarExcel}
+            disabled={exportando || notas.length === 0}
+          >
+            <Table size={13} /> {exportando ? 'Exportando...' : 'Exportar Excel'}
+          </button>
+        </div>
+      </div>
+
+      {erro && (
+        <div style={{ padding: '12px 16px', background: 'rgba(244,63,94,0.1)', borderRadius: '8px', color: 'var(--accent-rose)', marginBottom: '12px', fontSize: '0.85rem' }}>
+          {erro}
+        </div>
+      )}
+
+      {loading ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="glass-card" style={{ padding: '14px 16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className="skeleton" style={{ width: '16px', height: '16px', borderRadius: '4px' }} />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div className="skeleton" style={{ width: '180px', height: '14px' }} />
+                  <div className="skeleton" style={{ width: '260px', height: '10px' }} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+                  <div className="skeleton" style={{ width: '90px', height: '14px' }} />
+                  <div className="skeleton" style={{ width: '70px', height: '10px' }} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : notas.length === 0 ? (
+        <div className="glass-card" style={{ textAlign: 'center', padding: '40px' }}>
+          <FileText size={32} style={{ color: 'var(--text-muted)', marginBottom: '12px' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Nenhuma NF-e importada. Use &quot;Importar NF-e&quot; acima.</p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {notas.map((nota) => {
+            const expandida = expandidas.has(nota.id)
+            return (
+              <div key={nota.id} className="glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <div
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '12px',
+                    padding: '12px 16px', cursor: 'pointer',
+                    borderBottom: expandida ? '1px solid var(--border)' : 'none',
+                    userSelect: 'none',
+                  }}
+                  onClick={() => toggleExpand(nota.id)}
+                >
+                  <span style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
+                    {expandida ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+                  </span>
+
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>NF {nota.numero}/{nota.serie}</span>
+                      <span className="badge badge-teal" style={{ fontSize: '0.68rem' }}>
+                        {nota.totalProdutos} prod{nota.totalProdutos !== 1 ? 's' : ''}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                      {nota.fornecedor.nome} · {nota.fornecedor.cnpj}
+                    </div>
+                  </div>
+
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>
+                      {nota.valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                    </div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                      {new Date(nota.dataEmissao).toLocaleDateString('pt-BR')}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }} onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="btn btn-secondary"
+                      style={{ padding: '3px 8px', fontSize: '0.72rem', display: 'flex', alignItems: 'center', gap: '3px' }}
+                      onClick={() => downloadNota(nota.id)}
+                      disabled={!nota.xmlPath}
+                      title={nota.xmlPath ? 'Baixar arquivo original' : 'Arquivo não disponível'}
+                    >
+                      <Download size={11} /> Baixar
+                    </button>
+                    <button
+                      className="btn btn-secondary"
+                      style={{ padding: '3px 8px', fontSize: '0.72rem', display: 'flex', alignItems: 'center', gap: '3px', color: 'var(--accent-rose)' }}
+                      onClick={() => deletarNota(nota.id, nota.numero)}
+                      title="Remover nota e seus lotes"
+                    >
+                      <X size={11} />
+                    </button>
+                  </div>
+                </div>
+
+                {expandida && (
+                  <div className="table-container accordion-enter">
+                    <table style={{ fontSize: '0.7rem' }}>
+                      <thead>
+                        <tr style={{ userSelect: 'none' }}>
+                          <th style={{ textAlign: 'center' }}>Produto</th>
+                          <th style={{ textAlign: 'center' }}>Categoria</th>
+                          <th style={{ textAlign: 'center' }}>Qtd</th>
+                          <th style={{ textAlign: 'center' }}>Vlr. Unit.</th>
+                          <th style={{ textAlign: 'center' }}>Vlr. Total</th>
+                          <th style={{ textAlign: 'center' }}>Lote</th>
+                          <th style={{ textAlign: 'center' }}>Validade</th>
+                          <th style={{ textAlign: 'center' }}>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {nota.lotes.map((lote) => (
+                          <tr key={lote.id} style={{ userSelect: 'none' }}>
+                            <td style={{ fontWeight: 500, textAlign: 'center' }}>{lote.nomeProduto}</td>
+                            <td style={{ textAlign: 'center' }}>
+                              {lote.categoria
+                                ? <span className="badge badge-teal" style={{ fontSize: '0.68rem' }}>{lote.categoria}</span>
+                                : <span style={{ color: 'var(--text-muted)' }}>—</span>
+                              }
+                            </td>
+                            <td style={{ textAlign: 'center' }}>{lote.quantidade} {lote.unidadeMedida}</td>
+                            <td style={{ textAlign: 'center' }}>
+                              {lote.custoUnitario != null ? lote.custoUnitario.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '—'}
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              {lote.custoUnitario != null
+                                ? (lote.custoUnitario * lote.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                                : '—'}
+                            </td>
+                            <td style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>{lote.codigoLote ?? '—'}</td>
+                            <td style={{ textAlign: 'center' }}>
+                              {lote.validade
+                                ? new Date(lote.validade).toLocaleDateString('pt-BR')
+                                : <span style={{ color: 'var(--accent-amber)' }}>⚠ pendente</span>
+                              }
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              <span className={`badge ${
+                                lote.status === 'ATIVO' ? 'badge-emerald' :
+                                lote.status === 'ESGOTADO' ? 'badge-amber' : 'badge-rose'
+                              }`} style={{ fontSize: '0.68rem' }}>
+                                {lote.status}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       )}
     </div>
