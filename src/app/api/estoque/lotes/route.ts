@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
     const insumoId = searchParams.get('insumoId')
     const status = searchParams.get('status') ?? 'ATIVO'
     const fefo = searchParams.get('fefo') === 'true'
+    const comTaxa = searchParams.get('comTaxa') === 'true'
 
     const where: Record<string, unknown> = { status }
     if (insumoId) where.insumoId = Number(insumoId)
@@ -33,10 +34,57 @@ export async function GET(request: NextRequest) {
     const lotes = await db.lote.findMany({
       where,
       orderBy: fefo ? [{ validade: 'asc' }, { createdAt: 'asc' }] : { createdAt: 'desc' },
-      include: { insumo: true, fornecedor: true, nfeImport: true },
+      include: {
+        insumo: {
+          select: {
+            id: true,
+            nome: true,
+            grupoCategoria: true,
+            unidadeMedida: true,
+            unidadeUso: true,
+            estoqueMinimo: true,
+          },
+        },
+        fornecedor: { select: { id: true, cnpj: true, nome: true } },
+        nfeImport: {
+          select: {
+            id: true,
+            numero: true,
+            serie: true,
+            chaveAcesso: true,
+            dataEmissao: true,
+            valorTotal: true,
+          },
+        },
+      },
     })
 
-    return NextResponse.json(lotes)
+    if (!comTaxa) return NextResponse.json(lotes)
+
+    // Calculate monthly usage rate per insumo (last 90 days / 3 months)
+    const noventaDiasAtras = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
+    const insumoIds = [...new Set(lotes.map((l) => l.insumoId))]
+
+    const consumos = await db.consumoInsumo.groupBy({
+      by: ['insumoId'],
+      _sum: { quantidade: true },
+      where: {
+        insumoId: { in: insumoIds },
+        createdAt: { gte: noventaDiasAtras },
+      },
+    })
+
+    const taxaMap = new Map<number, number>()
+    for (const c of consumos) {
+      taxaMap.set(c.insumoId, (c._sum.quantidade ?? 0) / 3)
+    }
+
+    const result = lotes.map((l) => ({
+      ...l,
+      taxaUsoMensal: taxaMap.get(l.insumoId) ?? 0,
+    }))
+
+    return NextResponse.json(result)
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: 'Erro ao buscar lotes' }, { status: 500 })
