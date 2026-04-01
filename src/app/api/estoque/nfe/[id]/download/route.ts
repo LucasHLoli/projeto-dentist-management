@@ -6,8 +6,10 @@ import path from 'path'
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
+    const numId = parseInt(id, 10)
+    if (isNaN(numId)) return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
     const nota = await db.nFeImport.findUnique({
-      where: { id: Number(id) },
+      where: { id: numId },
       select: {
         xmlPath: true,
         numero: true,
@@ -21,6 +23,11 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     }
 
     const filePath = path.join(process.cwd(), 'public', nota.xmlPath)
+    const resolved = path.resolve(filePath)
+    const allowed = path.resolve(path.join(process.cwd(), 'public', 'uploads', 'notas'))
+    if (!resolved.startsWith(allowed + path.sep) && resolved !== allowed) {
+      return NextResponse.json({ error: 'Acesso negado' }, { status: 403 })
+    }
     const buffer = await readFile(filePath)
     const ext = nota.xmlPath.split('.').pop()?.toLowerCase() ?? 'bin'
 
