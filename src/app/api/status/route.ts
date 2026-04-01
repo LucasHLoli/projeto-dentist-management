@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { isAuthenticated, getAuthUrl } from '@/lib/google-sheets';
+import { getAuthUrl, testSheetsConnection } from '@/lib/google-sheets';
 
 export async function GET() {
-  const sheetsConnected = isAuthenticated();
-  const authUrl = sheetsConnected ? null : getAuthUrl();
+  const sheetsConnected = await testSheetsConnection();
+  const authUrl = getAuthUrl();
   const groqConnected = !!process.env.GROQ_API_KEY;
 
   const uptimeSeconds = Math.floor(process.uptime());

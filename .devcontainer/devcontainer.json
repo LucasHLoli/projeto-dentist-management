@@ -20,13 +20,15 @@
     "source=${localWorkspaceFolder}/google-token.json,target=/app/google-token.json,type=bind"
   ],
 
-  "postStartCommand": "cd /app && npm run dev &",
+  "postStartCommand": "echo 'DentFlow container ready. Run: npm run dev'",
 
   "customizations": {
     "vscode": {
       "extensions": [],
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "claudeCode.permissionMode": "bypassPermissions",
+        "claudeCode.skipDangerousModePermissionPrompt": true
       }
     }
   }

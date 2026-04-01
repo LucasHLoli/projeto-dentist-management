@@ -29,3 +29,25 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: 'Erro ao buscar nota' }, { status: 500 })
   }
 }
+
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params
+    const numId = parseInt(id, 10)
+    if (isNaN(numId)) return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
+
+    // Soft delete nos lotes da nota (marca como DESCARTADO)
+    await db.lote.updateMany({
+      where: { nfeImportId: numId },
+      data: { status: 'DESCARTADO', quantidadeAtual: 0 },
+    })
+
+    // Remove a nota
+    await db.nFeImport.delete({ where: { id: numId } })
+
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: 'Erro ao remover nota' }, { status: 500 })
+  }
+}

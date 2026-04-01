@@ -30,3 +30,10 @@ CLAUDE.md
 # Sensitive data files (avoid uploading patient data)
 *.xlsx
 *.xls
+
+/src/generated/prisma
+
+# Generated files
+dev.db
+prisma/dev.db
+tsconfig.tsbuildinfo

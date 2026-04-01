@@ -3,7 +3,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Appointment, samplePatients } from '@/lib/data';
 import { particularProcedures, getRestauracaoValue, buildRestauracaoNome } from '@/lib/procedures';
-import { X, Plus, Trash2 } from 'lucide-react';
+import { X, Plus, Trash2, Zap, Check } from 'lucide-react';
+
+interface ConsumoSugerido {
+  insumoId: number;
+  nomeInsumo: string;
+  quantidadeSugerida: number;
+  justificativa: string;
+  aceito: boolean;
+}
 
 const PLANOS = ['Particular', 'Uniodonto', 'Camed', 'Geap'] as const;
 type Plano = typeof PLANOS[number];
@@ -76,6 +84,9 @@ export default function NovoAtendimentoModal({ onClose, onSave, nextId, initialD
   const [paymentLines, setPaymentLines] = useState<PaymentLine[]>([
     { id: 1, method: 'Pix', value: '', autoFilled: false },
   ]);
+  const [consumosSugeridos, setConsumosSugeridos] = useState<ConsumoSugerido[]>([]);
+  const [loadingSugestao, setLoadingSugestao] = useState(false);
+
   const [convenioPagamento, setConvenioPagamento] = useState(
     plano !== 'Particular' ? (initialData?.modalidadePagamento ?? '') : ''
   );
@@ -159,6 +170,23 @@ export default function NovoAtendimentoModal({ onClose, onSave, nextId, initialD
   const addProcedure = (id: string, nome: string, valor: number) => {
     if (selectedProcedures.find(p => p.id === id)) return;
     setSelectedProcedures(prev => [...prev, { id, nome, valor2026: valor }]);
+    // Buscar sugestão de consumo de materiais via IA
+    setLoadingSugestao(true);
+    fetch(`/api/estoque/consumo?procedimentoId=${id}&nome=${encodeURIComponent(nome)}`)
+      .then(r => r.json())
+      .then(data => {
+        const novasSugestoes: ConsumoSugerido[] = (data.sugestoes ?? []).map((s: Omit<ConsumoSugerido, 'aceito'>) => ({
+          ...s,
+          aceito: true,
+        }));
+        setConsumosSugeridos(prev => {
+          // Evitar duplicar o mesmo insumo
+          const existentes = new Set(prev.map(s => s.insumoId));
+          return [...prev, ...novasSugestoes.filter(s => !existentes.has(s.insumoId))];
+        });
+      })
+      .catch(() => {})
+      .finally(() => setLoadingSugestao(false));
   };
 
   const removeProcedure = (id: string) => {
@@ -219,6 +247,24 @@ export default function NovoAtendimentoModal({ onClose, onSave, nextId, initialD
         : detalhesDespesa,
     };
     onSave(appointment);
+
+    // Registrar consumo de materiais (FEFO) se houver sugestões aceitas
+    const insumosAceitos = consumosSugeridos.filter(s => s.aceito);
+    if (insumosAceitos.length > 0) {
+      fetch('/api/estoque/consumo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          atendimentoId: String(appointment.id),
+          insumos: insumosAceitos.map(s => ({
+            insumoId: s.insumoId,
+            quantidade: s.quantidadeSugerida,
+            origem: 'AI_SUGERIDO',
+          })),
+        }),
+      }).catch(() => {});
+    }
+
     onClose();
   };
 
@@ -362,6 +408,37 @@ export default function NovoAtendimentoModal({ onClose, onSave, nextId, initialD
                         </button>
                       </span>
                     ))}
+                  </div>
+                )}
+
+                {/* Sugestão de materiais IA */}
+                {(consumosSugeridos.length > 0 || loadingSugestao) && (
+                  <div style={{ marginTop: '10px', padding: '10px 12px', background: 'rgba(99,102,241,0.06)', borderRadius: '8px', border: '1px solid rgba(99,102,241,0.2)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <Zap size={12} style={{ color: '#6366f1' }} />
+                      {loadingSugestao ? 'IA identificando materiais...' : 'Materiais sugeridos pela IA'}
+                    </div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                      {consumosSugeridos.map((s, i) => (
+                        <span
+                          key={s.insumoId}
+                          title={s.justificativa}
+                          onClick={() => setConsumosSugeridos(prev => prev.map((x, j) => j === i ? { ...x, aceito: !x.aceito } : x))}
+                          style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '4px',
+                            padding: '3px 8px', borderRadius: '12px', fontSize: '0.78rem',
+                            cursor: 'pointer', userSelect: 'none',
+                            background: s.aceito ? 'rgba(99,102,241,0.15)' : 'rgba(0,0,0,0.05)',
+                            border: `1px solid ${s.aceito ? 'rgba(99,102,241,0.4)' : 'var(--border)'}`,
+                            color: s.aceito ? '#6366f1' : 'var(--text-muted)',
+                            textDecoration: s.aceito ? 'none' : 'line-through',
+                          }}
+                        >
+                          {s.aceito && <Check size={9} />}
+                          {s.nomeInsumo} ×{s.quantidadeSugerida}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 )}
 

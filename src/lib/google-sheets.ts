@@ -53,9 +53,28 @@ export function getAuthenticatedClient() {
   return oauth2Client;
 }
 
-// Check if authenticated
+// Check if token file exists and has credentials
 export function isAuthenticated() {
-  return fs.existsSync(TOKEN_PATH);
+  if (!fs.existsSync(TOKEN_PATH)) return false;
+  try {
+    const tokens = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8'));
+    return !!(tokens.refresh_token || (tokens.access_token && tokens.expiry_date && tokens.expiry_date > Date.now()));
+  } catch {
+    return false;
+  }
+}
+
+// Actually test connection by calling the Sheets API
+export async function testSheetsConnection(): Promise<boolean> {
+  try {
+    const auth = getAuthenticatedClient();
+    if (!auth) return false;
+    const sheets = google.sheets({ version: 'v4', auth });
+    await sheets.spreadsheets.get({ spreadsheetId: GOOGLE_CONFIG.spreadsheetId });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 // ========== SHEETS OPERATIONS ==========

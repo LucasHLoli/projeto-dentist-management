@@ -1,29 +1,9 @@
 {
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
-      "WebSearch",
-      "Bash(cat ~/.claude/plugins/*/package.json)",
-      "Bash(for plugin:*)",
-      "Bash(do echo:*)",
-      "Bash(claude plugin:*)",
-      "Bash(do)",
-      "Bash(echo \"=== $plugin manifest ===\")",
-      "Read(//c/Users/lolil/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/$plugin/**)",
-      "Read(//c/Users/lolil/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/**)",
-      "Bash(done)",
-      "Bash(echo \"=== $plugin ===\")",
-      "Bash(echo \"=== $plugin .mcp.json ===\")",
-      "Bash(echo \"=== $plugin .claude-plugin ===\")",
-      "Bash(echo \"=== $plugin plugin.json ===\")",
-      "Read(//c/Users/lolil/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/$plugin/.claude-plugin/**)",
-      "Bash(dir \"C:/Users/lolil/Downloads/Projeto Dentist Management/\")",
-      "Bash(pnpm --version)",
-      "Bash(npm --version)",
-      "Bash(gh repo:*)",
-      "WebFetch(domain:github.com)",
-      "Bash(bash -n \"/c/Users/lolil/Downloads/Projeto Dentist Management/docker-entrypoint.sh\")",
-      "Bash(ls .env*)",
-      "Bash(npm run:*)"
+      "Bash(pnpm add:*)"
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }

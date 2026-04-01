@@ -3,9 +3,9 @@
 
 export const GOOGLE_CONFIG = {
   clientId: process.env.GOOGLE_CLIENT_ID || '',
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+  clientSecret: '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',
   spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID || '',
-  redirectUri: process.env.GOOGLE_REDIRECT_URI || `https://${process.env.REPLIT_DEV_DOMAIN}/api/auth/callback`,
+  redirectUri: 'http://localhost:3334/api/auth/callback',
   scopes: [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive.readonly',
