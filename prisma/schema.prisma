@@ -47,6 +47,7 @@ model Insumo {
   usosMin         Float                @default(1)
   usosMax         Float                @default(1)
   grupoCategoria  String?
+  subcategoria    String?
   estoqueMinimo   Float                @default(5)
   createdAt       DateTime             @default(now())
   lotes           Lote[]
