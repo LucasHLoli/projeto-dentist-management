@@ -8,7 +8,6 @@ interface LoteNota {
   nomeProduto: string
   categoria: string | null
   quantidade: number
-  quantidadeAtual: number
   custoUnitario: number | null
   validade: string | null
   codigoLote: string | null
@@ -40,15 +39,20 @@ function formatMoeda(v: number) {
 export default function NotasPage() {
   const [notas, setNotas] = useState<Nota[]>([])
   const [loading, setLoading] = useState(true)
+  const [erro, setErro] = useState<string | null>(null)
   const [expandidas, setExpandidas] = useState<Set<number>>(new Set())
   const [exportando, setExportando] = useState(false)
 
   function carregarNotas() {
     setLoading(true)
+    setErro(null)
     fetch('/api/estoque/nfe')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('Erro ao carregar notas')
+        return r.json()
+      })
       .then(setNotas)
-      .catch(() => {})
+      .catch(() => setErro('Erro ao carregar notas fiscais. Tente novamente.'))
       .finally(() => setLoading(false))
   }
 
@@ -145,6 +149,12 @@ export default function NotasPage() {
           </div>
         </div>
       </div>
+
+      {erro && (
+        <div style={{ padding: '12px 16px', background: 'rgba(244,63,94,0.1)', borderRadius: '8px', color: 'var(--accent-rose)', marginBottom: '12px' }}>
+          {erro}
+        </div>
+      )}
 
       {loading ? (
         <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
