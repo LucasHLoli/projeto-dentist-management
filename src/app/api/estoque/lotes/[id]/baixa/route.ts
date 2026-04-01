@@ -16,12 +16,17 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
     const lote = await db.lote.findUnique({ where: { id: Number(id) } })
     if (!lote) return NextResponse.json({ error: 'Lote não encontrado' }, { status: 404 })
+    if (lote.status === 'ESGOTADO' || lote.status === 'DESCARTADO') {
+      return NextResponse.json({ error: 'Lote já está esgotado ou descartado' }, { status: 409 })
+    }
     if (quantidade > lote.quantidadeAtual) {
       return NextResponse.json({ error: 'Quantidade maior que o estoque atual' }, { status: 400 })
     }
 
     const novaQtd = lote.quantidadeAtual - quantidade
-    const novoStatus = novaQtd <= 0 ? 'ESGOTADO' : lote.status
+    const novoStatus = novaQtd <= 0
+      ? (lote.status === 'VENCIDO' ? 'VENCIDO' : 'ESGOTADO')
+      : lote.status
 
     const atualizado = await db.lote.update({
       where: { id: Number(id) },
