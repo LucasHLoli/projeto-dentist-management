@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Fornecedor ──────────────────────────────────────────────────────────────
+
+model Fornecedor {
+  id         Int          @id @default(autoincrement())
+  cnpj       String       @unique
+  nome       String
+  email      String?
+  telefone   String?
+  createdAt  DateTime     @default(now())
+  lotes      Lote[]
+  nfeImports NFeImport[]
+}
+
+// ─── NF-e Import ─────────────────────────────────────────────────────────────
+
+model NFeImport {
+  id           Int        @id @default(autoincrement())
+  chaveAcesso  String     @unique
+  numero       String
+  serie        String
+  dataEmissao  DateTime
+  valorTotal   Float
+  xmlPath      String?
+  fornecedorId Int
+  fornecedor   Fornecedor @relation(fields: [fornecedorId], references: [id])
+  lotes        Lote[]
+  createdAt    DateTime   @default(now())
+}
+
+// ─── Insumo (catálogo de produtos) ───────────────────────────────────────────
+
+model Insumo {
+  id              Int                  @id @default(autoincrement())
+  nome            String
+  unidadeMedida   String               @default("UN")
+  unidadeUso      String?
+  fotoUrl         String?
+  usosMin         Float                @default(1)
+  usosMax         Float                @default(1)
+  grupoCategoria  String?
+  estoqueMinimo   Float                @default(5)
+  createdAt       DateTime             @default(now())
+  lotes           Lote[]
+  consumos        ConsumoInsumo[]
+  procedimentos   ProcedimentoInsumo[]
+}
+
+// ─── Lote ─────────────────────────────────────────────────────────────────────
+
+model Lote {
+  id                  Int          @id @default(autoincrement())
+  insumoId            Int
+  insumo              Insumo       @relation(fields: [insumoId], references: [id])
+  nfeImportId         Int?
+  nfeImport           NFeImport?   @relation(fields: [nfeImportId], references: [id])
+  fornecedorId        Int?
+  fornecedor          Fornecedor?  @relation(fields: [fornecedorId], references: [id])
+  codigoLote          String?
+  unidadeCompra       String?
+  fatorConversao      Float?
+  quantidadeCompra    Float?
+  quantidade          Float
+  quantidadeAtual     Float
+  custoUnitario       Float?
+  validade            DateTime?
+  validadeConfirmada  Boolean      @default(false)
+  status              String       @default("ATIVO")  // ATIVO | ESGOTADO | VENCIDO | DESCARTADO
+  fotoNotaUrl         String?
+  aiMatchConfianca    Float?
+  createdAt           DateTime     @default(now())
+  consumos            ConsumoInsumo[]
+  contagemItens       ContagemItem[]
+}
+
+// ─── Contagem de Estoque ──────────────────────────────────────────────────────
+
+model ContagemEstoque {
+  id          Int            @id @default(autoincrement())
+  data        DateTime       @default(now())
+  observacoes String?
+  criadoPor   String?
+  itens       ContagemItem[]
+}
+
+model ContagemItem {
+  id               Int             @id @default(autoincrement())
+  contagemId       Int
+  contagem         ContagemEstoque @relation(fields: [contagemId], references: [id])
+  loteId           Int
+  lote             Lote            @relation(fields: [loteId], references: [id])
+  quantidadeContada Float
+  validade         DateTime?
+  observacoes      String?
+}
+
+// ─── Tabela de Conversão (Procedimento ↔ Insumo) ─────────────────────────────
+
+model ProcedimentoInsumo {
+  id               Int     @id @default(autoincrement())
+  procedimentoId   String  // ref ao id em procedures.ts
+  insumoId         Int
+  insumo           Insumo  @relation(fields: [insumoId], references: [id])
+  quantidadePorUso Float   @default(1)
+  observacoes      String?
+  fonte            String  @default("MANUAL")  // MANUAL | AI_APRENDIDO
+
+  @@unique([procedimentoId, insumoId])
+}
+
+// ─── Consumo por Atendimento ──────────────────────────────────────────────────
+
+model ConsumoInsumo {
+  id            Int      @id @default(autoincrement())
+  atendimentoId String
+  insumoId      Int
+  insumo        Insumo   @relation(fields: [insumoId], references: [id])
+  loteId        Int?
+  lote          Lote?    @relation(fields: [loteId], references: [id])
+  quantidade    Float
+  origem        String   @default("MANUAL")  // MANUAL | AI_SUGERIDO | TABELA
+  createdAt     DateTime @default(now())
+}
