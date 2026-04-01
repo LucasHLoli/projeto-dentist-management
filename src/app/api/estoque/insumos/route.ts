@@ -9,6 +9,7 @@ const CreateInsumoSchema = z.object({
   usosMin: z.number().positive().default(1),
   usosMax: z.number().positive().default(1),
   grupoCategoria: z.string().optional(),
+  subcategoria: z.string().optional(),
   estoqueMinimo: z.number().nonnegative().default(5),
 })
 

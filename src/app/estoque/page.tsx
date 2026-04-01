@@ -115,6 +115,17 @@ const CATEGORIAS = [
   'Exodontia', 'Periodontia', 'Cirurgia Periodontal', 'Medicamentos', 'Outros',
 ]
 
+const SUBCATEGORIAS_MAP: Record<string, string[]> = {
+  'Endodontia': ['Limas Manuais', 'Limas Rotatórias', 'Cones', 'Seladores/Cimentos', 'Irrigação'],
+  'Anestesia': ['Com Vasoconstritor', 'Sem Vasoconstritor', 'Tópica'],
+  'Restauração': ['Resinas', 'Adesivos', 'Ácidos', 'Ionômeros', 'Acabamento'],
+  'Luvas/EPI': ['Luvas', 'Sugadores', 'Lençol de Borracha'],
+  'Limpeza/Esterilização': ['Pasta Profilática', 'Escovas', 'Pedra Pomes'],
+  'Medicamentos': ['Anti-inflamatório', 'Curativo', 'Clareador'],
+  'Exodontia': ['Fios de Sutura', 'Lâminas'],
+  'Outros': ['Brocas', 'Microbrush', 'Tiras'],
+}
+
 interface NFeResumo {
   id: number
   numero: string
@@ -131,9 +142,12 @@ interface LoteCompleto {
     id: number
     nome: string
     grupoCategoria: string | null
+    subcategoria: string | null
     unidadeMedida: string
     unidadeUso: string | null
     estoqueMinimo: number
+    usosMin: number
+    usosMax: number
   }
   fornecedor: { id: number; cnpj: string; nome: string } | null
   nfeImport: NFeResumo | null
@@ -150,7 +164,7 @@ interface LoteCompleto {
   taxaUsoMensal: number
 }
 
-type Tab = 'estoque' | 'lotes' | 'alertas' | 'fornecedores' | 'notas'
+type Tab = 'estoque' | 'lotes' | 'alertas' | 'fornecedores' | 'notas' | 'catalogo'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -436,6 +450,7 @@ export default function EstoquePage() {
   const [searchLotes, setSearchLotes] = useState('')
   const debouncedSearch = useDebounce(searchLotes, 200)
   const [filtroCategoria, setFiltroCategoria] = useState('')
+  const [filtroSubcategoria, setFiltroSubcategoria] = useState('')
   const [editandoCategoria, setEditandoCategoria] = useState<number | null>(null)
   const [baixaLoteId, setBaixaLoteId] = useState<number | null>(null)
   const [entradaInsumoId, setEntradaInsumoId] = useState<number | null>(null)
@@ -612,7 +627,7 @@ export default function EstoquePage() {
 
       {/* Tabs */}
       <div style={{ display: 'flex', gap: '4px', marginBottom: '16px', borderBottom: '1px solid var(--border)' }}>
-        {(['estoque', 'lotes', 'alertas', 'fornecedores', 'notas'] as Tab[]).map((t) => (
+        {(['estoque', 'lotes', 'alertas', 'fornecedores', 'notas', 'catalogo'] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -636,13 +651,16 @@ export default function EstoquePage() {
             {t === 'alertas' && <Zap size={13} />}
             {t === 'fornecedores' && <RefreshCw size={13} />}
             {t === 'notas' && <FileText size={13} />}
+            {t === 'catalogo' && <ClipboardList size={13} />}
             {t === 'alertas' && alertas.length > 0
               ? `Alertas (${alertas.length})`
               : t === 'notas'
                 ? 'Notas Fiscais'
                 : t === 'fornecedores'
                   ? 'Fornecedores'
-                  : t.charAt(0).toUpperCase() + t.slice(1)}
+                  : t === 'catalogo'
+                    ? 'Catálogo'
+                    : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
       </div>
@@ -662,13 +680,20 @@ export default function EstoquePage() {
             </div>
             <select
               className="input"
-              style={{ width: '180px' }}
+              style={{ width: '160px' }}
               value={filtroCategoria}
-              onChange={(e) => setFiltroCategoria(e.target.value)}
+              onChange={(e) => { setFiltroCategoria(e.target.value); setFiltroSubcategoria('') }}
             >
               <option value="">Todas categorias</option>
               {CATEGORIAS.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
+            {filtroCategoria && SUBCATEGORIAS_MAP[filtroCategoria] && (
+              <select className="input" style={{ width: '150px' }} value={filtroSubcategoria}
+                onChange={(e) => setFiltroSubcategoria(e.target.value)}>
+                <option value="">Todas sub</option>
+                {SUBCATEGORIAS_MAP[filtroCategoria].map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            )}
           </div>
 
           {loadingLotes ? (
@@ -685,6 +710,7 @@ export default function EstoquePage() {
                       <th style={{ textAlign: 'center' }}>Vlr. Nota</th>
                       <th style={{ textAlign: 'center' }}>Qtd</th>
                       <th style={{ textAlign: 'center' }}>Vlr/item</th>
+                      <th style={{ textAlign: 'center' }}>Vlr/uso</th>
                       <th style={{ textAlign: 'center' }}>Lote</th>
                       <th style={{ textAlign: 'center' }}>Validade</th>
                       <th style={{ textAlign: 'center' }}>Taxa/mês</th>
@@ -700,6 +726,7 @@ export default function EstoquePage() {
                             !l.nfeImport?.numero.includes(q) &&
                             !(l.fornecedor?.nome ?? '').toLowerCase().includes(q)) return false
                         if (filtroCategoria && l.insumo.grupoCategoria !== filtroCategoria) return false
+                        if (filtroSubcategoria && l.insumo.subcategoria !== filtroSubcategoria) return false
                         return true
                       })
                       .map((lote) => (
@@ -765,6 +792,19 @@ export default function EstoquePage() {
                           <td style={{ textAlign: 'center' }}>
                             {lote.custoUnitario != null ? `R$ ${lote.custoUnitario.toFixed(2)}` : '—'}
                           </td>
+                          <td style={{ textAlign: 'center' }}>
+                            {(() => {
+                              if (!lote.custoUnitario) return '—'
+                              const usosMedio = (lote.insumo.usosMin + lote.insumo.usosMax) / 2
+                              if (usosMedio <= 1) return '—'
+                              const vlrUso = lote.custoUnitario / usosMedio
+                              return (
+                                <span title={`R$ ${lote.custoUnitario.toFixed(2)} ÷ ${usosMedio} usos`} style={{ color: 'var(--accent-teal)' }}>
+                                  R$ {vlrUso.toFixed(2)}
+                                </span>
+                              )
+                            })()}
+                          </td>
                           <td style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                             {lote.codigoLote ?? '—'}
                           </td>
@@ -820,7 +860,7 @@ export default function EstoquePage() {
                       ))}
                     {lotes.filter((l) => l.status !== 'DESCARTADO').length === 0 && (
                       <tr>
-                        <td colSpan={10} style={{ textAlign: 'center', padding: '32px', color: 'var(--text-muted)' }}>
+                        <td colSpan={11} style={{ textAlign: 'center', padding: '32px', color: 'var(--text-muted)' }}>
                           Nenhum item no estoque. Importe uma NF-e ou cadastre manualmente.
                         </td>
                       </tr>
@@ -954,6 +994,8 @@ export default function EstoquePage() {
 
       {/* Tab: Notas Fiscais */}
       {tab === 'notas' && <div className="tab-content-enter" key="tab-notas"><NotasTab /></div>}
+
+      {tab === 'catalogo' && <div className="tab-content-enter" key="tab-catalogo"><CatalogoTab /></div>}
 
       {/* Modal Resumo IA */}
       {showResumoModal && (
@@ -1777,6 +1819,205 @@ function FornecedoresTab() {
           </div>
         )
       })}
+    </div>
+  )
+}
+
+// ─── CatalogoTab ─────────────────────────────────────────────────────────────
+
+function CatalogoTab() {
+  const { toast } = useToast()
+  const [insumos, setInsumos] = useState<{
+    id: number; nome: string; unidadeMedida: string; unidadeUso: string | null
+    grupoCategoria: string | null; subcategoria: string | null
+    usosMin: number; usosMax: number; estoqueMinimo: number
+    fatorConversaoMedio: number | null; custoUnitarioMedio: number | null
+  }[]>([])
+  const [loading, setLoading] = useState(true)
+  const [editando, setEditando] = useState<{ id: number; campo: string } | null>(null)
+  const [editValue, setEditValue] = useState('')
+  const [searchCatalogo, setSearchCatalogo] = useState('')
+  const [filtroCat, setFiltroCat] = useState('')
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/estoque/insumos').then((r) => r.json()),
+      fetch('/api/estoque/lotes?fefo=true').then((r) => r.json()),
+    ])
+      .then(([insumosData, lotesData]: [any[], any[]]) => {
+        const fatorMap = new Map<number, number[]>()
+        const custoMap = new Map<number, number[]>()
+        for (const lote of lotesData) {
+          if (lote.fatorConversao && lote.fatorConversao > 0) {
+            fatorMap.set(lote.insumoId, [...(fatorMap.get(lote.insumoId) ?? []), lote.fatorConversao])
+          }
+          if (lote.custoUnitario && lote.custoUnitario > 0) {
+            custoMap.set(lote.insumoId, [...(custoMap.get(lote.insumoId) ?? []), lote.custoUnitario])
+          }
+        }
+        const avg = (arr: number[]) => arr.reduce((s, v) => s + v, 0) / arr.length
+
+        setInsumos(insumosData.map((i: any) => ({
+          id: i.id, nome: i.nome,
+          unidadeMedida: i.unidadeMedida ?? 'UN',
+          unidadeUso: i.unidadeUso ?? null,
+          grupoCategoria: i.grupoCategoria ?? null,
+          subcategoria: i.subcategoria ?? null,
+          usosMin: i.usosMin ?? 1, usosMax: i.usosMax ?? 1,
+          estoqueMinimo: i.estoqueMinimo ?? 5,
+          fatorConversaoMedio: fatorMap.has(i.id) ? avg(fatorMap.get(i.id)!) : null,
+          custoUnitarioMedio: custoMap.has(i.id) ? avg(custoMap.get(i.id)!) : null,
+        })))
+      })
+      .finally(() => setLoading(false))
+  }, [])
+
+  async function salvarCampo(insumoId: number, campo: string, valor: string) {
+    const payload: Record<string, unknown> = {}
+    if (campo === 'usosMin' || campo === 'usosMax' || campo === 'estoqueMinimo') {
+      payload[campo] = parseFloat(valor) || 1
+    } else {
+      payload[campo] = valor || null
+    }
+    try {
+      const res = await fetch(`/api/estoque/insumos/${insumoId}`, {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (res.ok) {
+        setInsumos((prev) => prev.map((i) => i.id === insumoId ? { ...i, ...payload } as typeof i : i))
+        toast('Salvo', 'success')
+      }
+    } catch { toast('Erro ao salvar', 'error') }
+    setEditando(null)
+  }
+
+  function startEdit(id: number, campo: string, currentValue: string) {
+    setEditando({ id, campo })
+    setEditValue(currentValue)
+  }
+
+  const filtered = insumos.filter((i) => {
+    if (searchCatalogo && !i.nome.toLowerCase().includes(searchCatalogo.toLowerCase())) return false
+    if (filtroCat && i.grupoCategoria !== filtroCat) return false
+    return true
+  })
+
+  if (loading) return <SkeletonTable rows={8} cols={7} />
+
+  return (
+    <div>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+        <div className="search-bar" style={{ flex: 1 }}>
+          <span className="search-bar-icon"><Search size={14} /></span>
+          <input placeholder="Buscar produto..." value={searchCatalogo} onChange={(e) => setSearchCatalogo(e.target.value)} />
+        </div>
+        <select className="input" style={{ width: '160px' }} value={filtroCat} onChange={(e) => setFiltroCat(e.target.value)}>
+          <option value="">Todas categorias</option>
+          {CATEGORIAS.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+
+      <div className="glass-card" style={{ padding: 0 }}>
+        <div className="table-container">
+          <table style={{ fontSize: '0.7rem' }}>
+            <thead>
+              <tr style={{ fontSize: '0.7rem' }}>
+                <th>Produto</th>
+                <th style={{ textAlign: 'center' }}>Categoria</th>
+                <th style={{ textAlign: 'center' }}>Subcategoria</th>
+                <th style={{ textAlign: 'center' }}>Und. Compra</th>
+                <th style={{ textAlign: 'center' }}>Fator Conv.</th>
+                <th style={{ textAlign: 'center' }}>Usos/Un</th>
+                <th style={{ textAlign: 'center' }}>VLR/Uso médio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length === 0 ? (
+                <tr><td colSpan={7} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>Nenhum insumo cadastrado.</td></tr>
+              ) : filtered.map((ins) => {
+                const usosMedio = (ins.usosMin + ins.usosMax) / 2
+                const vlrUso = ins.custoUnitarioMedio && usosMedio > 0 ? ins.custoUnitarioMedio / usosMedio : null
+
+                return (
+                  <tr key={ins.id}>
+                    <td style={{ fontWeight: 500 }}>{ins.nome}</td>
+                    <td style={{ textAlign: 'center' }}>
+                      <span className={`badge ${ins.grupoCategoria ? 'badge-teal' : 'badge-amber'}`} style={{ fontSize: '0.6rem' }}>
+                        {ins.grupoCategoria ?? 'definir'}
+                      </span>
+                    </td>
+                    <td style={{ textAlign: 'center' }}>
+                      {editando?.id === ins.id && editando.campo === 'subcategoria' ? (
+                        <input className="input" style={{ width: '100px', padding: '2px 4px', fontSize: '0.7rem' }}
+                          value={editValue} onChange={(e) => setEditValue(e.target.value)}
+                          onBlur={() => salvarCampo(ins.id, 'subcategoria', editValue)}
+                          onKeyDown={(e) => e.key === 'Enter' && salvarCampo(ins.id, 'subcategoria', editValue)}
+                          autoFocus />
+                      ) : (
+                        <span style={{ cursor: 'pointer', color: ins.subcategoria ? 'var(--text-secondary)' : 'var(--text-muted)', fontSize: '0.65rem' }}
+                          onClick={() => startEdit(ins.id, 'subcategoria', ins.subcategoria ?? '')}>
+                          {ins.subcategoria ?? 'definir'}
+                        </span>
+                      )}
+                    </td>
+                    <td style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>{ins.unidadeMedida}</td>
+                    <td style={{ textAlign: 'center' }}>{ins.fatorConversaoMedio ? `1\u2192${ins.fatorConversaoMedio}` : '\u2014'}</td>
+                    <td style={{ textAlign: 'center' }}>
+                      {editando?.id === ins.id && editando.campo === 'usos' ? (
+                        <div style={{ display: 'flex', gap: '2px', justifyContent: 'center' }}>
+                          <input type="number" min="1" step="1" className="input"
+                            style={{ width: '40px', padding: '2px', fontSize: '0.7rem', textAlign: 'center' }}
+                            value={editValue.split('-')[0] ?? '1'}
+                            onChange={(e) => setEditValue(`${e.target.value}-${editValue.split('-')[1] ?? '1'}`)}
+                            autoFocus />
+                          <span style={{ color: 'var(--text-muted)' }}>-</span>
+                          <input type="number" min="1" step="1" className="input"
+                            style={{ width: '40px', padding: '2px', fontSize: '0.7rem', textAlign: 'center' }}
+                            value={editValue.split('-')[1] ?? '1'}
+                            onChange={(e) => setEditValue(`${editValue.split('-')[0] ?? '1'}-${e.target.value}`)}
+                            onBlur={async () => {
+                              const [min, max] = editValue.split('-').map(Number)
+                              await fetch(`/api/estoque/insumos/${ins.id}`, {
+                                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ usosMin: min || 1, usosMax: max || 1 }),
+                              })
+                              setInsumos((prev) => prev.map((i) => i.id === ins.id ? { ...i, usosMin: min || 1, usosMax: max || 1 } : i))
+                              setEditando(null)
+                              toast('Usos atualizados', 'success')
+                            }}
+                            onKeyDown={async (e) => {
+                              if (e.key === 'Enter') {
+                                const [min, max] = editValue.split('-').map(Number)
+                                await fetch(`/api/estoque/insumos/${ins.id}`, {
+                                  method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ usosMin: min || 1, usosMax: max || 1 }),
+                                })
+                                setInsumos((prev) => prev.map((i) => i.id === ins.id ? { ...i, usosMin: min || 1, usosMax: max || 1 } : i))
+                                setEditando(null)
+                                toast('Usos atualizados', 'success')
+                              }
+                            }} />
+                        </div>
+                      ) : (
+                        <span style={{ cursor: 'pointer', color: usosMedio > 1 ? 'var(--text-secondary)' : 'var(--text-muted)' }}
+                          onClick={() => startEdit(ins.id, 'usos', `${ins.usosMin}-${ins.usosMax}`)}>
+                          {ins.usosMin === ins.usosMax ? ins.usosMin : `${ins.usosMin}-${ins.usosMax}`}
+                        </span>
+                      )}
+                    </td>
+                    <td style={{ textAlign: 'center' }}>
+                      {vlrUso && usosMedio > 1
+                        ? <span style={{ color: 'var(--accent-teal)', fontWeight: 600 }}>R$ {vlrUso.toFixed(2)}</span>
+                        : <span style={{ color: 'var(--text-muted)' }}>\u2014</span>}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   )
 }

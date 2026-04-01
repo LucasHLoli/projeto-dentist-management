@@ -9,6 +9,7 @@ const UpdateInsumoSchema = z.object({
   usosMin: z.number().positive().optional(),
   usosMax: z.number().positive().optional(),
   grupoCategoria: z.string().nullable().optional(),
+  subcategoria: z.string().nullable().optional(),
   estoqueMinimo: z.number().nonnegative().optional(),
   fotoUrl: z.string().nullable().optional(),
 })
