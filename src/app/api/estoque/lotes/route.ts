@@ -13,7 +13,10 @@ const CreateLoteSchema = z.object({
   // quantidade em unidades de uso — calculado automaticamente se fator informado
   quantidade: z.number().positive().optional(),
   custoUnitario: z.number().nonnegative().optional(),
-  validade: z.string().optional(),
+  validade: z.string().refine(
+    (v) => !v || !isNaN(new Date(v).getTime()),
+    { message: 'Data inválida' }
+  ).optional(),
   validadeConfirmada: z.boolean().default(false),
 })
 
@@ -65,7 +68,8 @@ export async function POST(request: NextRequest) {
         codigoLote: data.codigoLote,
         unidadeCompra: data.unidadeCompra,
         fatorConversao: data.fatorConversao,
-        quantidadeCompra: data.quantidadeCompra,
+        // Only store quantidadeCompra when conversion is complete
+        quantidadeCompra: data.fatorConversao && data.quantidadeCompra ? data.quantidadeCompra : undefined,
         quantidade: quantidadeUso,
         quantidadeAtual: quantidadeUso,
         custoUnitario: data.custoUnitario,
