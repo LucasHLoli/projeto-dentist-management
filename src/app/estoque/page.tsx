@@ -195,7 +195,7 @@ function BaixaModal({
   loteId: number
   lote: LoteCompleto
   onClose: () => void
-  onSaved: () => void
+  onSaved: (qtdBaixada: number) => void
 }) {
   const [quantidade, setQuantidade] = useState('')
   const [motivo, setMotivo] = useState<'PERDA' | 'VENCIMENTO' | 'DANO' | 'OUTRO'>('PERDA')
@@ -219,7 +219,7 @@ function BaixaModal({
         const data = await res.json()
         throw new Error(data.error ?? 'Erro ao registrar')
       }
-      onSaved()
+      onSaved(qtd)
     } catch (e) {
       setErro(e instanceof Error ? e.message : 'Erro')
     } finally {
@@ -801,10 +801,14 @@ export default function EstoquePage() {
                                 style={{ padding: '3px 7px', fontSize: '0.72rem', color: 'var(--accent-rose)' }}
                                 onClick={async () => {
                                   if (!confirm(`Remover lote de "${lote.insumo.nome}"?`)) return
+                                  const prev = lotes
+                                  setLotes((cur) => cur.filter((l) => l.id !== lote.id))
+                                  toast('Lote removido', 'success')
                                   const res = await fetch(`/api/estoque/lotes/${lote.id}`, { method: 'DELETE' })
-                                  if (res.ok) toast('Lote removido', 'success')
-                                  else toast('Erro ao remover lote', 'error')
-                                  fetchLotes()
+                                  if (!res.ok) {
+                                    setLotes(prev)
+                                    toast('Erro ao remover lote', 'error')
+                                  }
                                 }}
                                 title="Remover lote"
                               >
@@ -832,7 +836,15 @@ export default function EstoquePage() {
               loteId={baixaLoteId}
               lote={lotes.find((l) => l.id === baixaLoteId)!}
               onClose={() => setBaixaLoteId(null)}
-              onSaved={() => { setBaixaLoteId(null); fetchLotes(); toast('Baixa registrada', 'success') }}
+              onSaved={(qtdBaixada: number) => {
+                setLotes((prev) => prev.map((l) => {
+                  if (l.id !== baixaLoteId) return l
+                  const novaQtd = l.quantidadeAtual - qtdBaixada
+                  return { ...l, quantidadeAtual: novaQtd, status: novaQtd <= 0 ? 'ESGOTADO' : l.status }
+                }))
+                setBaixaLoteId(null)
+                toast('Baixa registrada', 'success')
+              }}
             />
           )}
           {entradaInsumoId !== null && (
@@ -840,7 +852,11 @@ export default function EstoquePage() {
               insumoId={entradaInsumoId}
               insumos={lotes.map((l) => l.insumo)}
               onClose={() => setEntradaInsumoId(null)}
-              onSaved={() => { setEntradaInsumoId(null); fetchLotes() }}
+              onSaved={() => {
+                setEntradaInsumoId(null)
+                toast('Entrada registrada', 'success')
+                fetchLotes()
+              }}
             />
           )}
         </div>
