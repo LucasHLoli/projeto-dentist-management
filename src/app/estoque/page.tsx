@@ -557,7 +557,7 @@ export default function EstoquePage() {
       <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
         <div className="stat-card teal">
           <div className="stat-card-icon"><Package size={18} strokeWidth={2} /></div>
-          <div className="stat-card-label">Total de Insumos</div>
+          <div className="stat-card-label">Lotes Ativos</div>
           <div className="stat-card-value">{totalItens}</div>
         </div>
         <div className="stat-card rose">
@@ -676,11 +676,15 @@ export default function EstoquePage() {
                                 autoFocus
                                 onBlur={async (e) => {
                                   const novaCategoria = e.target.value || null
-                                  await fetch(`/api/estoque/lotes/${lote.id}`, {
-                                    method: 'PUT',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ grupoCategoria: novaCategoria }),
-                                  })
+                                  try {
+                                    await fetch(`/api/estoque/lotes/${lote.id}`, {
+                                      method: 'PUT',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ grupoCategoria: novaCategoria }),
+                                    })
+                                  } catch {
+                                    // silencioso — categoria reverte visualmente
+                                  }
                                   setEditandoCategoria(null)
                                   fetchLotes()
                                 }}
