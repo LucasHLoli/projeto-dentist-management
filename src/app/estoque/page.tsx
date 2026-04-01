@@ -1565,42 +1565,113 @@ interface FornecedorItem {
 }
 
 function FornecedoresTab() {
-  const [fornecedores, setFornecedores] = useState<FornecedorItem[]>([])
+  const { toast } = useToast()
+  const [fornecedores, setFornecedores] = useState<(FornecedorItem & {
+    totalNfe: number
+    totalProdutos: number
+    totalValorNfe: number
+    ultimoPedido: string | null
+    produtos: { nome: string; quantidade: number; custoUnitario: number | null }[]
+  })[]>([])
   const [loading, setLoading] = useState(true)
   const [avaliacoes, setAvaliacoes] = useState<Record<number, AvaliacaoFornecedor>>({})
   const [loadingAvaliacao, setLoadingAvaliacao] = useState<number | null>(null)
+  const [expandidos, setExpandidos] = useState<Set<number>>(new Set())
+  const [produtosVisiveis, setProdutosVisiveis] = useState<Set<number>>(new Set())
 
   useEffect(() => {
-    // Extrair fornecedores únicos a partir dos lotes
-    fetch('/api/estoque/lotes?fefo=true')
-      .then((r) => r.json())
-      .then((lotes: { fornecedor: { id: number; cnpj: string; nome: string; email: string | null; telefone: string | null } | null }[]) => {
-        const mapa = new Map<number, FornecedorItem>()
+    Promise.all([
+      fetch('/api/estoque/nfe').then((r) => r.json()),
+      fetch('/api/estoque/lotes?fefo=true').then((r) => r.json()),
+    ])
+      .then(([notas, lotes]: [any[], any[]]) => {
+        const mapa = new Map<number, {
+          id: number; cnpj: string; nome: string; email: string | null; telefone: string | null
+          totalLotes: number; totalNfe: number; totalProdutos: Set<string>; totalValorNfe: number
+          ultimoPedido: string | null; produtos: Map<string, { nome: string; quantidade: number; custoUnitario: number | null }>
+        }>()
+
         for (const lote of lotes) {
-          if (lote.fornecedor) {
-            const f = lote.fornecedor
-            const prev = mapa.get(f.id)
-            mapa.set(f.id, { ...f, totalLotes: (prev?.totalLotes ?? 0) + 1 })
+          if (!lote.fornecedor) continue
+          const f = lote.fornecedor
+          if (!mapa.has(f.id)) {
+            mapa.set(f.id, {
+              ...f, totalLotes: 0, totalNfe: 0, totalProdutos: new Set(),
+              totalValorNfe: 0, ultimoPedido: null, produtos: new Map(),
+            })
+          }
+          const entry = mapa.get(f.id)!
+          entry.totalLotes++
+          if (lote.insumo?.nome) {
+            entry.totalProdutos.add(lote.insumo.nome)
+            const key = lote.insumo.nome
+            const prev = entry.produtos.get(key)
+            entry.produtos.set(key, {
+              nome: key,
+              quantidade: (prev?.quantidade ?? 0) + (lote.quantidadeAtual ?? 0),
+              custoUnitario: lote.custoUnitario ?? prev?.custoUnitario ?? null,
+            })
           }
         }
-        setFornecedores(Array.from(mapa.values()))
+
+        for (const nota of notas) {
+          const fId = nota.fornecedor?.cnpj
+            ? Array.from(mapa.values()).find((f) => f.cnpj === nota.fornecedor.cnpj)?.id
+            : null
+          if (fId && mapa.has(fId)) {
+            const entry = mapa.get(fId)!
+            entry.totalNfe++
+            entry.totalValorNfe += nota.valorTotal ?? 0
+            const dataEmissao = nota.dataEmissao ? new Date(nota.dataEmissao).toISOString() : null
+            if (dataEmissao && (!entry.ultimoPedido || dataEmissao > entry.ultimoPedido)) {
+              entry.ultimoPedido = dataEmissao
+            }
+          }
+        }
+
+        setFornecedores(
+          Array.from(mapa.values()).map((f) => ({
+            id: f.id, cnpj: f.cnpj, nome: f.nome, email: f.email, telefone: f.telefone,
+            totalLotes: f.totalLotes, totalNfe: f.totalNfe, totalProdutos: f.totalProdutos.size,
+            totalValorNfe: f.totalValorNfe, ultimoPedido: f.ultimoPedido,
+            produtos: Array.from(f.produtos.values()),
+          }))
+        )
       })
-      .catch(() => {})
+      .catch(() => toast('Erro ao carregar fornecedores', 'error'))
       .finally(() => setLoading(false))
-  }, [])
+  }, [toast])
 
   async function avaliarFornecedor(fornecedorId: number) {
-    if (avaliacoes[fornecedorId]) return
+    if (avaliacoes[fornecedorId]) {
+      setExpandidos((prev) => {
+        const next = new Set(prev)
+        if (next.has(fornecedorId)) next.delete(fornecedorId)
+        else next.add(fornecedorId)
+        return next
+      })
+      return
+    }
     setLoadingAvaliacao(fornecedorId)
+    setExpandidos((prev) => new Set(prev).add(fornecedorId))
     try {
       const res = await fetch(`/api/estoque/ai/fornecedor?fornecedorId=${fornecedorId}`)
       const data = await res.json()
       setAvaliacoes((prev) => ({ ...prev, [fornecedorId]: data }))
     } catch {
-      // silencioso
+      toast('Erro ao avaliar fornecedor', 'error')
     } finally {
       setLoadingAvaliacao(null)
     }
+  }
+
+  function toggleProdutos(fId: number) {
+    setProdutosVisiveis((prev) => {
+      const next = new Set(prev)
+      if (next.has(fId)) next.delete(fId)
+      else next.add(fId)
+      return next
+    })
   }
 
   if (loading) {
@@ -1617,60 +1688,90 @@ function FornecedoresTab() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {fornecedores.map((f) => {
         const av = avaliacoes[f.id]
+        const expandido = expandidos.has(f.id)
+        const mostrarProdutos = produtosVisiveis.has(f.id)
+
         return (
-          <div key={f.id} className="glass-card">
+          <div key={f.id} className="glass-card" style={{ padding: '14px 16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <div>
-                <div style={{ fontWeight: 600, marginBottom: '4px' }}>{f.nome}</div>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                  CNPJ: {f.cnpj} · {f.totalLotes} lote{f.totalLotes !== 1 ? 's' : ''}
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{f.nome}</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '2px' }}>
+                  CNPJ: {f.cnpj} · {f.totalNfe} NF-e{f.totalNfe !== 1 ? 's' : ''} · {f.totalProdutos} produto{f.totalProdutos !== 1 ? 's' : ''}
                 </div>
-                {(f.email || f.telefone) && (
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '2px' }}>
-                    {f.email && <span>{f.email}</span>}
-                    {f.email && f.telefone && <span> · </span>}
-                    {f.telefone && <span>{f.telefone}</span>}
-                  </div>
-                )}
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '2px' }}>
+                  {f.ultimoPedido && <>Último pedido: {new Date(f.ultimoPedido).toLocaleDateString('pt-BR')} · </>}
+                  Total NF-e: <strong style={{ color: 'var(--text-secondary)' }}>R$ {f.totalValorNfe.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                </div>
               </div>
               <button
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '4px 10px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                style={{ fontSize: '0.7rem', padding: '4px 10px', display: 'flex', alignItems: 'center', gap: '4px' }}
                 onClick={() => avaliarFornecedor(f.id)}
                 disabled={loadingAvaliacao === f.id}
               >
-                <Star size={12} />
-                {loadingAvaliacao === f.id ? 'Avaliando...' : av ? 'Reavaliado' : 'Avaliar'}
+                <Star size={11} />
+                {loadingAvaliacao === f.id ? 'Avaliando...' : av ? (expandido ? 'Recolher' : 'Ver Avaliação') : 'Avaliar IA'}
               </button>
             </div>
 
-            {av && (
-              <div style={{ marginTop: '12px', borderTop: '1px solid var(--border)', paddingTop: '12px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '10px' }}>
+            {f.produtos.length > 0 && (
+              <div style={{ marginTop: '8px' }}>
+                <button
+                  onClick={() => toggleProdutos(f.id)}
+                  style={{
+                    background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+                    color: 'var(--accent-teal)', fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '4px',
+                  }}
+                >
+                  {mostrarProdutos ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
+                  Ver {f.produtos.length} produto{f.produtos.length !== 1 ? 's' : ''}
+                </button>
+                {mostrarProdutos && (
+                  <div style={{ marginTop: '6px', background: 'var(--bg-elevated)', borderRadius: '6px', padding: '8px 10px' }}>
+                    {f.produtos.map((p, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '3px 0', fontSize: '0.7rem', borderBottom: i < f.produtos.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                        <span style={{ color: 'var(--text-secondary)' }}>{p.nome}</span>
+                        <span style={{ color: 'var(--text-muted)' }}>
+                          {p.quantidade > 0 && <>{p.quantidade} un</>}
+                          {p.custoUnitario != null && <> · R$ {p.custoUnitario.toFixed(2)}/un</>}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {expandido && av && (
+              <div style={{ marginTop: '10px', borderTop: '1px solid var(--border)', paddingTop: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', marginBottom: '8px' }}>
                   {[
                     { label: 'Geral', value: av.notaGeral },
                     { label: 'Confiabilidade', value: av.notaConfiabilidade },
                     { label: 'Custo', value: av.notaCusto },
                     { label: 'Qualidade', value: av.notaQualidade },
                   ].map(({ label, value }) => (
-                    <div key={label} style={{ textAlign: 'center', padding: '6px', background: 'var(--bg-elevated)', borderRadius: '6px' }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginBottom: '2px' }}>{label}</div>
-                      <div style={{ fontWeight: 700, fontSize: '1rem', color: value >= 8 ? 'var(--accent-emerald)' : value >= 6 ? 'var(--accent-amber)' : 'var(--accent-rose)' }}>
+                    <div key={label} style={{ textAlign: 'center', padding: '4px', background: 'var(--bg-elevated)', borderRadius: '6px' }}>
+                      <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)' }}>{label}</div>
+                      <div style={{ fontWeight: 700, fontSize: '0.9rem', color: value >= 8 ? 'var(--accent-emerald)' : value >= 6 ? 'var(--accent-amber)' : 'var(--accent-rose)' }}>
                         {value}/10
                       </div>
                     </div>
                   ))}
                 </div>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '0 0 8px' }}>{av.narrativa}</p>
-                <span className={`badge ${av.recomendacao === 'manter' ? 'badge-emerald' : av.recomendacao === 'avaliar' ? 'badge-amber' : 'badge-rose'}`}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0 0 6px' }}>{av.narrativa}</p>
+                <span className={`badge ${av.recomendacao === 'manter' ? 'badge-emerald' : av.recomendacao === 'avaliar' ? 'badge-amber' : 'badge-rose'}`} style={{ fontSize: '0.65rem' }}>
                   {av.recomendacao === 'manter' ? '✓ Manter' : av.recomendacao === 'avaliar' ? '⚠ Avaliar' : '✗ Substituir'}
                 </span>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginLeft: '8px' }}>
-                  Total gasto: R$ {av.totalGasto.toFixed(2)}
-                </span>
+              </div>
+            )}
+            {expandido && !av && loadingAvaliacao === f.id && (
+              <div style={{ marginTop: '10px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem', padding: '12px' }}>
+                Avaliando fornecedor com IA...
               </div>
             )}
           </div>
