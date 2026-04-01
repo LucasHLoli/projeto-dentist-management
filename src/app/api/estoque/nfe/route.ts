@@ -3,7 +3,7 @@ import { writeFile } from 'fs/promises'
 import path from 'path'
 import { parseNFe } from '@/lib/nfe-parser'
 import { parseDanfe, detectMimeType } from '@/lib/danfe-parser'
-import { fuzzyMatchInsumo } from '@/lib/ai-stock'
+import { fuzzyMatchInsumo, categorizarInsumo } from '@/lib/ai-stock'
 import { db } from '@/lib/db'
 
 export async function GET() {
@@ -94,6 +94,57 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // ── 1b. Check for duplicate ─────────────────────────────────────────────
+    const existente = await db.nFeImport.findUnique({
+      where: { chaveAcesso: nfeData.chaveAcesso },
+      include: {
+        fornecedor: { select: { cnpj: true, nome: true } },
+        lotes: {
+          where: { status: { not: 'DESCARTADO' } },
+          include: { insumo: { select: { nome: true, grupoCategoria: true, unidadeMedida: true } } },
+        },
+      },
+    })
+
+    if (existente) {
+      return NextResponse.json({
+        duplicada: true,
+        existente: {
+          id: existente.id,
+          numero: existente.numero,
+          serie: existente.serie,
+          chaveAcesso: existente.chaveAcesso,
+          dataEmissao: existente.dataEmissao,
+          valorTotal: existente.valorTotal,
+          fornecedor: existente.fornecedor,
+          itens: existente.lotes.map((l) => ({
+            nome: l.insumo?.nome ?? '—',
+            categoria: l.insumo?.grupoCategoria ?? null,
+            quantidade: l.quantidade,
+            custoUnitario: l.custoUnitario,
+            validade: l.validade,
+            unidade: l.insumo?.unidadeMedida ?? 'UN',
+          })),
+        },
+        nova: {
+          numero: nfeData.numero,
+          serie: nfeData.serie,
+          chaveAcesso: nfeData.chaveAcesso,
+          dataEmissao: nfeData.dataEmissao,
+          valorTotal: nfeData.valorTotal,
+          fornecedor: nfeData.fornecedor,
+          itens: nfeData.itens.map((item, idx) => ({
+            nome: item.nomeProduto,
+            categoria: null,
+            quantidade: item.quantidade,
+            custoUnitario: item.valorUnitario,
+            validade: itensComValidade[idx]?.validade ?? null,
+            unidade: item.unidade,
+          })),
+        },
+      }, { status: 409 })
+    }
+
     // ── 2. Salvar arquivo ────────────────────────────────────────────────────
 
     const ext = file.name.split('.').pop() ?? 'xml'
@@ -111,9 +162,8 @@ export async function POST(request: NextRequest) {
 
     // ── 4. Criar NFeImport ───────────────────────────────────────────────────
 
-    const nfeImport = await db.nFeImport.upsert({
-      where: { chaveAcesso: nfeData.chaveAcesso },
-      create: {
+    const nfeImport = await db.nFeImport.create({
+      data: {
         chaveAcesso: nfeData.chaveAcesso,
         numero: nfeData.numero,
         serie: nfeData.serie,
@@ -122,7 +172,6 @@ export async function POST(request: NextRequest) {
         xmlPath: `/uploads/notas/${filename}`,
         fornecedorId: fornecedor.id,
       },
-      update: {},
     })
 
     // ── 5. Fuzzy match + criar lotes ─────────────────────────────────────────
@@ -133,19 +182,35 @@ export async function POST(request: NextRequest) {
     for (let idx = 0; idx < nfeData.itens.length; idx++) {
       const item = nfeData.itens[idx]
       const validadeExtraida = itensComValidade[idx]?.validade ?? null
-      const matchResult = await fuzzyMatchInsumo(item.nomeProduto, catalogoInsumos)
+
+      // Fuzzy match + categorização em paralelo (mais rápido)
+      const [matchResult, categoriaIA] = await Promise.all([
+        fuzzyMatchInsumo(item.nomeProduto, catalogoInsumos),
+        categorizarInsumo(item.nomeProduto),
+      ])
 
       let insumoId: number
 
       if (matchResult.insumoId && matchResult.confianca >= 0.85) {
         insumoId = matchResult.insumoId
+        // Atualiza categoria se o insumo existente ainda não tem
+        const insumoExistente = catalogoInsumos.find((i) => i.id === insumoId)
+        if (insumoExistente) {
+          const insumoDb = await db.insumo.findUnique({ where: { id: insumoId }, select: { grupoCategoria: true } })
+          if (!insumoDb?.grupoCategoria) {
+            await db.insumo.update({ where: { id: insumoId }, data: { grupoCategoria: categoriaIA } })
+          }
+        }
       } else {
         const novoInsumo = await db.insumo.create({
-          data: { nome: item.nomeProduto, unidadeMedida: item.unidade },
+          data: { nome: item.nomeProduto, unidadeMedida: item.unidade, grupoCategoria: categoriaIA },
         })
         insumoId = novoInsumo.id
         catalogoInsumos.push({ id: novoInsumo.id, nome: novoInsumo.nome })
       }
+
+      // Código de lote padrão: NF{numero}-{serie}-{idx+1} (garante rastreabilidade)
+      const codigoLoteGerado = `NF${nfeData.numero}-${nfeData.serie}-${String(idx + 1).padStart(2, '0')}`
 
       // Se Gemini extraiu validade, já salva como confirmada
       const validadeDate = validadeExtraida ? new Date(validadeExtraida) : null
@@ -156,6 +221,7 @@ export async function POST(request: NextRequest) {
           insumoId,
           nfeImportId: nfeImport.id,
           fornecedorId: fornecedor.id,
+          codigoLote: codigoLoteGerado,
           quantidade: item.quantidade,
           quantidadeAtual: item.quantidade,
           custoUnitario: item.valorUnitario,
@@ -172,12 +238,14 @@ export async function POST(request: NextRequest) {
         insumoId: lote.insumoId,
         nomeInsumo: lote.insumo.nome,
         nomeBruto: item.nomeProduto,
+        codigoLote: codigoLoteGerado,
+        categoria: categoriaIA,
         quantidade: item.quantidade,
         unidade: item.unidade,
         custoUnitario: item.valorUnitario,
         aiMatchConfianca: matchResult.confianca,
         aiSugestao: matchResult.sugestao,
-        validadeExtraida: validadeExtraida, // validade extraída pelo Gemini (pode ser null)
+        validadeExtraida,
         validadeConfirmada,
       })
     }
